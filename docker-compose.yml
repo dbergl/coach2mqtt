@@ -1,0 +1,41 @@
+
+services:
+  rvc2mqtt:
+    image: ghcr.io/dbergl/rvc2mqtt:latest
+    depends_on:
+      - mosquitto
+    environment:
+      - CAN_INTERFACE_NAME=can1
+      - FLOORPLAN_FILE_1=/floorplan/2023_entegra_ethos_20DL.yml
+      - FLOORPLAN_FILE_2
+      - LOG_CONFIG_FILE=/config/logger.yml
+      - MQTT_HOST=localhost
+      - MQTT_PORT=1883
+      - MQTT_USERNAME
+      - MQTT_PASSWORD
+      - MQTT_CLIENT_ID
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - ./floorplan:/floorplan
+      - ./config:/config
+      - ./logs:/home/worker/logs
+
+  can2mqtt:
+    image: ghcr.io/dbergl/can2mqtt:latest
+    container_name: can2mqtt
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+      - ./config/config.json:/app/config.json
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0.18-openssl
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./logs:/mosquitto/log
+      - ./data:/mosquitto/data
+      - ./config:/mosquitto/config
