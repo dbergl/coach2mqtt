@@ -5,10 +5,9 @@ services:
     depends_on:
       - mosquitto
     environment:
-      - CAN_INTERFACE_NAME=can1
-      - FLOORPLAN_FILE_1=/floorplan/2023_entegra_ethos_20DL.yml
-      - FLOORPLAN_FILE_2
-      - LOG_CONFIG_FILE=/config/logger.yml
+      - CAN_INTERFACE_NAME=${RVC_CAN_INTERFACE_NAME}
+      - FLOORPLAN_FILE_1=${RVC_FLOORPLAN_FILE_1}
+      - LOG_CONFIG_FILE
       - MQTT_HOST=localhost
       - MQTT_PORT=1883
       - MQTT_USERNAME
@@ -23,7 +22,17 @@ services:
 
   can2mqtt:
     image: ghcr.io/dbergl/can2mqtt:latest
+    depends_on:
+      - mosquitto
     container_name: can2mqtt
+    environment:
+      - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME}
+      - CONFIG_FILE=${CANBUS_CONFIG_FILE}
+      - MQTT_HOST=localhost
+      - MQTT_PORT=1883
+      - MQTT_USERNAME
+      - MQTT_PASSWORD
+      - MQTT_CLIENT_ID
     network_mode: "host"
     restart: unless-stopped
     volumes:

@@ -166,3 +166,5 @@ config/config.json
 config/logger.yml
 config/mosquitto.conf
 
+data/*.db
+
