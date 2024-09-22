@@ -1,0 +1,69 @@
+#
+# Logging info
+# See https://docs.python.org/3/library/logging.config.html#logging-config-dictschema
+#
+logger:
+  version: 1
+  handlers:
+    debug_console_handler:
+      level: INFO
+      class: logging.StreamHandler
+      formatter: brief
+      stream: ext://sys.stdout
+
+    debug_file_handler:
+      class : logging.handlers.RotatingFileHandler
+      formatter: default
+      maxBytes: 10485760   #10 mb
+      backupCount: 1
+      level: INFO
+      filename: logs/RVC2MQTT.log
+      mode: w
+
+    unhandled_file_handler:
+      class : logging.handlers.RotatingFileHandler
+      formatter: trace
+      maxBytes: 10485760   #10 mb
+      backupCount: 1
+      level: DEBUG
+      filename: logs/UNHANDLED_RVC.log
+
+    rvc_bus_trace_handler:
+      class : logging.handlers.RotatingFileHandler
+      formatter: trace
+      filename: logs/RVC_FULL_BUS_TRACE.log
+      maxBytes: 10485760   #10 mb
+      backupCount: 3
+      level: DEBUG
+
+  loggers:
+    "": # root logger
+      handlers:
+        - debug_console_handler
+        - debug_file_handler
+      level: DEBUG
+      propagate: False
+
+    "unhandled_rvc": # unhandled messages
+      handlers:
+        - unhandled_file_handler
+      level: DEBUG
+      propagate: False
+
+    "rvc_bus_trace": # all bus messages
+      handlers:
+        - rvc_bus_trace_handler
+      level: DEBUG
+      propagate: False
+
+  formatters:
+    brief:
+      format: "%(message)s"
+    default:
+      format: "%(asctime)s %(levelname)-8s %(name)-15s %(message)s"
+      datefmt: "%Y-%m-%d %H:%M:%S"
+    trace:
+      format: "%(asctime)s %(message)s"
+      datefmt: "%Y-%m-%d %H:%M:%S"
+
+

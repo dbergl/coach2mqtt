@@ -70,6 +70,26 @@ floorplan:
     type: tank_level
     instance_name: second gray waste tank
 
+  - name: DC_DIMMER_STATUS_3
+    instance: 5
+    type: dimmer_switch
+    instance_name: tank heater fresh
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 6
+    type: dimmer_switch
+    instance_name: tank heater gray
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 7
+    type: dimmer_switch
+    instance_name: tank heater black
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 8
+    type: dimmer_switch
+    instance_name: tank heater gray two
+
   - name: DC_SOURCE_STATUS_1
     instance: 1
     type: dc_system

@@ -8,8 +8,8 @@ services:
       - CAN_INTERFACE_NAME=${RVC_CAN_INTERFACE_NAME}
       - FLOORPLAN_FILE_1=${RVC_FLOORPLAN_FILE_1}
       - LOG_CONFIG_FILE
-      - MQTT_HOST=localhost
-      - MQTT_PORT=1883
+      - MQTT_HOST
+      - MQTT_PORT
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./floorplan:/floorplan
-      - ./config:/config
+      - ./configs:/config/
       - ./logs:/home/worker/logs
 
   can2mqtt:
@@ -28,15 +28,16 @@ services:
     environment:
       - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME}
       - CONFIG_FILE=${CANBUS_CONFIG_FILE}
-      - MQTT_HOST=localhost
-      - MQTT_PORT=1883
+      - LOG_LEVEL
+      - MQTT_HOST
+      - MQTT_PORT
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
     network_mode: "host"
     restart: unless-stopped
     volumes:
-      - ./config/config.json:/app/config.json
+      - ./configs/config.json:/app/config.json
 
   mosquitto:
     image: eclipse-mosquitto:2.0.18-openssl
@@ -45,6 +46,6 @@ services:
       - "1883:1883"
       - "9001:9001"
     volumes:
-      - ./logs:/mosquitto/log
+      - ./logs/mosquitto:/mosquitto/log
       - ./data:/mosquitto/data
-      - ./config:/mosquitto/config
+      - ./configs/mosquitto.conf:/mosquitto/config/mosquitto.conf
