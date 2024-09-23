@@ -2,6 +2,7 @@
 services:
   rvc2mqtt:
     image: ghcr.io/dbergl/rvc2mqtt:latest
+    #image: rvc2mqtt:tempf
     depends_on:
       - mosquitto
     environment:
@@ -17,14 +18,13 @@ services:
     restart: unless-stopped
     volumes:
       - ./floorplan:/floorplan
-      - ./configs:/config/
-      - ./logs:/home/worker/logs
+      - ./configs/logger.yml.example:/config/logger.yml
+      - ./logs:/logs
 
   can2mqtt:
     image: ghcr.io/dbergl/can2mqtt:latest
     depends_on:
       - mosquitto
-    container_name: can2mqtt
     environment:
       - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME}
       - CONFIG_FILE=${CANBUS_CONFIG_FILE}
@@ -37,7 +37,7 @@ services:
     network_mode: "host"
     restart: unless-stopped
     volumes:
-      - ./configs/config.json:/app/config.json
+      - ./configs/config.json:/config/config.json
 
   mosquitto:
     image: eclipse-mosquitto:2.0.18-openssl
