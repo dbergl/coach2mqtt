@@ -1,8 +1,4 @@
 {
-    canbus: {
-        channel: "can0",
-        interface: "socketcan_ctypes"
-    },
     mqtt: {
 //        username: "user", // not implemented yet
 //        password: "pass",// not implemented yet
@@ -22,7 +18,7 @@
         {
             canid: "0x502",
             unpack_template: ">hhhh",
-            var_names: ["unknown", "totalvoltage via divideby10", "hcellv via mv2v", "lcellv via mv2v"],
+            var_names: ["unknown", "totalvoltage via volts_soc2json", "hcellv via mv2v", "lcellv via mv2v"],
             topic_template: ["bms/volts interval 20", "bms/highest_cell_volts interval 20", "bms/lowest_cell_volts interval 20"],
             payload_template: ["{totalvoltage}","{hcellv}","{lcellv}"]
         },

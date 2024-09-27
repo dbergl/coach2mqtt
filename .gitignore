@@ -162,9 +162,9 @@ cython_debug/
 #.idea/
 
 # Config files
-config/config.json
-config/logger.yml
-config/mosquitto.conf
+configs/config.json
+configs/rvc_logger.yml
+configs/mosquitto.conf
 
 data/*.db
 
