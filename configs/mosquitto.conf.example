@@ -4,8 +4,9 @@ log_dest file /mosquitto/log/mosquitto.log
 listener 1883
 allow_anonymous true
 
+
 #Bridge connection
-#connection hivemq
+#example connection to hivemq
 #address <id>.s1.eu.hivemq.cloud:8883
 # pem file is needed becasue of connection/cert issue with hivemq
 # wget https://letsencrypt.org/certs/isrgrootx1.pem
