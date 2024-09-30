@@ -17,7 +17,7 @@ logger:
       maxBytes: 10485760   #10 mb
       backupCount: 1
       level: INFO
-      filename: logs/RVC2MQTT.log
+      filename: /logs/RVC2MQTT.log
       mode: w
 
     unhandled_file_handler:
@@ -26,12 +26,12 @@ logger:
       maxBytes: 10485760   #10 mb
       backupCount: 1
       level: DEBUG
-      filename: logs/UNHANDLED_RVC.log
+      filename: /logs/UNHANDLED_RVC.log
 
     rvc_bus_trace_handler:
       class : logging.handlers.RotatingFileHandler
       formatter: trace
-      filename: logs/RVC_FULL_BUS_TRACE.log
+      filename: /logs/RVC_FULL_BUS_TRACE.log
       maxBytes: 10485760   #10 mb
       backupCount: 3
       level: DEBUG
