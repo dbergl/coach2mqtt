@@ -19,7 +19,7 @@ services:
     volumes:
       - ./floorplan:/floorplan
       - ./configs/rvc_logger.yml.example:/config/logger.yml
-      - ./logs:/logs
+      - ./rvc-logs:/logs
 
   can2mqtt:
     image: ghcr.io/dbergl/can2mqtt:latest
