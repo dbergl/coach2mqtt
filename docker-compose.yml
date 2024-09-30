@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./floorplan:/floorplan
-      - ./configs/rvc_logger.yml.example:/config/logger.yml
+      - ./configs/rvc_logger.yml.example:/config/rvc_logger.yml
       - ./rvc-logs:/logs
 
   can2mqtt:
