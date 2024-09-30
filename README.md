@@ -24,20 +24,20 @@ With the correct configuration files this should work with Jayco Swift Li, Enteg
 
 ## Software
 To get the information from both the RV-C bus and the Renogy canbus this project combines 3 projects:
-* [can2mqtt](https://github.com/dbergl/can2mqtt) 
-* [rvc2mqtt](https://github.com/dbergl/rvc2mqtt) 
+* [can2mqtt](https://github.com/dbergl/can2mqtt)
+* [rvc2mqtt](https://github.com/dbergl/rvc2mqtt)
 * [Mosquitto](https://mosquitto.org/)
 
 All 3 run as [docker](https://www.docker.com/) containers locally on the Raspberry Pi.
 
-To view and interact with RV systems on my phone I am using the [IoT MQTT Panel](https://blog.snrlab.in/iot/iot-mqtt-panel-user-guide/) app which is available for apple and android devices 
+To view and interact with RV systems on my phone I am using the [IoT MQTT Panel](https://blog.snrlab.in/iot/iot-mqtt-panel-user-guide/) app which is available for apple and android devices
 
 ## Software setup
 Eventually I hope to make a custom image but for now these are the steps to get started.
 
 1. Install your choice of OS on the Raspberry Pi using the [official imager tool](https://www.raspberrypi.com/software/)
    I recommend installing The latest Raspberry Pi OS Lite (64 bit) - Currently this is Debian Bookworm
-   
+
    It is easiest to set up your wifi and login username/password using the advanced settings of the imager tool
 
 2. Start your pi up and connect to it over the network you configured or locally connected to a monitor and keyboard.
@@ -70,22 +70,66 @@ Uncomment `#dtparam=spi=on` by changing it to `dtparam=spi=on`
           down /sbin/ifconfig can1 down
 
 5. Install docker
-   Instructions can be found [here](https://docs.docker.com/engine/install/debian/#install-using-the-repository).
-   Post install instructions [here](https://docs.docker.com/engine/install/linux-postinstall/).
+   - Instructions can be found [here](https://docs.docker.com/engine/install/debian/#install-using-the-repository).
+   - Post install instructions [here](https://docs.docker.com/engine/install/linux-postinstall/).
 
 6. Update packages and install a few programs
-    sudo apt update
-    sudo apt upgrade
-    sudo apt install -y git can-utils
+   ```bash
+   sudo apt update
+   sudo apt upgrade
+   sudo apt install -y git can-utils
+   ```
 
 7. Clone this repo:
-    cd ~ && git clone https://github.com/dbergl/coach2mqtt
+   ```bash
+   cd ~ && git clone https://github.com/dbergl/coach2mqtt
+   ```
 
 8. Make a copy of the example config files and modify as desired/needed
-    cd ~/coach2mqtt/configs
-    cp config.json.example config.json
-    cp mosquitto.conf.example mosquitto.conf
-    cp rvc_logger.yml.example rvc_logger.yml
+   ```bash
+   cd ~/coach2mqtt/configs
+   cp config.json.example config.json
+   cp mosquitto.conf.example mosquitto.conf
+   # Optionally copy the logger config too
+   cp rvc_logger.yml.example rvc_logger.yml
+   ```
+
+   - `config.json` holds the configuration for communication with the Renogy battery BMS
+   - `mosquitto.conf` holds the configuration for the MQTT server. Your phone app will communicate with this.
+   - `rvc_logger.yml` is optional and contains settings for logging RV-C messages to a file.
+
+9. Make a copy of the .env file and edit to suit your needs
+   ```bash
+   cd ~/coach2mqtt/
+   cp .env.example .env
+
+   - .env sets certain environment variables that are used by the 3 docker containers
+      - `RVC_CAN_INTERFACE_NAME` sets the can device connected to the RV-C bus. Defaults to `can1` if not set
+      - `RVC_FLOORPLAN_FILE_1` sets full path to the floorplan file for your coach
+      - `RVC_LOG_CONFIG_FILE` sets the name of the RV-C logger config file. Be sure to set this if you want to tail the RV-C bus logs
+      - `CANBUS_CAN_INTERFACE_NAME` sets the can device connected to the Renogy bus. Defaults to `can0` if not set
+      - `CANBUS_CONFIG_FILE` Similar to the floorplan file but used to config the Renogy bus listener. Defaults to `config.json` if not set
+      - `MQTT_HOST` Sets host/domain name of the MQTT broker. Defaults to `localhost` if not set
+      - `MQTT_PORT` Sets MQTT port to use when connecting to MQTT broker. Defaults to `1883` if not set
+
+## Starting the services
+
+- Start the containers
+  ```bash
+  cd ~/coach2mqtt
+  docker compose up -d
+  ```
+
+At this point the containers should start up and should begin publishing messages to the MQTT broker.
+
+-  Verify containers are running
+   ```bash
+   docker ps
+   ```
+  
+   You should see your three containers running: 
+   - coach2mqtt-rvc2mqtt-1
+   - coach2mqtt-can2mqtt-1
+   - coach2mqtt-mosquitto-1
 
 
-    

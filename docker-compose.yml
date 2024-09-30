@@ -6,11 +6,11 @@ services:
     depends_on:
       - mosquitto
     environment:
-      - CAN_INTERFACE_NAME=${RVC_CAN_INTERFACE_NAME}
+      - CAN_INTERFACE_NAME=${RVC_CAN_INTERFACE_NAME:-can1}
       - FLOORPLAN_FILE_1=${RVC_FLOORPLAN_FILE_1}
-      - LOG_CONFIG_FILE
-      - MQTT_HOST
-      - MQTT_PORT
+      - LOG_CONFIG_FILE=${RVC_LOG_CONFIG_FILE}
+      - MQTT_HOST=${MQTT_HOST:-localhost}
+      - MQTT_PORT=${MQTT_PORT:-1883}
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
@@ -26,11 +26,11 @@ services:
     depends_on:
       - mosquitto
     environment:
-      - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME}
-      - CONFIG_FILE=${CANBUS_CONFIG_FILE}
-      - LOG_LEVEL
-      - MQTT_HOST
-      - MQTT_PORT
+      - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME:-can0}
+      - CONFIG_FILE=${CANBUS_CONFIG_FILE:-config.json}
+      - LOG_LEVEL=${CAN_LOG_LEVEL:-info}
+      - MQTT_HOST=${MQTT_HOST:-localhost}
+      - MQTT_PORT=${MQTT_PORT:-1883}
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
