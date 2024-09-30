@@ -100,3 +100,8 @@ floorplan:
     type: hvac
     instance_name: air conditioner
 
+  - name: DATE_TIME_STATUS
+    source_id: 9C
+    type: system_clock
+    instance_name: clock
+
