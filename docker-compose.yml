@@ -27,7 +27,7 @@ services:
     environment:
       - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME:-can0}
       - CONFIG_FILE=${CANBUS_CONFIG_FILE:-/config/config.json}
-      - LOG_LEVEL=${CAN_LOG_LEVEL:-info}
+      - LOG_LEVEL=${CAN_LOG_LEVEL:-INFO}
       - MQTT_HOST=${MQTT_HOST:-localhost}
       - MQTT_PORT=${MQTT_PORT:-1883}
       - MQTT_USERNAME
