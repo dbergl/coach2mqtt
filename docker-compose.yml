@@ -2,7 +2,6 @@
 services:
   rvc2mqtt:
     image: ghcr.io/dbergl/rvc2mqtt:latest
-    #image: rvc2mqtt:tempf
     depends_on:
       - mosquitto
     environment:
@@ -27,7 +26,7 @@ services:
       - mosquitto
     environment:
       - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME:-can0}
-      - CONFIG_FILE=${CANBUS_CONFIG_FILE:-config.json}
+      - CONFIG_FILE=${CANBUS_CONFIG_FILE:-/config/config.json}
       - LOG_LEVEL=${CAN_LOG_LEVEL:-info}
       - MQTT_HOST=${MQTT_HOST:-localhost}
       - MQTT_PORT=${MQTT_PORT:-1883}
