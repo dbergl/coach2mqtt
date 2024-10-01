@@ -165,5 +165,9 @@ cython_debug/
 configs/*
 !configs/*.example
 
+#rvc2mqtt logs
+rvc-logs/*
+!rvc-logs/.rvc_logs_here
+
 data/*.db
 
