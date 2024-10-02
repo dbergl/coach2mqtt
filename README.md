@@ -1,6 +1,8 @@
 # coach2mqtt
 A project to send data to an MQTT broker from both the Renogy battery BMS and and the RV-C network.
 
+Based off of [can2mqtt](https://github.com/jgeisler0303/can2mqtt) and [rvc2mqtt](https://github.com/spbrogan/rvc2mqtt)
+
 With the correct configuration files this should work with Jayco Swift Li, Entegra Ethos Li, Jayco Terrain, and Entegra Launch RVs
 
 ## Hardware needed:
