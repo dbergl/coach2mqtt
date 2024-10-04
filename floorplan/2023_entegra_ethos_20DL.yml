@@ -74,21 +74,25 @@ floorplan:
     instance:  1
     type: tank_level
     instance_name: fresh water tank
+    minimum_change: 10
 
   - name: G12_TANK_LEVEL
     instance:  2
     type: tank_level
     instance_name: grey waste tank
+    minimum_change: 10
 
   - name: G12_TANK_LEVEL
     instance:  3
     type: tank_level
     instance_name: black waste tank
+    minimum_change: 10
 
   - name: G12_TANK_LEVEL
     instance:  4
     type: tank_level
     instance_name: second grey waste tank
+    minimum_change: 10
 
   - name: DC_DIMMER_STATUS_3
     instance: 5
