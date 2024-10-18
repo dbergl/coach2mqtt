@@ -161,13 +161,18 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Config files
-configs/*
-!configs/*.example
-
 #rvc2mqtt logs
 rvc-logs/*
 !rvc-logs/.rvc_logs_here
 
-data/*.db
+#configs with potentially sensitive data
+configs/telegraf/*.conf
+configs/influxdb/*.conf
+configs/grafana/*.conf
+configs/mosquitto/*.conf
+!configs/mosquitto/*.conf.example
+
+#Data dirs
+mosquitto-data/
+influxdb-data/
 

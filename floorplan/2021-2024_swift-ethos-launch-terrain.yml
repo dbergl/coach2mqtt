@@ -1,0 +1,205 @@
+
+floorplan:
+  - name: DC_DIMMER_STATUS_3
+    instance: 1
+    type: dimmer_switch
+    instance_name: spotlight
+    status_topic: rvc/lights/ext/spotlight
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 21
+    type: dimmer_switch
+    instance_name: awning lights
+    status_topic: rvc/lights/ext/awning
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 22
+    type: dimmer_switch
+    instance_name: Kitchen ohc lights
+    status_topic: rvc/lights/int/kitchenohc
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 23
+    type: dimmer_switch
+    instance_name: step light
+    status_topic: rvc/lights/ext/step
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 24
+    type: dimmer_switch
+    instance_name: bed light
+    status_topic: rvc/lights/int/bed
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 25
+    type: dimmer_switch
+    instance_name: bathroom light
+    status_topic: rvc/lights/int/bath
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 32
+    type: dimmer_switch
+    instance_name: main lights
+    status_topic: rvc/lights/int/main
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 34
+    type: dimmer_switch
+    instance_name: bunk accent lights
+    status_topic: rvc/lights/int/bunk
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 35
+    type: dimmer_switch
+    instance_name: living room ohc lights
+    status_topic: rvc/lights/int/livingohc
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 40
+    type: dimmer_switch
+    instance_name: bath fan
+    status_topic: rvc/lights/int/bathfan
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 44
+    type: dimmer_switch
+    instance_name: water pump
+    status_topic: rvc/waterpump
+
+  - name: THERMOSTAT_AMBIENT_STATUS
+    instance: 0
+    type: temperature
+    instance_name: interior temperature
+    status_topic: rvc/hvac/thermostat
+
+  - name: G12_TANK_LEVEL
+    instance: 1
+    type: g12_tank_level
+    instance_name: fresh water tank
+    status_topic: rvc/tanks/fresh
+    minimum_change: 100
+    33_trigger: 57400
+    66_trigger: 44400
+    100_trigger: 22000
+
+  - name: G12_TANK_LEVEL
+    instance: 2
+    type: g12_tank_level
+    instance_name: gray waste tank
+    status_topic: rvc/tanks/gray
+    minimum_change: 100
+
+  - name: G12_TANK_LEVEL
+    instance: 3
+    type: g12_tank_level
+    instance_name: black waste tank
+    status_topic: rvc/tanks/black
+    minimum_change: 100
+
+  - name: G12_TANK_LEVEL
+    instance: 4
+    type: g12_tank_level
+    instance_name: second gray waste tank
+    status_topic: rvc/tanks/gray2
+    minimum_change: 100
+
+  - name: TANK_STATUS
+    instance: 0
+    type: tank_level
+    instance_name: fresh water tank
+    status_topic: rvc/tanks/fresh/lvl
+
+  - name: TANK_STATUS
+    instance: 1
+    type: tank_level
+    instance_name: black waste tank
+    status_topic: rvc/tanks/black/lvl
+
+  - name: TANK_STATUS
+    instance: 2
+    type: tank_level
+    instance_name: gray waste tank
+    status_topic: rvc/tanks/gray/lvl
+
+  - name: TANK_STATUS
+    instance: 18
+    type: tank_level
+    instance_name: second gray waste tank
+    status_topic: rvc/tanks/gray2/lvl
+
+  - name: TANK_STATUS
+    instance: 3
+    type: tank_level
+    instance_name: lpg
+    status_topic: rvc/tanks/lpg/lvl
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 5
+    type: tank_heater
+    instance_name: tank heater fresh
+    status_topic: rvc/tanks/fresh/heater
+    link_id: fresh
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 6
+    type: tank_heater
+    instance_name: tank heater gray
+    status_topic: rvc/tanks/gray/heater
+    link_id: gray
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 7
+    type: tank_heater
+    instance_name: tank heater black
+    status_topic: rvc/tanks/black/heater
+    link_id: black
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 8
+    type: tank_heater
+    instance_name: tank heater gray two
+    status_topic: rvc/tanks/gray2/heater
+    link_id: gray2
+
+  - name: DC_DIMMER_STATUS_3
+    instance: 99
+    type: tank_heater
+    instance_name: tank heaters
+    status_topic: rvc/tanks/all/heater
+    link_id: tank_heater_group
+    entity_links:
+      - fresh
+      - gray
+      - black
+      - gray2
+
+  - name: DC_SOURCE_STATUS_1
+    instance: 1
+    type: dc_system
+    instance_name: main house battery bank
+    status_topic: rvc/dc/battery/renogy
+
+  - name: DC_SOURCE_STATUS_G12
+    instance: 1
+    type: dc_system
+    instance_name: house battery
+    status_topic: rvc/dc/battery/house
+
+  - name: DC_SOURCE_STATUS_G12
+    instance: 2
+    type: dc_system
+    instance_name: chassis battery
+    status_topic: rvc/dc/battery/chassis
+
+  - name: THERMOSTAT_STATUS_1
+    instance: 0
+    type: hvac
+    instance_name: air conditioner
+    status_topic: rvc/hvac/cool
+
+  - name: DATE_TIME_STATUS
+    source_id: 9C
+    type: system_clock
+    instance_name: clock
+    status_topic: rvc/date
+
