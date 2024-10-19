@@ -63,6 +63,8 @@ services:
   telegraf:
     profiles: [influx]
     image: telegraf
+    depends_on:
+      - influxdb
     environment:
       - INFLUX_TOKEN
     volumes:

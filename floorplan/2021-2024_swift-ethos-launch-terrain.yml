@@ -163,7 +163,7 @@ floorplan:
 
   - name: DC_DIMMER_STATUS_3
     instance: 99
-    type: tank_heater
+    type: tank_heater_group
     instance_name: tank heaters
     status_topic: rvc/tanks/all/heater
     link_id: tank_heater_group
