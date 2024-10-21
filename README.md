@@ -56,20 +56,26 @@ Uncomment `#dtparam=spi=on` by changing it to `dtparam=spi=on`
    to the end of the file in the `[all]` section
 4. Set can to autostart on boot:
    * Create the file `/etc/modules-load.d/can.conf` and add these lines:
+    ```bash
        can
        can_raw
+    ```
    * Create the file `/etc/network/interfaces.d/can0` and add these lines:
-       auto can0
-       iface can0 inet manual
-          pre-up /sbin/ip link set can0 type can bitrate 250000 restart-ms 100
-          up /sbin/ifconfig can0 up
-          down /sbin/ifconfig can0 down
+    ```bash
+    auto can0
+    iface can0 inet manual
+      pre-up /sbin/ip link set can0 type can bitrate 250000 restart-ms 100
+      up /sbin/ifconfig can0 up
+      down /sbin/ifconfig can0 down
+    ```
    * Create the file `/etc/network/interfaces.d/can1` and add these lines:
-       auto can1
-       iface can1 inet manual
-          pre-up /sbin/ip link set can1 type can bitrate 250000 restart-ms 100
-          up /sbin/ifconfig can1 up
-          down /sbin/ifconfig can1 down
+    ```bash
+    auto can1
+    iface can1 inet manual
+      pre-up /sbin/ip link set can1 txqueuelen 100 type can bitrate 250000 restart-ms 100
+      up /sbin/ifconfig can1 up
+      down /sbin/ifconfig can1 down
+    ```
 
 5. Install docker
    - Instructions can be found [here](https://docs.docker.com/engine/install/debian/#install-using-the-repository).
@@ -90,25 +96,25 @@ Uncomment `#dtparam=spi=on` by changing it to `dtparam=spi=on`
 8. Make a copy of the example config files and modify as desired/needed
    ```bash
    cd ~/coach2mqtt/configs
-   cp config.json.example config.json
-   cp mosquitto.conf.example mosquitto.conf
+   cp mosquitto/mosquitto.conf.example mosquitto/mosquitto.conf
    # Optionally copy the logger config too
-   cp rvc_logger.yml.example rvc_logger.yml
+   cp rvc2mqtt/rvc_logger.yml.example rvc2mqtt/rvc_logger.yml
    ```
 
-   - `config.json` holds the configuration for communication with the Renogy battery BMS
-   - `mosquitto.conf` holds the configuration for the MQTT server. Your phone app will communicate with this.
-   - `rvc_logger.yml` is optional and contains settings for logging RV-C messages to a file.
+   - `can2mqtt/config.json` holds the configuration for communication with the Renogy battery BMS
+   - `mosquitto/mosquitto.conf` holds the configuration for the MQTT server. Your phone app will communicate with this.
+   - `rvc2mqtt/rvc_logger.yml` is optional and contains settings for logging RV-C messages to a file.
 
 9. Make a copy of the .env file and edit to suit your needs
    ```bash
    cd ~/coach2mqtt/
    cp .env.example .env
+   ```
 
-   - .env sets certain environment variables that are used by the 3 docker containers
+   - .env sets certain environment variables that are used by the docker containers
       - `RVC_CAN_INTERFACE_NAME` sets the can device connected to the RV-C bus. Defaults to `can1` if not set
-      - `RVC_FLOORPLAN_FILE_1` sets full path to the floorplan file for your coach
-      - `RVC_LOG_CONFIG_FILE` sets the name of the RV-C logger config file. Be sure to set this if you want to tail the RV-C bus logs
+      - `RVC_FLOORPLAN_FILE` sets filename of the floorplan file for your coach. floorplan files are in floorplans/
+      - `RVC_LOG_CONFIG_FILE` sets the name of the RV-C logger config file. Set this if you want to tail the RV-C bus logs
       - `CANBUS_CAN_INTERFACE_NAME` sets the can device connected to the Renogy bus. Defaults to `can0` if not set
       - `CANBUS_CONFIG_FILE` Similar to the floorplan file but used to config the Renogy bus listener. Defaults to `config.json` if not set
       - `MQTT_HOST` Sets host/domain name of the MQTT broker. Defaults to `localhost` if not set
