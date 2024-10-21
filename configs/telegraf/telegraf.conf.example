@@ -71,7 +71,7 @@
   # log_with_timezone = ""
 
   ## Override default hostname, if empty use os.Hostname()
-  hostname = ""
+  hostname = "coach2mqtt"
   ## If set to true, do no set the "host" tag in the telegraf agent.
   omit_hostname = false
 [[outputs.influxdb_v2]]
@@ -135,6 +135,7 @@
 
   ## Topics that will be subscribed to.
   topics = ["bms/cells/#","bms/current"]
+
   data_format = "value"
   data_type = "float"
   [[inputs.mqtt_consumer.topic_parsing]]
@@ -149,10 +150,27 @@
     tags = "_/current"
     [inputs.mqtt_consumer.topic_parsing.types]
       current = "float"
+    
 [[processors.pivot]]
   tag_key = "volts"
   value_key = "value"
 
+  [[inputs.mqtt_consumer]]
+    servers = ["tcp://mosquitto:1883"]
+  
+    topics = ["bms/volts"]
+  
+    data_type = "json_v2"
+    data_format = "json_v2"
+    [[inputs.mqtt_consumer.topic_parsing]]
+      topic = "bms/volts"
+      measurement = "_/volts"
+      tags = "_/voltage"
+    [[inputs.mqtt_consumer.json_v2]]
+      [[inputs.mqtt_consumer.json_v2.field]]
+          path = "volts"
+          type = "float"
+      
   ## The message topic will be stored in a tag specified by this value.  If set
   ## to the empty string no topic tag will be created.
   # topic_tag = "topic"
@@ -216,3 +234,4 @@
   ## Value supported is int, float, unit
   #   [[inputs.mqtt_consumer.topic.types]]
   #      key = type
+
