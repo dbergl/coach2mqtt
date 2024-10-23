@@ -20,21 +20,28 @@
             unpack_template: ">hhhh",
             var_names: ["unknown", "totalvoltage via volts_soc2json", "hcellv via mv2v", "lcellv via mv2v"],
             topic_template: ["bms/volts interval 20", "bms/highest_cell/volts", "bms/lowest_cell/volts"],
-            payload_template: ["{totalvoltage}","{hcellv}","{lcellv}"]
+            payload_template: ["{totalvoltage}", "{hcellv}", "{lcellv}"]
         },
         {
             canid: "0x503",
             unpack_template: ">hhhh",
-            var_names: ["unknown", "unknown2", "hcell", "lcell"],
-            topic_template: ["bms/highest_cell/number", "bms/lowest_cell/number"],
-            payload_template: ["{hcell}","{lcell}"]
+            var_names: ["maxtemp via val2celsius", "mintemp via val2celsius", "hcell", "lcell"],
+            topic_template: ["bms/temps/max", "bms/temps/min", "bms/highest_cell/number", "bms/lowest_cell/number"],
+            payload_template: ["{maxtemp}", "{mintemp}", "{hcell}", "{lcell}"]
+        },
+        {
+            canid: "0x504",
+            unpack_template: ">hhhBB",
+            var_names: ["a", "b", "c", "relays via byte2relays", "d"],
+            topic_template: ["bms/relays"],
+            payload_template: ["{relays}"]
         },
         {
             canid: "0x505",
-            unpack_template: ">chhcBB",
-            var_names: ["unknown", "bmsvolts via divideby10", "bmsamps via divideby10", "unknown2", "bmsmajor", "bmsminor via bytetominorpatch"],
-            topic_template: ["bms/chargevoltage", "bms/chargecurrent", "bms/version" ],
-            payload_template: ["{bmsvolts}","{bmsamps}","{bmsmajor}.{bmsminor}"]
+            unpack_template: ">BhhBBB",
+            var_names: ["workmodel via val2workmodel", "chargevoltage via divideby10", "chargecurrent via divideby10", "chargestatus via val2chargestatus", "bmsmajor", "bmsminor via bytetominorpatch"],
+            topic_template: ["bms/chargemode", "bms/chargingvoltage", "bms/chargingcurrent", "bms/chargestatus", "bms/version"],
+            payload_template: ["{workmodel}", "{chargevoltage}", "{chargecurrent}", "{chargestatus}", "{bmsmajor}.{bmsminor}"]
         },
         {
             canid: "0x507",
@@ -77,6 +84,20 @@
             var_names: ["c16 via mv2v"],
             topic_template: ["bms/cells/16/volts"],
             payload_template: ["{c16}"]
+        },
+        {
+            canid: "0x550",
+            unpack_template: ">hhhh",
+            var_names: ["numoftempsensors", "t1 via val2celsius", "t2 via val2celsius", "t3 via val2celsius"],
+            topic_template: ["bms/temps/sensorcount", "bms/temps/t1", "bms/temps/t2", "bms/temps/t3"],
+            payload_template: ["{numoftempsensors}", "{t1}", "{t2}", "{t3}"]
+        },
+        {
+            canid: "0x551",
+            unpack_template: ">hhhh",
+            var_names: ["t4 via val2celsius", "unknown1", "unknown2", "unknown3"],
+            topic_template: ["bms/temps/t4"],
+            payload_template: ["{t4}"]
         },
     ]
 }
