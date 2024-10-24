@@ -31,10 +31,10 @@
         },
         {
             canid: "0x504",
-            unpack_template: ">hhhBB",
-            var_names: ["a", "b", "c", "relays via byte2relays", "d"],
-            topic_template: ["bms/relays"],
-            payload_template: ["{relays}"]
+            unpack_template: ">BBBBBBBB",
+            var_names: ["a via alarmlevel", "b via alarmlevel", "c via alarmlevel", "d via alarmlevel", "e via alarmlevel", "failures", "relays via byte2relays", "h via alarmlevel"],
+            topic_template: ["bms/alarms/a", "bms/alarms/b", "bms/alarms/c", "bms/alarms/d", "bms/alarms/e", "bms/alarms/total_alarms", "bms/relays", "bms/alarms/f"],
+            payload_template: ["{a}", "{b}", "{c}", "{d}", "{e}", "{failures}", "{relays}", "{h}"]
         },
         {
             canid: "0x505",
