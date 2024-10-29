@@ -218,3 +218,10 @@ floorplan:
     instance_name: clock
     status_topic: rvc/date
 
+  - name: APS-500
+    source_id: 80
+    instance: 1
+    type: dc_system
+    instance_name: APS
+    status_topic: rvc/aps
+
