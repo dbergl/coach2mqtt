@@ -63,6 +63,7 @@ services:
   telegraf:
     profiles: [influx]
     image: telegraf
+    restart: unless-stopped
     depends_on:
       - influxdb
     environment:
