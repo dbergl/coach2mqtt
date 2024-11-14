@@ -225,3 +225,21 @@ floorplan:
     instance_name: APS
     status_topic: rvc/aps
 
+  - name: GENERATOR_STATUS_1
+    type: generator
+    instance: 0
+    instance_name: generator
+    status_topic: rvc/generator
+
+  - name: SOLAR_CONTROLLER_STATUS
+    type: solar
+    instance: 1
+    instance_name: house-battery
+    status_topic: rvc/solar
+
+  - name: SOLAR_CONTROLLER_STATUS
+    type: solar
+    instance: 2
+    instance_name: chassis-battery
+    status_topic: rvc/solar
+
