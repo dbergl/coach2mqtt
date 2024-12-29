@@ -1,0 +1,38 @@
+"type","topic","col2","col3","col4","col5","col6"
+# DO NOT REMOVE THE FIRST LINE!
+
+# Charge voltage aka setting 09 (12v normalized)
+# 131 = 52.4v
+# 134 = 53.6v
+# 135 = 54.0v
+# 136 = 54.4v
+poll,inverter,32,57352,1,holding_register,10.0
+ref,chargevolts,57352,rw
+
+# Charge current aka setting 28
+# 50  =  5 amps
+# 150 = 15 amps
+# 400 = 40 amps
+poll,inverter,32,57861,1,holding_register,10.0
+ref,current,57861,rw
+
+# Inverter Status
+#0: Power-up delay
+#1: Waiting state
+#2: Initialization
+#3: Soft start
+#4: Mains powered operation
+#5: Inverter powered operation
+#6: Inverter to mains
+#7: Mains to inverter
+#8: Reserved
+#9: Reserved
+#10: Shutdown
+#11: Fault
+poll,inverter,32,528,1,holding_register,10.0
+ref,status,528,r
+
+# Inverter on/off
+poll,inverter,32,57088,1,holding_register,10.0
+ref,onoff,57088,rw
+

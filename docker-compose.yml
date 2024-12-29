@@ -1,7 +1,8 @@
 
 services:
   rvc2mqtt:
-    image: ghcr.io/dbergl/rvc2mqtt:latest
+    #image: ghcr.io/dbergl/rvc2mqtt:latest
+    image: rvc2mqtt:apsreset
     depends_on:
       - mosquitto
     environment:
@@ -38,6 +39,28 @@ services:
     restart: unless-stopped
     volumes:
       - ./configs/can2mqtt/${CANBUS_CONFIG_FILE:-config.json}:/config/config.json
+
+  modbus2mqtt:
+    image: ghcr.io/dbergl/modbus2mqtt:latest
+    depends_on:
+      - mosquitto
+    environment:
+      - RTU=${RTU:-/dev/ttyUSB0}
+      - CONFIG_FILE=/config/modbus2mqtt.csv
+      - LOG_LEVEL=${MODBUS_LOG_LEVEL:-3}
+      - MQTT_HOST=${MQTT_HOST:-localhost}
+      - MQTT_PORT=${MQTT_PORT:-1883}
+      - MQTT_USERNAME
+      - MQTT_PASSWORD
+      - MQTT_CLIENT_ID
+    network_mode: "host"
+    restart: unless-stopped
+    device_cgroup_rules:
+      - 'c 188:* rmw'
+    volumes:
+      - ./configs/modbus2mqtt/${MODBUS_CONFIG_FILE:-jayco.csv}:/config/modbus2mqtt.csv
+      - /run/udev:/run/udev:ro
+      - /dev:/dev
 
   mosquitto:
     image: eclipse-mosquitto:2.0.18-openssl
