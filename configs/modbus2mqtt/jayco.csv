@@ -29,10 +29,13 @@ ref,current,57861,rw
 #9: Reserved
 #10: Shutdown
 #11: Fault
-poll,inverter,32,528,1,holding_register,10.0
+poll,inverter,32,528,1,holding_register,2.0
 ref,status,528,r
 
 # Inverter on/off
 poll,inverter,32,57088,1,holding_register,10.0
 ref,onoff,57088,rw
 
+# Password needs to be set to 255 to be able to write to some registers
+poll,inverter,32,57859,1,holding_register,0
+ref,password,57859,rw
