@@ -1,0 +1,40 @@
+# MQTT Automations 
+# Constrains: [ Mqtt, Cron ]
+# Actions:    [ Mqtt, Http ]
+
+
+# modbus/inverter/automation/mode/state
+# 0 = manual
+# 1 = Normal 30A/53.6v
+# 2 = Normal 15A/53.6v
+# 3 = Storage 5A/52.4v
+#
+- Name: Normal 15A outlet
+  Mode: AND
+  Constraints: 
+    - Mqtt : modbus/inverter/connected == True
+    - Mqtt : modbus/inverter/automation/set/mode == 2
+  Actions:
+    - Mqtt : modbus/inverter/set/current = 150 (Retained 0)
+    - Mqtt : modbus/inverter/set/chargevolts = 134 (Retained 0)
+    - Mqtt : modbus/inverter/automation/set/mode = 0 (Retained 0)
+
+- Name: Normal 30A outlet
+  Mode: AND
+  Constraints: 
+    - Mqtt : modbus/inverter/connected == True
+    - Mqtt : modbus/inverter/automation/set/mode == 1
+  Actions:
+    - Mqtt : modbus/inverter/set/current = 400 (Retained 0)
+    - Mqtt : modbus/inverter/set/chargevolts = 134 (Retained 0)
+    - Mqtt : modbus/inverter/automation/set/mode = 0 (Retained 0)
+
+- Name: Storage Trickle charge
+  Mode: AND
+  Constraints: 
+    - Mqtt : modbus/inverter/connected == True
+    - Mqtt : modbus/inverter/automation/set/mode == 3
+  Actions:
+    - Mqtt : modbus/inverter/set/current = 50 (Retained 0)
+    - Mqtt : modbus/inverter/set/chargevolts = 131 (Retained 0)
+    - Mqtt : modbus/inverter/automation/set/mode = 0 (Retained 0)

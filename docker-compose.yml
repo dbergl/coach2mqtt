@@ -48,12 +48,11 @@ services:
       - RTU=${RTU:-/dev/ttyUSB0}
       - CONFIG_FILE=/config/modbus2mqtt.csv
       - LOG_LEVEL=${MODBUS_LOG_LEVEL:-3}
-      - MQTT_HOST=${MQTT_HOST:-localhost}
+      - MQTT_HOST=${MQTT_HOST:-mosquitto}
       - MQTT_PORT=${MQTT_PORT:-1883}
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
-    network_mode: "host"
     restart: unless-stopped
     device_cgroup_rules:
       - 'c 188:* rmw'
@@ -61,6 +60,16 @@ services:
       - ./configs/modbus2mqtt/${MODBUS_CONFIG_FILE:-jayco.csv}:/config/modbus2mqtt.csv
       - /run/udev:/run/udev:ro
       - /dev:/dev
+
+  mqttcommander:
+    image: calkoe/mqttcommander
+    depends_on:
+      - mosquitto
+    ports:
+      - 9091:9090
+    restart: unless-stopped
+    volumes:
+      - ./configs/mqttcommander:/data
 
   mosquitto:
     image: eclipse-mosquitto:2.0.18-openssl
