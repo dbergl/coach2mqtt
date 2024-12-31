@@ -1,0 +1,48 @@
+# MQTT Automations 
+# Constrains: [ Mqtt, Cron ]
+# Actions:    [ Mqtt, Http ]
+
+- Name: Tank Heaters On
+  Mode: AND
+  Constraints:
+    - Mqtt : rvc/tanks/all/heater/set == on
+  Actions:
+    - Mqtt : rvc/tanks/black/heater/set = on
+    - Mqtt : rvc/tanks/fresh/heater/set = on
+    - Mqtt : rvc/tanks/gray/heater/set = on
+    - Mqtt : rvc/tanks/gray2/heater/set = on
+    - Mqtt : rvc/tanks/all/heater = on
+    - Mqtt : rvc/tanks/all/heater/set =
+
+- Name: Tank Heaters Off
+  Mode: AND
+  Constraints:
+    - Mqtt : rvc/tanks/all/heater/set == off
+  Actions:
+    - Mqtt : rvc/tanks/black/heater/set = off
+    - Mqtt : rvc/tanks/fresh/heater/set = off
+    - Mqtt : rvc/tanks/gray/heater/set = off
+    - Mqtt : rvc/tanks/gray2/heater/set = off
+    - Mqtt : rvc/tanks/all/heater = off
+    - Mqtt : rvc/tanks/all/heater/set =
+
+- Name: Ensure Tank Heaters status is correct
+  Mode: OR
+  Constraints:
+    - Mqtt : rvc/tanks/black/heater == on
+    - Mqtt : rvc/tanks/fresh/heater == on
+    - Mqtt : rvc/tanks/gray/heater == on
+    - Mqtt : rvc/tanks/gray2/heater == on
+  Actions:
+    - Mqtt : rvc/tanks/all/heater = on
+
+- Name: Ensure Tank Heaters status is correct
+  Mode: AND
+  Constraints:
+    - Mqtt : rvc/tanks/black/heater == off
+    - Mqtt : rvc/tanks/fresh/heater == off
+    - Mqtt : rvc/tanks/gray/heater == off
+    - Mqtt : rvc/tanks/gray2/heater == off
+  Actions:
+    - Mqtt : rvc/tanks/all/heater/set = off
+

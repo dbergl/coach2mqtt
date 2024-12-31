@@ -176,18 +176,6 @@ floorplan:
     status_topic: rvc/tanks/gray2/heater
     link_id: gray2
 
-  - name: DC_DIMMER_STATUS_3
-    instance: 99
-    type: tank_heater_group
-    instance_name: tank heaters
-    status_topic: rvc/tanks/all/heater
-    link_id: tank_heater_group
-    entity_links:
-      - fresh
-      - gray
-      - black
-      - gray2
-
   - name: DC_SOURCE_STATUS_1
     instance: 1
     type: dc_system

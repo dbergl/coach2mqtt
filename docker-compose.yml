@@ -1,8 +1,7 @@
 
 services:
   rvc2mqtt:
-    #image: ghcr.io/dbergl/rvc2mqtt:latest
-    image: rvc2mqtt:apsreset
+    image: ghcr.io/dbergl/rvc2mqtt:latest
     depends_on:
       - mosquitto
     environment:

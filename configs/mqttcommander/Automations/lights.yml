@@ -1,0 +1,48 @@
+# MQTT Automations 
+# Constrains: [ Mqtt, Cron ]
+# Actions:    [ Mqtt, Http ]
+
+- Name: Interior lights on
+  Mode: AND
+  Constraints:
+    - Mqtt : rvc/lights/int/all == on
+  Actions:
+    - Mqtt : rvc/lights/int/main/set = on
+    - Mqtt : rvc/lights/int/livingohc/set = on
+    - Mqtt : rvc/lights/int/kitchenohc/set = on
+    - Mqtt : rvc/lights/int/bunk/set = on
+    - Mqtt : rvc/lights/int/bed/set = on
+    - Mqtt : rvc/lights/int/bath/set = on
+    - Mqtt : rvc/lights/int/all = 
+
+- Name: Interior lights off
+  Mode: AND
+  Constraints:
+    - Mqtt : rvc/lights/int/all == off
+  Actions:
+    - Mqtt : rvc/lights/int/main/set = off
+    - Mqtt : rvc/lights/int/livingohc/set = off
+    - Mqtt : rvc/lights/int/kitchenohc/set = off
+    - Mqtt : rvc/lights/int/bunk/set = off
+    - Mqtt : rvc/lights/int/bed/set = off
+    - Mqtt : rvc/lights/int/bath/set = off
+    - Mqtt : rvc/lights/int/all = 
+
+- Name: Exterior lights on
+  Mode: AND
+  Constraints:
+    - Mqtt : rvc/lights/ext/all == on
+  Actions:
+    - Mqtt : rvc/lights/ext/awning/set = on
+    - Mqtt : rvc/lights/ext/step/set = on
+    - Mqtt : rvc/lights/ext/all = 
+
+- Name: Exterior lights off
+  Mode: AND
+  Constraints:
+    - Mqtt : rvc/lights/ext/all == off
+  Actions:
+    - Mqtt : rvc/lights/ext/awning/set = off
+    - Mqtt : rvc/lights/ext/step/set = off
+    - Mqtt : rvc/lights/ext/all = 
+
