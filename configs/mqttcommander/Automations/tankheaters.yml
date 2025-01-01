@@ -12,7 +12,7 @@
     - Mqtt : rvc/tanks/gray/heater/set = on
     - Mqtt : rvc/tanks/gray2/heater/set = on
     - Mqtt : rvc/tanks/all/heater = on
-    - Mqtt : rvc/tanks/all/heater/set =
+    - Mqtt : rvc/tanks/all/heater/set = (BlockRetained 1)
 
 - Name: Tank Heaters Off
   Mode: AND
@@ -24,7 +24,7 @@
     - Mqtt : rvc/tanks/gray/heater/set = off
     - Mqtt : rvc/tanks/gray2/heater/set = off
     - Mqtt : rvc/tanks/all/heater = off
-    - Mqtt : rvc/tanks/all/heater/set =
+    - Mqtt : rvc/tanks/all/heater/set = (BlockRetained 1)
 
 - Name: Ensure Tank Heaters status is correct
   Mode: OR
