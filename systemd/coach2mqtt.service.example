@@ -1,0 +1,21 @@
+[Unit]
+Description=coach2mqtt
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+User=1000
+Group=docker
+TimeoutStopSec=15
+WorkingDirectory=/opt/coach2mqtt
+# Shutdown container (if running) when unit is started
+ExecStartPre=docker compose -f docker-compose.yml down
+# Start container when unit is started
+ExecStart=docker compose -f docker-compose.yml up
+# Stop container when unit is stopped
+ExecStop=docker compose -f docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target
+

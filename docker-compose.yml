@@ -15,7 +15,7 @@ services:
       - MQTT_CLIENT_ID
       - MQTT_TOPIC_BASE=${MQTT_TOPIC_BASE:-rvc}
     network_mode: "host"
-    restart: unless-stopped
+    restart: on-failure:10
     volumes:
       - ./floorplan/${RVC_FLOORPLAN_FILE:-2021-2024_swift-ethos-launch-terrain.yml}:/floorplan/floorplan.yml
       - ./configs/rvc2mqtt:/config
@@ -35,7 +35,7 @@ services:
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
     network_mode: "host"
-    restart: unless-stopped
+    restart: on-failure:10
     volumes:
       - ./configs/can2mqtt/${CANBUS_CONFIG_FILE:-config.json}:/config/config.json
 
@@ -52,7 +52,7 @@ services:
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
-    restart: unless-stopped
+    restart: on-failure:10
     device_cgroup_rules:
       - 'c 188:* rmw'
     volumes:
@@ -66,13 +66,13 @@ services:
       - mosquitto
     ports:
       - 9091:9090
-    restart: unless-stopped
+    restart: on-failure:10
     volumes:
       - ./configs/mqttcommander:/data
 
   mosquitto:
     image: eclipse-mosquitto:2.0.18-openssl
-    restart: unless-stopped
+    restart: on-failure:10
     ports:
       - "1883:1883"
       - "9001:9001"
@@ -82,9 +82,9 @@ services:
       - ./configs/mosquitto:/mosquitto/config
 
   influxdb:
-    profiles: [influx,grafana]
+    profiles: [influx]
     image: influxdb:2
-    restart: unless-stopped
+    restart: on-failure:10
     ports:
       - "8086:8086"
     volumes:
@@ -94,24 +94,10 @@ services:
   telegraf:
     profiles: [influx]
     image: telegraf
-    restart: unless-stopped
+    restart: on-failure:10
     depends_on:
       - influxdb
     environment:
       - INFLUX_TOKEN
     volumes:
       - ./configs/telegraf:/etc/telegraf
-    
-  grafana:
-    profiles: [grafana]
-    image: grafana/grafana-enterprise
-    restart: unless-stopped
-    environment:
-    - GF_INSTALL_PLUGINS
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-storage:/var/lib/grafana
-
-volumes:
-    grafana-storage:

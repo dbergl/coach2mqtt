@@ -14,6 +14,7 @@ allow_anonymous true
 #remote_username <username>
 #remote_password <password>
 #topic rvc/# both 0
+#topic inverter/# both 0
 #topic bms/# out 0
 #bridge_protocol_version mqttv311
 #try_private false
