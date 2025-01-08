@@ -45,7 +45,7 @@ jobs:
           touch pi-gen/stage3/SKIP pi-gen/stage4/SKIP pi-gen/stage4/SKIP_IMAGES pi-gen/stage5/SKIP pi-gen/stage5/SKIP_IMAGES
           cp -R stage-coach2mqtt pi-gen/ && cd pi-gen
           touch stage-coach2mqtt/EXPORT_IMAGE
-          sed -i 's/^RELEASE=.*/RELEASE=${{ env.PLATFORM }}/' ./config
+          sed -i 's/^RELEASE=.*/RELEASE=${{ env.PLATFORM }}/' "./config"
           sudo IMG_FILENAME=${{ env.ETHOS }} ARCHIVE_FILENAME=${{ env.ETHOS }} ./build.sh
 
       - name: 📦 Upload
