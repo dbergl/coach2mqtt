@@ -1,0 +1,9 @@
+[Match]
+Name=can*
+
+[Link]
+RequiredForOnline=no
+
+[CAN]
+BitRate=250K
+RestartSec=100ms

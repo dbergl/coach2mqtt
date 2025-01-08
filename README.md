@@ -64,7 +64,7 @@ Uncomment `#dtparam=spi=on` by changing it to `dtparam=spi=on`
     ```bash
     auto can0
     iface can0 inet manual
-      pre-up /sbin/ip link set can0 type can bitrate 250000 restart-ms 100
+      pre-up /sbin/ip link set can0 txqueuelen 100 type can bitrate 250000 restart-ms 100
       up /sbin/ifconfig can0 up
       down /sbin/ifconfig can0 down
     ```
@@ -112,10 +112,10 @@ Uncomment `#dtparam=spi=on` by changing it to `dtparam=spi=on`
    ```
 
    - .env sets certain environment variables that are used by the docker containers
-      - `RVC_CAN_INTERFACE_NAME` sets the can device connected to the RV-C bus. Defaults to `can1` if not set
+      - `RVC_CAN_INTERFACE_NAME` sets the can device connected to the RV-C bus. Defaults to `can0` if not set
       - `RVC_FLOORPLAN_FILE` sets filename of the floorplan file for your coach. floorplan files are in floorplans/
       - `RVC_LOG_CONFIG_FILE` sets the name of the RV-C logger config file. Set this if you want to tail the RV-C bus logs
-      - `CANBUS_CAN_INTERFACE_NAME` sets the can device connected to the Renogy bus. Defaults to `can0` if not set
+      - `CANBUS_CAN_INTERFACE_NAME` sets the can device connected to the Renogy bus. Defaults to `can1` if not set
       - `CANBUS_CONFIG_FILE` Similar to the floorplan file but used to config the Renogy bus listener. Defaults to `config.json` if not set
       - `MQTT_HOST` Sets host/domain name of the MQTT broker. Defaults to `localhost` if not set
       - `MQTT_PORT` Sets MQTT port to use when connecting to MQTT broker. Defaults to `1883` if not set
