@@ -1,0 +1,109 @@
+name: Build and release RaspberryPi 4 image
+
+run-name: |
+  ${{ github.event_name == 'push' && format('🌱 Push build - {0}', github.event.head_commit.message) || '' }}
+  ${{ github.event_name == 'pull_request' && format('👷 PR #{0} build - {1}', github.event.pull_request.number, github.event.pull_request.title) || '' }}
+  ${{ github.event_name == 'repository_dispatch' && '🚀 Triggered HyperBian build' || '' }}
+  ${{ github.event_name == 'workflow_dispatch' && '🚀 Manual triggered HyperBian build' || '' }}
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - "v*.*.*"
+
+env:
+  PLATFORM: bookworm
+
+jobs:
+  image-builder:
+    name: "coach2mqtt (${{ matrix.pi-gen.architecture }})"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pi-gen: [
+          { branch: arm64,  architecture: arm64 }
+        ]
+
+    steps:
+      - name: Checkout coach2mqtt
+        uses: actions/checkout@v4
+
+      - name: Checkout pi-gen
+        uses: actions/checkout@v4
+        with:
+          repository: RPi-Distro/pi-gen
+          ref: ${{ matrix.pi-gen.branch }}
+          path: pi-gen
+
+      - name: 🔧 Prepare
+        run: |
+          sudo apt-get update && sudo apt-get install -y coreutils quilt parted qemu-utils qemu-user-static debootstrap zerofree zip dosfstools libarchive-tools libcap2-bin grep rsync xz-utils file git curl bc kmod kpartx arch-test
+          echo "ETHOS=Eth-OS-${{ env.PLATFORM }}-${{ matrix.pi-gen.architecture }}" >> $GITHUB_ENV
+
+      - name: 👷 Build
+        run: |
+          touch pi-gen/stage3/SKIP pi-gen/stage4/SKIP pi-gen/stage4/SKIP_IMAGES pi-gen/stage5/SKIP pi-gen/stage5/SKIP_IMAGES
+          cp -R stage-coach2mqtt pi-gen/
+          touch pi-gen/stage-coach2mqtt/EXPORT_IMAGE
+          cp config pi-gen/ && cd pi-gen
+          sed -i 's/^RELEASE=.*/RELEASE='${{ env.PLATFORM }}'' ./config
+          sudo IMG_FILENAME=${{ env.ETHOS }} ARCHIVE_FILENAME=${{ env.ETHOS }} ./build.sh
+
+      - name: 📦 Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ETHOS }}
+          path: pi-gen/deploy/*.zip
+          retention-days: 1
+        
+
+#####################################
+###### Publish GitHub Releases ######
+#####################################
+
+  github_publish:
+    name: 🚀 Publish GitHub Releases
+    needs: [ image-builder ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇ Checkout coach2mqtt
+        uses: actions/checkout@v4
+
+      - name: 🔧 Prepare
+        id: read_template
+        shell: bash
+        run: |
+          TEMPLATE=$(cat ./.github/workflows/template.md)
+          TEMPLATE="${TEMPLATE//'%'/'%25'}"
+          TEMPLATE="${TEMPLATE//$'\n'/'%0A'}"
+          TEMPLATE="${TEMPLATE//$'\r'/'%0D'}"
+          echo "RELEASE_BODY=$TEMPLATE" >> "$GITHUB_OUTPUT"
+
+      - name: 💾 Artifact download
+        uses: actions/download-artifact@v4.1.8
+        with:
+          pattern: Eth-OS-*
+          path: all-artifacts
+          merge-multiple: true
+
+      - name: Delete previous coach2mqtt Release
+        uses: dev-drprasad/delete-older-releases@v0.3.4
+        with:
+          keep_latest: 0
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release and upload image
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
+          file: all-artifacts/*
+          tag: coach2mqtt
+          release_name: coach2mqtt
+          overwrite: true
+          body: |
+            ${{ steps.read_template.outputs.RELEASE_BODY }}

@@ -1,0 +1,1 @@
+deb [arch=ARCH signed-by=/etc/apt/keyrings/allstarlink.gpg] https://repo.allstarlink.org/public RELEASE main

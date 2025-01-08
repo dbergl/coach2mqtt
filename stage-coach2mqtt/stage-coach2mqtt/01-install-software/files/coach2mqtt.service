@@ -1,0 +1,20 @@
+[Unit]
+Description=coach2mqtt
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=on-failure
+User=1000
+Group=docker
+WorkingDirectory=/opt/coach2mqtt
+Type=oneshot
+
+ExecStartPre=/usr/bin/docker compose -f /opt/coach2mqtt/docker-compose.yml down
+ExecStart=docker compose -f /opt/coach2mqtt/docker-compose.yml up
+
+ExecStop=docker compose -f /opt/coach2mqtt/docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target
+
