@@ -3,8 +3,6 @@ name: Build and release RaspberryPi 4 image
 run-name: |
   ${{ github.event_name == 'push' && format('🌱 Push build - {0}', github.event.head_commit.message) || '' }}
   ${{ github.event_name == 'pull_request' && format('👷 PR #{0} build - {1}', github.event.pull_request.number, github.event.pull_request.title) || '' }}
-  ${{ github.event_name == 'repository_dispatch' && '🚀 Triggered HyperBian build' || '' }}
-  ${{ github.event_name == 'workflow_dispatch' && '🚀 Manual triggered HyperBian build' || '' }}
 
 on:
   push:
@@ -48,7 +46,7 @@ jobs:
           cp -R stage-coach2mqtt pi-gen/
           touch pi-gen/stage-coach2mqtt/EXPORT_IMAGE
           cp config pi-gen/ && cd pi-gen
-          sed -i 's/^RELEASE=.*/RELEASE='${{ env.PLATFORM }}'' ./config
+          sed -i 's/^RELEASE=.*/RELEASE=${{ env.PLATFORM }}/' ./config
           sudo IMG_FILENAME=${{ env.ETHOS }} ARCHIVE_FILENAME=${{ env.ETHOS }} ./build.sh
 
       - name: 📦 Upload
