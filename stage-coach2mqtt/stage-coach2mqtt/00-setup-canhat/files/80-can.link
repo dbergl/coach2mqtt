@@ -1,6 +1,8 @@
 [Match]
-OriginalName=can*
+# identifying property found by running udevadm info -p $(udevadm info --query=path --path=/sys/class/net/can0)
+Property=ID_PATH=platform-fe215080.spi-cs-1
 
 [Link]
+Name=can_rvc
 TransmitQueueLength=100
 

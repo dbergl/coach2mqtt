@@ -12,10 +12,10 @@ install -m 644 files/allstarlink.list "${ROOTFS_DIR}/etc/apt/sources.list.d/"
 sed -i "s/RELEASE/${RELEASE}/g" "${ROOTFS_DIR}/etc/apt/sources.list.d/allstarlink.list"
 
 on_chroot <<- EOF
-	ARCH="$(dpkg --print-architecture)"
+    ARCH="$(dpkg --print-architecture)"
     sed -i "s/ARCH/${ARCH}/g" "/etc/apt/sources.list.d/docker.list"
     sed -i "s/ARCH/${ARCH}/g" "/etc/apt/sources.list.d/allstarlink.list"
 
-	apt-get update
+    apt-get update
 EOF
 

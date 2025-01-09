@@ -13,12 +13,13 @@ EOF
 install -v -m 644 files/can.conf "${ROOTFS_DIR}/etc/modules-load.d/can.conf"
 
 #can0 and can1 configuration for systemd-networkd
-install -v -m 644 files/80-can.link "${ROOTFS_DIR}/etc/systemd/network/80-can.link"
-install -v -m 644 files/80-can.network "${ROOTFS_DIR}/etc/systemd/network/80-can.network"
+install -v -m 644 files/80-can.link "${ROOTFS_DIR}/etc/systemd/network/"
+install -v -m 644 files/81-can.link "${ROOTFS_DIR}/etc/systemd/network/"
+install -v -m 644 files/80-can.network "${ROOTFS_DIR}/etc/systemd/network/"
 
 #networkd should only wait for the can links
 install -v -m 755 -d "${ROOTFS_DIR}/etc/systemd/system/systemd-networkd-wait-online.service.d"
-install -v -m 644 files/override.conf "${ROOTFS_DIR}/etc/systemd/system/systemd-networkd-wait-online.service.d/override.conf"
+install -v -m 644 files/override.conf "${ROOTFS_DIR}/etc/systemd/system/systemd-networkd-wait-online.service.d/"
 
 on_chroot << EOF
 systemctl enable systemd-networkd

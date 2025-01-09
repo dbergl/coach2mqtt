@@ -1,5 +1,5 @@
 [Match]
-Name=can*
+Name=can_*
 
 [Link]
 RequiredForOnline=no

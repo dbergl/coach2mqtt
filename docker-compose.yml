@@ -5,7 +5,7 @@ services:
     depends_on:
       - mosquitto
     environment:
-      - CAN_INTERFACE_NAME=${RVC_CAN_INTERFACE_NAME:-can0}
+      - CAN_INTERFACE_NAME=${RVC_CAN_INTERFACE_NAME:-can_rvc}
       - FLOORPLAN_FILE_1=/floorplan/floorplan.yml
       - LOG_CONFIG_FILE=/config/${RVC_LOG_CONFIG_FILE}
       - MQTT_HOST=${MQTT_HOST:-localhost}
@@ -26,7 +26,7 @@ services:
     depends_on:
       - mosquitto
     environment:
-      - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME:-can1}
+      - CAN_INTERFACE_NAME=${CANBUS_CAN_INTERFACE_NAME:-can_bms}
       - CONFIG_FILE=/config/config.json
       - LOG_LEVEL=${CAN_LOG_LEVEL:-INFO}
       - MQTT_HOST=${MQTT_HOST:-localhost}
