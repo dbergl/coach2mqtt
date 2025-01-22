@@ -92,6 +92,10 @@ jobs:
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
 
       - name: Create release and upload image
         uses: svenstaro/upload-release-action@v2
