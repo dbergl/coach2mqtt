@@ -4,20 +4,23 @@ log_dest file /mosquitto/log/mosquitto.log
 listener 1883
 allow_anonymous true
 
+#Bridge connection
+connection hivemq
+#address will be something like <id>.s1.eu.hivemq.cloud:8883
+address .s1.eu.hivemq.cloud:8883
 
-##Bridge connection
-#connection hivemq
-#address <id>.s1.eu.hivemq.cloud:8883
-## pem file is needed because of connection/cert issue with hivemq
-## wget https://letsencrypt.org/certs/isrgrootx1.pem
-#bridge_cafile /mosquitto/config/isrgrootx1.pem
-#remote_username <username>
-#remote_password <password>
-#topic rvc/# both 0
-#topic inverter/# both 0
-#topic bms/# out 0
-#bridge_protocol_version mqttv311
-#try_private false
-#notifications true
-#bridge_attempt_unsubscribe false
-#bridge_insecure true
+# letsencrypt root cert pem file is needed because of cert issue with hivemq
+# you can download a new one from https://letsencrypt.org/certs/isrgrootx1.pem
+bridge_cafile /mosquitto/config/isrgrootx1.pem
+bridge_protocol_version mqttv50
+remote_username <username>
+remote_password <password>
+topic rvc/# both 0
+topic modbus/inverter/state/# out 0
+topic modbus/inverter/set/# in 0
+topic modbus/inverter/connected out 0
+topic bms/# out 0
+try_private true
+notifications true
+bridge_attempt_unsubscribe false
+bridge_insecure false

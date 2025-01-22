@@ -61,7 +61,7 @@ services:
       - /dev:/dev
 
   mqttcommander:
-    image: ghcr.io/dbergl/mqttcommander:main
+    image: ghcr.io/dbergl/mqttcommander:latest
     depends_on:
       - mosquitto
     ports:

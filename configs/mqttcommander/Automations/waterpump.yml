@@ -1,0 +1,13 @@
+# MQTT Automations 
+# Constrains: [ Mqtt, Cron ]
+# Actions:    [ Mqtt, Http ]
+
+- Name: Shut off waterpump after 15 min
+  Mode: AND
+  Delay: 15m
+  Constraints:
+    - Mqtt : rvc/waterpump/autooff == True
+    - Mqtt : rvc/waterpump == on
+  Actions:
+    - Mqtt : rvc/waterpump/set = off
+
