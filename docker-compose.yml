@@ -1,7 +1,8 @@
 
 services:
   rvc2mqtt:
-    image: ghcr.io/dbergl/rvc2mqtt:latest
+    #image: ghcr.io/dbergl/rvc2mqtt:latest
+    image: rvc2mqtt:override
     depends_on:
       - mosquitto
     environment:
@@ -17,12 +18,13 @@ services:
     network_mode: "host"
     restart: on-failure:10
     volumes:
-      - ./floorplan/${RVC_FLOORPLAN_FILE:-2021-2024_swift-ethos-launch-terrain.yml}:/floorplan/floorplan.yml
+      - ./configs/rvc2mqtt/${RVC_FLOORPLAN_FILE:-2021-2024_swift-ethos-launch-terrain.yml}:/floorplan/floorplan.yml
       - ./configs/rvc2mqtt:/config
       - ./rvc-logs:/logs
 
   can2mqtt:
-    image: ghcr.io/dbergl/can2mqtt:latest
+    #image: ghcr.io/dbergl/can2mqtt:latest
+    image: can2mqtt:alarms
     depends_on:
       - mosquitto
     environment:

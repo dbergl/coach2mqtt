@@ -6,8 +6,8 @@
   Mode: AND
   Delay: 15m
   Constraints:
-    - Mqtt : rvc/waterpump/autooff == True
-    - Mqtt : rvc/waterpump == on
+    - Mqtt : rvc/set/waterpump/autooff == on
+    - Mqtt : rvc/state/waterpump == on
   Actions:
-    - Mqtt : rvc/waterpump/set = off
+    - Mqtt : rvc/set/waterpump = off
 
