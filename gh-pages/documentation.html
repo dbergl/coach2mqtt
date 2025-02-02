@@ -1,0 +1,418 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Documentation Template</title>
+    <meta name="description" content="A simple HTML/CSS DocumentationTemplate">
+    <meta name="author" content="Carlos Yllobre">
+
+    <link rel="stylesheet" href="style.css?">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <a href="#"><img class="logo" src="logo.svg"></a>
+            <a class="right" style="text-decoration: underline;" href="#"><i class="fas fa-book"></i>&nbsp; Documentation</a>
+            <!-- <a class="right" href="mailto:yourapp@email.com" target="_blank"><i class="fas fa-paper-plane"></i>&nbsp; yourapp@email.com</a> -->
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">
+
+            <div class="sidepanel">
+
+                <a class="title" href="#">Introduction</a>
+                
+                <a class="section" href="#">About this App</a>
+                <a class="section" href="#technology">Technology</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#gettingstarted">Getting Started</a>
+
+                <a class="section" href="#assemblehardware">The Hardware</a>
+                <a class="section" href="#installingapp">Installing the App</a>
+                 <a class="section" href="#openingapp">Opening the App</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#basicfeatures">Basic Features</a>
+
+                <a class="section" href="#basicfeatures">Feature 1</a>
+                <a class="section" href="#basicfeatures">Feature 2</a>
+                <a class="section" href="#feature3">Feature 3</a>
+                <a class="section" href="#feature3">Feature 4</a>
+                <a class="section" href="#feature3">Feature 5</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#advanced">Advanced Features</a>
+
+                <a class="section" href="#advanced">Feature A</a>
+                <a class="section" href="#featureb">Feature B</a>
+                <a class="section" href="#featurec">Feature C</a>
+                <a class="sub-section" href="#featurec1">Feature C.1</a>
+                <a class="sub-section" href="#featurec2">Feature C.2</a>
+                <a class="section" href="#featured">Feature D</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#accesibility">Accesibility</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#moreinfo">More Info</a>
+            
+             <div class="space double"></div>
+
+            </div>
+
+            <div class="right-col">
+            
+
+
+                <h1 >Introduction</h1>
+                
+                <p>Coach2mqtt runs on a <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> and allows you to control and monitor most of the systems in your Jayco Swift/Entegra Ethos or your Jayco Terrain/Entegra Launch from your phone or tablet.
+                </p>
+                <p>On Renogy Lithium battery models you will be able to control most of the firefly devices (lights, fans, A/C, tank heaters, etc.), monitor the Renogy battery BMS (aka Samkoon screen), and also monitor and control your Renogy Inverter/Charger.
+                </p> 
+                <p>On generator models you will be able to control most of the firefly devices (lights, fans, A/C, tank heaters, etc.)
+                </p>
+                <p>Lithionics models have not been tested.
+                </p>
+
+                <h2>About this App</h2>
+                
+                <p id="technology"> Coach2mqtt runs as a collection of docker containers </p>
+
+                <h2>Technology</h2>
+                
+                <p>In order to monitor and control the systems the <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> connects to the <a href="http://www.rv-c.com">RV-C</a> bus and on Renogy Lithium battery models it also connects to the BMS CAN bus and the Inverter RS-485 port. 
+
+                <p id="gettingstarted"></p> 
+                 
+        <div class="divider" style="width:24%; margin:30px 0;"></div>
+
+                <p id="assemblehardware"></p>
+                <h1>Getting Started</h1>
+
+                <h2>Hardware requirements</h2>
+                
+                <p>You will need the following:</p> 
+
+                <ul>
+                    <li>
+                        <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B with 2GB+ RAM</a>
+                    </li>
+                    <li>
+                        <a href="https://www.waveshare.com/2-ch-can-hat-plus.htmhttps://www.waveshare.com/2-ch-can-hat-plus.htm">Waveshare 2-Channel CAN Hat+</a>
+                        <ul>
+                            <li>
+                                <a href="https://www.amazon.com/Waveshare-2-Channel-Expansion-Compatible-Protections/dp/B0D3GD458Z">Amazon</a>
+                            </li>
+                        </ul>
+                        <b>Important:</b> Be sure to buy the + version so you can supply power to the Pi and Hat from the RV-C cable.
+                    </li>
+                    <br>
+                    <li>
+                        A case for RaspberryPi 4B that can accomodate the CAN bus hat
+                        <ul>
+                            <li><a href="https://www.amazon.com/HighPi-Raspberry-Pi-Case/dp/B0BWC714GY">Black HighPi Raspberry Pi Case for Pi 4 from Amazon</a></li>
+                            <li><a href="https://www.pishop.us/product/highpi-raspberry-pi-case-for-pi4/">Black HighPi Raspberry Pi Case for Pi 4i from PiShop</a></li>
+                            <li><a href="https://www.pishop.us/product/highpi-raspberry-pi-case-for-pi4-white/">White HighPi Raspberry Pi Case for Pi 4 from PiShop</a></li>
+                            <li><a href="https://www.pishop.us/product/highpi-raspberry-pi-case-for-pi4-clear/">Clear HighPi Raspberry Pi Case for Pi 4 from PiShop</a></li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li>
+                        Several feet of RV-C drop cable (4 conductor 24awg) or equivalant. Get enough so you have some flexibility where you mount the Raspberry Pi but keep in mind the RV-C spec says a drop cable should be no more than 6ft.
+                        <ul>
+                            <li>
+                                <a href="https://www.fireflyint.com/products/70053-24ga-rv-c-drop-cable">RV-C drop cable from FireFly integrations</a>
+                            </li>
+                            <li>
+                                <a href="https://www.fireflyint.com/products/70079a-10-ft-plugplug-drop-cable-assembly">10ft with plugs attached already</a>
+                            </li>
+                            <li>
+                                <a href="https://www.fireflyint.com/products/70077a-6-ft-plugplug-drop-cable-assembly">6ft with plugs attached already</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li>
+                         One 3M miniplug connector to connect RV-C bus. Alternatively you can buy RV-C cable with a plug already attached (see above)
+                        <ul>
+                            <li>
+                                <a href="https://www.fireflyint.com/products/70090-3m-mini-plug-connector">From Firefly Integrations</a>
+                            </li>
+                            <li>
+                                <a href="https://www.digikey.com/en/products/detail/3m/37104-A165-00E%2520MB/1855697">From Digikey</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <h3>Renogy Lithium models also require these:</h3>
+                    <ul>
+                        <li>
+                            USB 2.0 A to B cable to connect to Renogy Inverter. Be sure to get one that is long enough to reach from the inverter to the where you are mounting the Pi.
+                            <ul>
+                                <li>
+                                    <a href="https://www.amazon.com/Tripp-Lite-Hi-Speed-Ferrite-U023-006/dp/B008VOPCGY">Example from Amazon</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Connector for Renogy BMS Debug port
+                            <ul>
+                                <li>
+                                    <a href="https://www.amazon.com/dp/B0BX42NJWR">2 pin connector on Amazon</a>
+                                </li>
+                            </ul>
+                    </ul>
+
+
+
+                <p id="installingapp">
+               
+
+
+                <h2>Installing Coach2mqtt</h2>
+                
+                <p>To fully utilize Coach2mqtt you will need to install an image on the Rasperry Pi and an app on your phone or tablet.</p>
+                
+                <h3>Install the image</h3>
+                   <ol>
+                    <li>
+                        <a href="https://www.raspberrypi.com/software/">Download and install the latest Imager tool</a>
+                    </li>
+                    <br>
+                    <li>
+                        <a href="https://github.com/dbergl/coach2mqtt/releases/latest">Download the latest image for the Raspberry Pi</a>
+                        <p><b>Note:</b> There is no need to decompress the downloaded image. The Imager tool can install a .zip image.
+                    </li>
+                    <li>
+                        Using the Imager tool install the image you downloaded onto the micro SD card
+                        <ol>
+                            <li>
+                                Click CHOOSE OS <
+
+                    </li>
+                    <br id="openingapp">
+                    <li>
+                     The app is installed now.
+                    </li>
+                    <br>
+                </ol>
+                
+                <h3>Install the app on your phone or tablet</h3>
+
+                <h2>Opening the app</h2>
+                
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                
+                 <ol>
+                    <li>
+                     The first thing you need to do to open this app.
+                    </li>
+                    <br>
+                    <li>
+                     The second thing you need to do to open this app.
+                    </li>
+                    <br>
+                    <li>
+                      The third thing you need to do to open this app.
+                    </li>
+                    <br>
+                    <li>
+                     Open the app and start using it!
+                    </li>
+                    <br>
+                </ol>
+                
+                <p id="basicfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                    
+            <div class="divider" style="width:24%; margin:30px 0;"></div>
+            
+            
+                <h1>Basic Features</h1>
+
+                <h2>Feature 1</h2>
+                
+                <p id="basicfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                </p>
+                
+                <h2>Feature 2</h2>
+                
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br><br>
+                <b>Explanation 1</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br>
+                <br>
+                <b>Explanation 2</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br>
+                <br>
+                <b>Explanation 3</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br>
+                <br id="feature3">
+                <b>Explanation 4</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+                
+                <h2>Feature 3</h2>
+                
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br id="feature4">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+                
+                <h2>Feature 4</h2>
+                
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  <br>
+                  <br>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                 <br>
+                 <br id="feature5">
+                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                
+                
+                <h2>Feature 5</h2>
+                
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                <br>
+                <br>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br>
+                </p>
+                
+        
+                
+               <h2>Feature 5</h2>
+                 
+               <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                <br id="advanced">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                
+                <h1>Advanced Features</h1>
+                
+                <h2>Feature A</h2>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                <br>
+                <br id="featureb">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                   
+                
+                <h2>Feature B</h2>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br>
+                <br id="featurec">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                
+                
+                <h2>Feature C</h2>
+                  
+                <p id="featurec1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  
+                 
+                <h2>Feature C.1</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+                </p>
+                
+                   <ul>
+                    <li>
+                    <b>Point 1</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <br>
+                    <li>
+                    <b>Point 2</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                    </li>
+                    <br id="featurec2">
+                     <li>
+                    <b>Point 3</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <br>
+                </ul>
+                   
+                 <h2>Feauture C.2</h2>
+                   
+                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <br>
+                    <br>
+                     <b>Important:</b> Please notice that lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <br>
+                    <br>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                 </p>
+                  
+                  
+                  <h2>Feature D</h2>
+                  
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  <br>
+                  <br id="accesibility">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  
+                  
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                   
+                   <h1>Accessibility</h1>
+                   
+                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                   <br>
+                   <br>
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                   <br>
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                   
+                   <p>Lorem ipsum dolor sit amet.
+                      <br id="moreinfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                   
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+
+                <h1>More Info</h1>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.marks are protected by intellectual property rights.</p>
+
+                <div class="doublespace"></div>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
