@@ -1,8 +1,7 @@
 
 services:
   rvc2mqtt:
-    #image: ghcr.io/dbergl/rvc2mqtt:latest
-    image: rvc2mqtt:override
+    image: ghcr.io/dbergl/rvc2mqtt:latest
     depends_on:
       - mosquitto
     environment:
@@ -23,8 +22,7 @@ services:
       - ./rvc-logs:/logs
 
   can2mqtt:
-    #image: ghcr.io/dbergl/can2mqtt:latest
-    image: can2mqtt:alarms
+    image: ghcr.io/dbergl/can2mqtt:latest
     depends_on:
       - mosquitto
     environment:
@@ -62,15 +60,17 @@ services:
       - /run/udev:/run/udev:ro
       - /dev:/dev
 
-  mqttcommander:
-    image: ghcr.io/dbergl/mqttcommander:latest
+  node-red:
+    image: nodered/node-red:latest
     depends_on:
       - mosquitto
+    environment:
+      - TZ=America/Los_Angeles
     ports:
-      - 9091:9090
+      - "1880:1880"
     restart: on-failure:10
     volumes:
-      - ./configs/mqttcommander:/data
+      - ./node-red-data:/data
 
   mosquitto:
     image: eclipse-mosquitto:2.0.18-openssl

@@ -1,0 +1,3150 @@
+[
+    {
+        "id": "461370def5ae9f29",
+        "type": "tab",
+        "label": "RV",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ee0f2e3478b1cd5e",
+        "type": "tab",
+        "label": "APS-500",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "508667271f69fe2e",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a6c5fe6fe51d9491",
+        "type": "group",
+        "z": "461370def5ae9f29",
+        "name": "All Interior Lights On/Off",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "565f94900dad66c1",
+            "9aab03227baf2c31",
+            "ed5f24e6555f5959",
+            "e253e180ac9dfbd7",
+            "45b263d90d026331",
+            "671d48be58e2957d",
+            "45fe68c62ecda7d2",
+            "15d128e60de3a72e"
+        ],
+        "x": 34,
+        "y": 19,
+        "w": 572,
+        "h": 402
+    },
+    {
+        "id": "1395a37395e0e102",
+        "type": "group",
+        "z": "461370def5ae9f29",
+        "name": "All Exterior LIghts On/Off",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "262f70e78be05140",
+            "ee791ed32bc97ea3",
+            "c659308b78326c22",
+            "837942b8be60ba07"
+        ],
+        "x": 614,
+        "y": 19,
+        "w": 572,
+        "h": 162
+    },
+    {
+        "id": "deed87104fd78a1d",
+        "type": "group",
+        "z": "461370def5ae9f29",
+        "name": "Water Pump and Water Pump Auto-Off",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "168f712ef2988436",
+            "6f87d76a19b86c29",
+            "0e97071128a08c98",
+            "ae210c14b36c6658",
+            "c5f8bdad3c8514d0",
+            "ffda1ddc64725d23",
+            "070c4bf4f064bf89",
+            "05f9178575f7240c",
+            "eccc68bd27dd4cc4",
+            "3119e84fbf050a0f",
+            "bd8d7cbb2ae6c1f0",
+            "aa30463be30f33d4"
+        ],
+        "x": 34,
+        "y": 439,
+        "w": 1172,
+        "h": 202
+    },
+    {
+        "id": "c12c2f76c53497c3",
+        "type": "group",
+        "z": "461370def5ae9f29",
+        "name": "Tank Heaters",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "b524736fd0721f3e",
+            "d53d81e1854f8808",
+            "b8dce80b40c712bc",
+            "cbf88b070f3d5a38",
+            "0abfd0b6f481ca76",
+            "0483df95700cddd7",
+            "b6c0bce97e61eacf",
+            "40a09cf8762e20fc",
+            "11a22a163de4bdeb",
+            "36ea8dbc04c2896d",
+            "5ebc3701f2d87b16",
+            "86b093c9d3339094",
+            "799c9e98a21c0fd2",
+            "98054278a786114a",
+            "57609fee550c144d",
+            "e32b947ea66437e7",
+            "c8231a11beb11ef4",
+            "6771b289fc7ba3e6",
+            "794847aaa61df307",
+            "3103bfeb47c99553"
+        ],
+        "x": 34,
+        "y": 659,
+        "w": 1092,
+        "h": 522
+    },
+    {
+        "id": "09769311b4ac2cf1",
+        "type": "group",
+        "z": "461370def5ae9f29",
+        "name": "Inverter",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "9344180afa8c6abb",
+            "99460a572baf77ee",
+            "67c5467db2d20501",
+            "87f7ce4eef5630c0",
+            "b50fbcc598059709",
+            "2407c60b8a5dc6df",
+            "503cf7179fb74f8d",
+            "861112a0020f7f31",
+            "e2bce4c55c7fe268",
+            "8139e17154ceebed",
+            "08ad687c9916d15c",
+            "ee9c395727168735",
+            "254a2e9a7473b302",
+            "80d5eabf81388190",
+            "e3ed248e1c18692d"
+        ],
+        "x": 34,
+        "y": 1199,
+        "w": 1052,
+        "h": 262
+    },
+    {
+        "id": "9c5de13d667d7ea6",
+        "type": "mqtt-broker",
+        "name": "mosquitto",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "262f70e78be05140",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "1395a37395e0e102",
+        "name": "All Exterior Lights",
+        "topic": "rvc/set/lights/ext/all",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 720,
+        "y": 100,
+        "wires": [
+            [
+                "ee791ed32bc97ea3"
+            ]
+        ]
+    },
+    {
+        "id": "ee791ed32bc97ea3",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "1395a37395e0e102",
+        "name": "On/Off",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 870,
+        "y": 100,
+        "wires": [
+            [
+                "c659308b78326c22",
+                "837942b8be60ba07"
+            ],
+            [
+                "c659308b78326c22",
+                "837942b8be60ba07"
+            ]
+        ]
+    },
+    {
+        "id": "c659308b78326c22",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "1395a37395e0e102",
+        "name": "Awning Lights",
+        "topic": "rvc/set/lights/ext/awning",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1080,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "837942b8be60ba07",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "1395a37395e0e102",
+        "name": "Step Lights",
+        "topic": "rvc/set/lights/ext/step",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1070,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "565f94900dad66c1",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "a6c5fe6fe51d9491",
+        "name": "Main Lights",
+        "topic": "rvc/set/lights/int/main",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 470,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "9aab03227baf2c31",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "a6c5fe6fe51d9491",
+        "name": "Living Room OHC",
+        "topic": "rvc/set/lights/int/livingohc",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 490,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ed5f24e6555f5959",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "a6c5fe6fe51d9491",
+        "name": "Kitchen OHC",
+        "topic": "rvc/set/lights/int/kitchenohc",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 470,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e253e180ac9dfbd7",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "a6c5fe6fe51d9491",
+        "name": "Bunk",
+        "topic": "rvc/set/lights/int/bunk",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 450,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "45b263d90d026331",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "a6c5fe6fe51d9491",
+        "name": "Bed",
+        "topic": "rvc/set/lights/int/bed",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 450,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "671d48be58e2957d",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "a6c5fe6fe51d9491",
+        "name": "Bath",
+        "topic": "rvc/set/lights/int/bath",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 450,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "45fe68c62ecda7d2",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "a6c5fe6fe51d9491",
+        "name": "All Interior Lights",
+        "topic": "rvc/set/lights/int/all",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "15d128e60de3a72e"
+            ]
+        ]
+    },
+    {
+        "id": "15d128e60de3a72e",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "a6c5fe6fe51d9491",
+        "name": "On/Off",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "565f94900dad66c1",
+                "9aab03227baf2c31",
+                "ed5f24e6555f5959",
+                "e253e180ac9dfbd7",
+                "45b263d90d026331",
+                "671d48be58e2957d"
+            ],
+            [
+                "565f94900dad66c1",
+                "9aab03227baf2c31",
+                "ed5f24e6555f5959",
+                "e253e180ac9dfbd7",
+                "45b263d90d026331",
+                "671d48be58e2957d"
+            ]
+        ]
+    },
+    {
+        "id": "ae210c14b36c6658",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "Waterpump auto off",
+        "topic": "rvc/state/waterpump/autooff",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "3119e84fbf050a0f"
+            ]
+        ]
+    },
+    {
+        "id": "168f712ef2988436",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "Waterpump auto-off state",
+        "topic": "rvc/state/waterpump/autooff",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 610,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "6f87d76a19b86c29",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "Set waterpump auto off state",
+        "topic": "rvc/set/waterpump/autooff",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 480,
+        "wires": [
+            [
+                "0e97071128a08c98"
+            ]
+        ]
+    },
+    {
+        "id": "0e97071128a08c98",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "On/Off",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 480,
+        "wires": [
+            [
+                "168f712ef2988436"
+            ],
+            [
+                "168f712ef2988436"
+            ]
+        ]
+    },
+    {
+        "id": "c5f8bdad3c8514d0",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "Waterpump",
+        "topic": "rvc/state/waterpump",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "eccc68bd27dd4cc4"
+            ]
+        ]
+    },
+    {
+        "id": "ffda1ddc64725d23",
+        "type": "trigger",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "auto-off",
+        "op1": "",
+        "op2": "off",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "15",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "off",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 940,
+        "y": 580,
+        "wires": [
+            [
+                "070c4bf4f064bf89"
+            ]
+        ]
+    },
+    {
+        "id": "070c4bf4f064bf89",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "Waterpump off",
+        "topic": "rvc/set/waterpump",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1100,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "05f9178575f7240c",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 790,
+        "y": 580,
+        "wires": [
+            [
+                "ffda1ddc64725d23"
+            ],
+            [
+                "ffda1ddc64725d23"
+            ]
+        ]
+    },
+    {
+        "id": "eccc68bd27dd4cc4",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "pump",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 560,
+        "wires": [
+            [
+                "bd8d7cbb2ae6c1f0"
+            ]
+        ]
+    },
+    {
+        "id": "3119e84fbf050a0f",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "autooff",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 600,
+        "wires": [
+            [
+                "bd8d7cbb2ae6c1f0"
+            ]
+        ]
+    },
+    {
+        "id": "bd8d7cbb2ae6c1f0",
+        "type": "join",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 490,
+        "y": 580,
+        "wires": [
+            [
+                "aa30463be30f33d4"
+            ]
+        ]
+    },
+    {
+        "id": "aa30463be30f33d4",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "deed87104fd78a1d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "($string(msg.payload.pump) = \"on\" and $string(msg.payload.autooff) = \"on\") ? \"on\" : \"off\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 580,
+        "wires": [
+            [
+                "05f9178575f7240c"
+            ]
+        ]
+    },
+    {
+        "id": "b524736fd0721f3e",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "All Tank Heaters state",
+        "topic": "rvc/set/tanks/all/heater",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 820,
+        "wires": [
+            [
+                "b6c0bce97e61eacf"
+            ]
+        ]
+    },
+    {
+        "id": "d53d81e1854f8808",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "Black Tank Heater",
+        "topic": "rvc/set/tanks/black/heater",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 610,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "b8dce80b40c712bc",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "Fresh Tank Heater",
+        "topic": "rvc/set/tanks/fresh/heater",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 610,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "cbf88b070f3d5a38",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "Gray Tank Heater",
+        "topic": "rvc/set/tanks/gray/heater",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 610,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "0abfd0b6f481ca76",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "Gray 2 Tank Heater",
+        "topic": "rvc/set/tanks/gray2/heater",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 610,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "0483df95700cddd7",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "All Tank Heaters State",
+        "topic": "rvc/state/tanks/all/heater",
+        "qos": "0",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 600,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "b6c0bce97e61eacf",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "On/Off",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 820,
+        "wires": [
+            [
+                "d53d81e1854f8808",
+                "b8dce80b40c712bc",
+                "cbf88b070f3d5a38",
+                "0abfd0b6f481ca76",
+                "0483df95700cddd7"
+            ],
+            [
+                "d53d81e1854f8808",
+                "b8dce80b40c712bc",
+                "cbf88b070f3d5a38",
+                "0abfd0b6f481ca76",
+                "0483df95700cddd7"
+            ]
+        ]
+    },
+    {
+        "id": "40a09cf8762e20fc",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "Black Tank Heater",
+        "topic": "rvc/state/tanks/black/heater",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1020,
+        "wires": [
+            [
+                "799c9e98a21c0fd2"
+            ]
+        ]
+    },
+    {
+        "id": "11a22a163de4bdeb",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "Fresh Tank Heater",
+        "topic": "rvc/state/tanks/fresh/heater",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1060,
+        "wires": [
+            [
+                "98054278a786114a"
+            ]
+        ]
+    },
+    {
+        "id": "36ea8dbc04c2896d",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "Gray Tank Heater",
+        "topic": "rvc/state/tanks/gray/heater",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1100,
+        "wires": [
+            [
+                "57609fee550c144d"
+            ]
+        ]
+    },
+    {
+        "id": "5ebc3701f2d87b16",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "Gray2 Tank Heater",
+        "topic": "rvc/state/tanks/gray2/heater",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1140,
+        "wires": [
+            [
+                "e32b947ea66437e7"
+            ]
+        ]
+    },
+    {
+        "id": "86b093c9d3339094",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t   msg.payload.black = \"on\" or msg.payload.fresh = \"on\" or msg.payload.gray = \"on\" or msg.payload.gray2 = \"on\"\t) ? \"on\" : \"off\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 1080,
+        "wires": [
+            [
+                "794847aaa61df307"
+            ]
+        ]
+    },
+    {
+        "id": "799c9e98a21c0fd2",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "black",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 1020,
+        "wires": [
+            [
+                "6771b289fc7ba3e6"
+            ]
+        ]
+    },
+    {
+        "id": "98054278a786114a",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "fresh",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 1060,
+        "wires": [
+            [
+                "6771b289fc7ba3e6"
+            ]
+        ]
+    },
+    {
+        "id": "57609fee550c144d",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "gray",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 1100,
+        "wires": [
+            [
+                "6771b289fc7ba3e6"
+            ]
+        ]
+    },
+    {
+        "id": "e32b947ea66437e7",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "gray2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 1140,
+        "wires": [
+            [
+                "6771b289fc7ba3e6"
+            ]
+        ]
+    },
+    {
+        "id": "c8231a11beb11ef4",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "All Tank Heaters State",
+        "topic": "rvc/state/tanks/all/heater",
+        "qos": "0",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1000,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "6771b289fc7ba3e6",
+        "type": "join",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": ",",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": true,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 490,
+        "y": 1080,
+        "wires": [
+            [
+                "86b093c9d3339094"
+            ]
+        ]
+    },
+    {
+        "id": "794847aaa61df307",
+        "type": "rbe",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 810,
+        "y": 1080,
+        "wires": [
+            [
+                "c8231a11beb11ef4"
+            ]
+        ]
+    },
+    {
+        "id": "3103bfeb47c99553",
+        "type": "comment",
+        "z": "461370def5ae9f29",
+        "g": "c12c2f76c53497c3",
+        "name": "All tank heaters on if ANY heater is on",
+        "info": "",
+        "x": 590,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "9344180afa8c6abb",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Inverter Connected",
+        "topic": "modbus/inverter/connected",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1240,
+        "wires": [
+            [
+                "80d5eabf81388190"
+            ]
+        ]
+    },
+    {
+        "id": "99460a572baf77ee",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Send Password",
+        "topic": "modbus/inverter/set/password",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 980,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "67c5467db2d20501",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Password",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "True",
+                "fromt": "str",
+                "to": "255",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 1240,
+        "wires": [
+            [
+                "e3ed248e1c18692d"
+            ]
+        ]
+    },
+    {
+        "id": "87f7ce4eef5630c0",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Inverter commands",
+        "topic": "modbus/inverter/set/chargevalues",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1360,
+        "wires": [
+            [
+                "08ad687c9916d15c",
+                "ee9c395727168735",
+                "254a2e9a7473b302"
+            ]
+        ]
+    },
+    {
+        "id": "b50fbcc598059709",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Inverter On/Off",
+        "topic": "modbus/inverter/set/onoff",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 840,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "2407c60b8a5dc6df",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Set Charging Current",
+        "topic": "modbus/inverter/set/current",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 860,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "503cf7179fb74f8d",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Set Charging Volts",
+        "topic": "modbus/inverter/set/chargevolts",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 850,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "861112a0020f7f31",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Valid on/off message",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "0|1",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 1320,
+        "wires": [
+            [
+                "b50fbcc598059709"
+            ]
+        ]
+    },
+    {
+        "id": "e2bce4c55c7fe268",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Valid Current message",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "50|100|150|200|250|300|350|400",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 1360,
+        "wires": [
+            [
+                "2407c60b8a5dc6df"
+            ]
+        ]
+    },
+    {
+        "id": "8139e17154ceebed",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Valid Voltage message",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "524|528|532|536|540|544|548",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 1400,
+        "wires": [
+            [
+                "503cf7179fb74f8d"
+            ]
+        ]
+    },
+    {
+        "id": "08ad687c9916d15c",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "current",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.current",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 1360,
+        "wires": [
+            [
+                "e2bce4c55c7fe268"
+            ]
+        ]
+    },
+    {
+        "id": "ee9c395727168735",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "voltage",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.volts",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 1400,
+        "wires": [
+            [
+                "8139e17154ceebed"
+            ]
+        ]
+    },
+    {
+        "id": "254a2e9a7473b302",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "on/off",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.on",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 1320,
+        "wires": [
+            [
+                "861112a0020f7f31"
+            ]
+        ]
+    },
+    {
+        "id": "80d5eabf81388190",
+        "type": "delay",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "Ignore multiple connects on start",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 1240,
+        "wires": [
+            [
+                "67c5467db2d20501"
+            ]
+        ]
+    },
+    {
+        "id": "e3ed248e1c18692d",
+        "type": "delay",
+        "z": "461370def5ae9f29",
+        "g": "09769311b4ac2cf1",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 780,
+        "y": 1240,
+        "wires": [
+            [
+                "99460a572baf77ee"
+            ]
+        ]
+    },
+    {
+        "id": "7f71c68a8a7040a6",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Override APS-500",
+        "topic": "rvc/set/aps/danger/override",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "d218b3f5974c6f71",
+                "dd1f9fb08fcc3936"
+            ]
+        ]
+    },
+    {
+        "id": "aa6bdaca972bf7c5",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Cap APS max watts",
+        "topic": "rvc/set/aps/danger/capwatts",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 920,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "606e7771e3f1eeda",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "APS-500 Response",
+        "topic": "rvc/state/aps/response",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "a9eeda5b08cd2ee9"
+            ]
+        ]
+    },
+    {
+        "id": "9def6965aade5f9e",
+        "type": "join",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 550,
+        "y": 260,
+        "wires": [
+            [
+                "9421a24dd134875c"
+            ]
+        ]
+    },
+    {
+        "id": "a9eeda5b08cd2ee9",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "response",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$trim(msg.payload)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "AOK;",
+                "fromt": "str",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "NAK;",
+                "fromt": "str",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 240,
+        "wires": [
+            [
+                "9def6965aade5f9e"
+            ]
+        ]
+    },
+    {
+        "id": "c6fd038151f91e74",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "override",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "aa6bdaca972bf7c5",
+                "9def6965aade5f9e"
+            ]
+        ]
+    },
+    {
+        "id": "2110d421461de98a",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "clear APS response",
+        "topic": "rvc/state/aps/response",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 540,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d218b3f5974c6f71",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "2110d421461de98a"
+            ]
+        ]
+    },
+    {
+        "id": "dd1f9fb08fcc3936",
+        "type": "delay",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "c6fd038151f91e74"
+            ]
+        ]
+    },
+    {
+        "id": "9421a24dd134875c",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(msg.payload.response ? msg.payload.override : \"NAK\")",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 260,
+        "wires": [
+            [
+                "edc91bc4f981fab1"
+            ]
+        ]
+    },
+    {
+        "id": "edc91bc4f981fab1",
+        "type": "switch",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "NAK",
+                "vt": "str"
+            },
+            {
+                "t": "regex",
+                "v": "0|1",
+                "vt": "str",
+                "case": true
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 850,
+        "y": 260,
+        "wires": [
+            [
+                "f91a1afa57690e16"
+            ],
+            [
+                "e41b28fd3b1eec64",
+                "e8934a59f6488bd6"
+            ]
+        ]
+    },
+    {
+        "id": "e41b28fd3b1eec64",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Cap APS max watts",
+        "topic": "rvc/state/aps/danger/capwatts",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1060,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e8934a59f6488bd6",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Set ingnorefaults",
+        "topic": "rvc/set/aps/danger/ignorefaults",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1050,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ab9980219a8d06d5",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Override Failed",
+        "topic": "rvc/state/aps/danger/overridemessage",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1200,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "04cf487c4e7ff287",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "override",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"payload\": msg.payload, \"timestamp\": $millis() }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 720,
+        "wires": [
+            [
+                "43fad2bbb2a1632a"
+            ]
+        ]
+    },
+    {
+        "id": "da0e99fd2b32726f",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "clear APS response",
+        "topic": "rvc/state/aps/response",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 540,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "100e7fd7853762fa",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "da0e99fd2b32726f"
+            ]
+        ]
+    },
+    {
+        "id": "e8375a88584c3ecd",
+        "type": "delay",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 330,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9830a7ab46f32d18",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "APS-500 Response",
+        "topic": "rvc/state/aps/response",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d98aabdf449bd052",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "response",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$trim(msg.payload)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "AOK;",
+                "fromt": "str",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "NAK;",
+                "fromt": "str",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 460,
+        "wires": [
+            [
+                "36aa2807fcd82640"
+            ]
+        ]
+    },
+    {
+        "id": "36aa2807fcd82640",
+        "type": "join",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 530,
+        "y": 460,
+        "wires": [
+            [
+                "c8e36fbd3191438b"
+            ]
+        ]
+    },
+    {
+        "id": "c8e36fbd3191438b",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(msg.payload.response) ? msg.payload.override : \"NAK\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 460,
+        "wires": [
+            [
+                "3b183721d850d7e1"
+            ]
+        ]
+    },
+    {
+        "id": "3b183721d850d7e1",
+        "type": "switch",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "NAK",
+                "vt": "str"
+            },
+            {
+                "t": "regex",
+                "v": "0|1",
+                "vt": "str",
+                "case": true
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 830,
+        "y": 460,
+        "wires": [
+            [
+                "435a5fc84b6131ea"
+            ],
+            [
+                "219d23cecfc0933a"
+            ]
+        ]
+    },
+    {
+        "id": "87c3d06caf3a12d4",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Override Failed",
+        "topic": "rvc/state/aps/danger/overridemessage",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1200,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "219d23cecfc0933a",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Ignore BMS Faults",
+        "topic": "rvc/state/aps/danger/ignorefaults",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1030,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "01847d088a8fea1d",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "APS Ignore Faults",
+        "topic": "rvc/set/aps/danger/ignorefaults",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f91a1afa57690e16",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Failed to set",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "⚠️ Failed to override APS-500",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 220,
+        "wires": [
+            [
+                "ab9980219a8d06d5"
+            ]
+        ]
+    },
+    {
+        "id": "435a5fc84b6131ea",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "d": true,
+        "name": "Failed to set",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "⚠️ Failed to override APS-500",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 420,
+        "wires": [
+            [
+                "87c3d06caf3a12d4"
+            ]
+        ]
+    },
+    {
+        "id": "f56873c4c0c3968c",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "APS Ignore Faults",
+        "topic": "rvc/set/aps/test/test",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 720,
+        "wires": [
+            [
+                "04cf487c4e7ff287"
+            ]
+        ]
+    },
+    {
+        "id": "3f9bfe1c4a763b57",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "APS-500 Response",
+        "topic": "rvc/set/aps/test/response",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 800,
+        "wires": [
+            [
+                "f0d8833e3c5f37b0"
+            ]
+        ]
+    },
+    {
+        "id": "e59eb21e3043d345",
+        "type": "debug",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "f0d8833e3c5f37b0",
+        "type": "change",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "response",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"payload\": msg.payload, \"timestamp\": $millis() }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43fad2bbb2a1632a",
+        "type": "join",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": true,
+        "timeout": "",
+        "count": "2",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 530,
+        "y": 780,
+        "wires": [
+            [
+                "65379fe8c9b55741"
+            ]
+        ]
+    },
+    {
+        "id": "65379fe8c9b55741",
+        "type": "function",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "function 1",
+        "func": "let override_time = msg.payload.override.timestamp\nlet response_time = msg.payload.response.timestamp\n\nif (override_time < response_time) {\n    msg.payload = \"OK\"\n    delete msg.payload.override.timestamp\n    delete msg.payload.response.timestamp \n} else {\n    return;\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ed777a94ff0d0dc",
+        "type": "inject",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "responseTopic",
+                "v": "rvc/state/aps/danger/capwatts",
+                "vt": "str"
+            },
+            {
+                "p": "correlationData",
+                "v": "50",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "rvc/set/aps/danger/capwatts",
+        "payload": "0",
+        "payloadType": "str",
+        "x": 160,
+        "y": 900,
+        "wires": [
+            [
+                "d11283897cf666e8",
+                "e59eb21e3043d345"
+            ]
+        ]
+    },
+    {
+        "id": "d11283897cf666e8",
+        "type": "mqtt out",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "rvc/set/aps/test/response",
+        "contentType": "text/plain",
+        "userProps": "",
+        "correl": "",
+        "expiry": "10",
+        "broker": "9c5de13d667d7ea6",
+        "x": 410,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "1c23f162bfbbf886",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "topic": "rvc/state/aps/danger/capwatts",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "rh": "2",
+        "inputs": 0,
+        "x": 160,
+        "y": 980,
+        "wires": [
+            [
+                "7b430fbb9aadd866"
+            ]
+        ]
+    },
+    {
+        "id": "7b430fbb9aadd866",
+        "type": "debug",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "3dc865f1021e839e",
+        "type": "inject",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "responseTopic",
+                "v": "rvc/state/aps/response",
+                "vt": "str"
+            },
+            {
+                "p": "correlationData",
+                "v": "ignorefaults",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "rvc/set/aps/danger/ignorefaults",
+        "payload": "0",
+        "payloadType": "str",
+        "x": 170,
+        "y": 860,
+        "wires": [
+            [
+                "d11283897cf666e8",
+                "e59eb21e3043d345"
+            ]
+        ]
+    },
+    {
+        "id": "43fa363f30f1ff72",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "topic": "rvc/state/aps/danger/ignorefaults",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "rh": "2",
+        "inputs": 0,
+        "x": 170,
+        "y": 1040,
+        "wires": [
+            [
+                "7b430fbb9aadd866"
+            ]
+        ]
+    },
+    {
+        "id": "16844235a1ddc2c1",
+        "type": "inject",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "correlationData",
+                "v": "reboot",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "rvc/set/aps/reboot",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 130,
+        "y": 940,
+        "wires": [
+            [
+                "d11283897cf666e8",
+                "e59eb21e3043d345"
+            ]
+        ]
+    },
+    {
+        "id": "e7842dc05287a8e7",
+        "type": "mqtt in",
+        "z": "ee0f2e3478b1cd5e",
+        "name": "",
+        "topic": "rvc/state/aps/reboot",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "rh": "2",
+        "inputs": 0,
+        "x": 130,
+        "y": 1100,
+        "wires": [
+            [
+                "7b430fbb9aadd866"
+            ]
+        ]
+    },
+    {
+        "id": "b904fee52c919276",
+        "type": "inject",
+        "z": "508667271f69fe2e",
+        "name": "demo/response2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "correlationData",
+                "v": "[99,111,114,114,101,108,45,100,97,116,97]",
+                "vt": "bin"
+            },
+            {
+                "p": "aa",
+                "v": "123",
+                "vt": "num"
+            },
+            {
+                "p": "userProperties",
+                "v": "{\"number1\":1,\"subobj\":{\"sub1\":123}}",
+                "vt": "json"
+            },
+            {
+                "p": "responseTopic",
+                "v": "demo/response2",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 400,
+        "wires": [
+            [
+                "478cc07ce1c26944"
+            ]
+        ]
+    },
+    {
+        "id": "478cc07ce1c26944",
+        "type": "mqtt out",
+        "z": "508667271f69fe2e",
+        "name": "",
+        "topic": "demo/request",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "text/plain",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 500,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "d385f22c782451b3",
+        "type": "mqtt in",
+        "z": "508667271f69fe2e",
+        "name": "",
+        "topic": "demo/request",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 270,
+        "y": 560,
+        "wires": [
+            [
+                "43dee61df6e6455c",
+                "08701c829d127141"
+            ]
+        ]
+    },
+    {
+        "id": "7b3bd04d1a35b781",
+        "type": "mqtt out",
+        "z": "508667271f69fe2e",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 830,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "5d8be3d7c7792da9",
+        "type": "mqtt in",
+        "z": "508667271f69fe2e",
+        "name": "",
+        "topic": "demo/response1",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 680,
+        "y": 340,
+        "wires": [
+            [
+                "60f39f3a4a4544cf"
+            ]
+        ]
+    },
+    {
+        "id": "60f39f3a4a4544cf",
+        "type": "debug",
+        "z": "508667271f69fe2e",
+        "name": "req res pattern",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "43dee61df6e6455c",
+        "type": "change",
+        "z": "508667271f69fe2e",
+        "name": "delete topic & add random payload",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$floor( ($random() * 10) + 1)\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 560,
+        "wires": [
+            [
+                "7b3bd04d1a35b781",
+                "056dca9d6b0c266d"
+            ]
+        ]
+    },
+    {
+        "id": "472c97d48c085b48",
+        "type": "comment",
+        "z": "508667271f69fe2e",
+        "name": "*************** Response topic demo ************************",
+        "info": "",
+        "x": 410,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "66b893c894931874",
+        "type": "comment",
+        "z": "508667271f69fe2e",
+        "name": "send payload to \"demo/request\" expect reply on the responseTopic set in the inject node",
+        "info": "",
+        "x": 500,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "43a62bc0609adef3",
+        "type": "comment",
+        "z": "508667271f69fe2e",
+        "name": "fake external application recieving command and responding to reply topic",
+        "info": "",
+        "x": 460,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "357f97fcea459f3d",
+        "type": "inject",
+        "z": "508667271f69fe2e",
+        "name": "demo/response3",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "correlationData",
+                "v": "correl sent in msg as a string",
+                "vt": "str"
+            },
+            {
+                "p": "aa",
+                "v": "123",
+                "vt": "num"
+            },
+            {
+                "p": "userProperties",
+                "v": "{\"number\":1}",
+                "vt": "json"
+            },
+            {
+                "p": "responseTopic",
+                "v": "demo/response3",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 440,
+        "wires": [
+            [
+                "478cc07ce1c26944"
+            ]
+        ]
+    },
+    {
+        "id": "8f1d8b2d63c76c83",
+        "type": "inject",
+        "z": "508667271f69fe2e",
+        "name": "demo/response1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "correlationData",
+                "v": "correl sent in msg as a string",
+                "vt": "str"
+            },
+            {
+                "p": "aa",
+                "v": "123",
+                "vt": "num"
+            },
+            {
+                "p": "userProperties",
+                "v": "{\"number2\":2, \"number1\":1}",
+                "vt": "json"
+            },
+            {
+                "p": "responseTopic",
+                "v": "demo/response1",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 300,
+        "y": 360,
+        "wires": [
+            [
+                "478cc07ce1c26944",
+                "c615833634abb50d"
+            ]
+        ]
+    },
+    {
+        "id": "5c388085903ea127",
+        "type": "mqtt in",
+        "z": "508667271f69fe2e",
+        "name": "",
+        "topic": "demo/response2",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 680,
+        "y": 400,
+        "wires": [
+            [
+                "9da46db1433057e6"
+            ]
+        ]
+    },
+    {
+        "id": "9da46db1433057e6",
+        "type": "debug",
+        "z": "508667271f69fe2e",
+        "name": "req res pattern",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "4f4a5c69965c9085",
+        "type": "mqtt in",
+        "z": "508667271f69fe2e",
+        "name": "",
+        "topic": "demo/response3",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 680,
+        "y": 460,
+        "wires": [
+            [
+                "26db7de9af1fd5a8"
+            ]
+        ]
+    },
+    {
+        "id": "26db7de9af1fd5a8",
+        "type": "debug",
+        "z": "508667271f69fe2e",
+        "name": "req res pattern",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "08701c829d127141",
+        "type": "debug",
+        "z": "508667271f69fe2e",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "056dca9d6b0c266d",
+        "type": "debug",
+        "z": "508667271f69fe2e",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "c615833634abb50d",
+        "type": "debug",
+        "z": "508667271f69fe2e",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 160,
+        "wires": []
+    }
+]
