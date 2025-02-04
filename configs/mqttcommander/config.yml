@@ -1,6 +1,0 @@
-# System Settings
-Name: MqttCommander System Name
-Timezone: America/Los_Angeles
-MqttUri: tcp://mosquitto:1883/
-MqttQos: 0
-Muted: false

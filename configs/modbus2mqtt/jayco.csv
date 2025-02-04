@@ -37,7 +37,7 @@ poll,inverter,255,528,1,holding_register,2.0
 ref,status,528,r
 
 # Inverter on/off
-# Found in SRNE document. Mains charge current limit
+# Found in SRNE document.
 # 0: Off 1: On
 poll,inverter,255,57088,1,holding_register,2.0
 ref,onoff,57088,rw
