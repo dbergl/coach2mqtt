@@ -7,7 +7,7 @@ sed -i "s/RELEASE/${RELEASE}/g" "${ROOTFS_DIR}/etc/apt/sources.list.d/docker.lis
 sed -i "s/ARCH/arm64/g" "${ROOTFS_DIR}/etc/apt/sources.list.d/docker.list"
 
 #AllStarLink repo for cockpit wifi plugin
-install -m 644 files/allstarlink.asc "${ROOTFS_DIR}/etc/apt/keyrings/"
+install -m 644 files/allstarlink.gpg "${ROOTFS_DIR}/etc/apt/keyrings/"
 install -m 644 files/allstarlink.list "${ROOTFS_DIR}/etc/apt/sources.list.d/"
 sed -i "s/RELEASE/${RELEASE}/g" "${ROOTFS_DIR}/etc/apt/sources.list.d/allstarlink.list"
 
