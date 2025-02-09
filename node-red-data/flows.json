@@ -145,8 +145,8 @@
         ],
         "x": 34,
         "y": 1199,
-        "w": 1052,
-        "h": 262
+        "w": 1072,
+        "h": 242
     },
     {
         "id": "ea608056f5f6ac2b",
@@ -168,6 +168,32 @@
         "y": 199,
         "w": 452,
         "h": 202
+    },
+    {
+        "id": "f2cbf3c557c1bfd9",
+        "type": "group",
+        "z": "461370def5ae9f29",
+        "name": "Generator start",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e7d682c6c64a4fcb",
+            "54c38e5154622c60",
+            "828e5066ebf1ae77",
+            "3eb7a63818c3969f",
+            "4662f0fa23be13ec",
+            "4abf5902c4d0a16f",
+            "3a9acc171d673236",
+            "910a986291492aef",
+            "3b0a4ae6d4c2d170",
+            "ddfa655775159001",
+            "26101017d89f1e94"
+        ],
+        "x": 34,
+        "y": 1479,
+        "w": 1072,
+        "h": 262
     },
     {
         "id": "9c5de13d667d7ea6",
@@ -1334,8 +1360,8 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 840,
-        "y": 1300,
+        "x": 780,
+        "y": 1320,
         "wires": []
     },
     {
@@ -1353,7 +1379,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 860,
+        "x": 980,
         "y": 1360,
         "wires": []
     },
@@ -1372,8 +1398,8 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 850,
-        "y": 1420,
+        "x": 790,
+        "y": 1400,
         "wires": []
     },
     {
@@ -1713,6 +1739,279 @@
         "x": 750,
         "y": 300,
         "wires": []
+    },
+    {
+        "id": "e7d682c6c64a4fcb",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "Start/Stop Generator",
+        "topic": "rvc/set/generator/start",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 1580,
+        "wires": [
+            [
+                "26101017d89f1e94"
+            ]
+        ]
+    },
+    {
+        "id": "54c38e5154622c60",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "Stop Trigger",
+        "topic": "rvc/set/generator/stop_trigger",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1010,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "828e5066ebf1ae77",
+        "type": "delay",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "250",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 1580,
+        "wires": [
+            [
+                "4662f0fa23be13ec"
+            ]
+        ]
+    },
+    {
+        "id": "3eb7a63818c3969f",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "send message to stop trigger",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "off",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 1520,
+        "wires": [
+            [
+                "54c38e5154622c60"
+            ]
+        ]
+    },
+    {
+        "id": "4662f0fa23be13ec",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "",
+        "topic": "rvc/set/generator/start_trigger",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 950,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "4abf5902c4d0a16f",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "Start/Stop",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 460,
+        "y": 1580,
+        "wires": [
+            [
+                "3eb7a63818c3969f",
+                "828e5066ebf1ae77"
+            ],
+            [
+                "3a9acc171d673236",
+                "ddfa655775159001"
+            ]
+        ]
+    },
+    {
+        "id": "3a9acc171d673236",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "",
+        "topic": "rvc/set/generator/start_trigger",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 770,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "910a986291492aef",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "Stop Trigger",
+        "topic": "rvc/set/generator/stop_trigger",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1010,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "3b0a4ae6d4c2d170",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "send message to stop trigger",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 1700,
+        "wires": [
+            [
+                "910a986291492aef"
+            ]
+        ]
+    },
+    {
+        "id": "ddfa655775159001",
+        "type": "delay",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "50",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 590,
+        "y": 1700,
+        "wires": [
+            [
+                "3b0a4ae6d4c2d170"
+            ]
+        ]
+    },
+    {
+        "id": "26101017d89f1e94",
+        "type": "rbe",
+        "z": "461370def5ae9f29",
+        "g": "f2cbf3c557c1bfd9",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 330,
+        "y": 1580,
+        "wires": [
+            [
+                "4abf5902c4d0a16f"
+            ]
+        ]
     },
     {
         "id": "e59eb21e3043d345",

@@ -228,12 +228,32 @@ floorplan:
     status_topic: rvc/state/aps
     command_topic: rvc/set/aps
 
-  - name: GENERATOR_STATUS_1
+#  - name: GENERATOR
+#    type: generator
+#    instance: 0
+#    instance_name: generator
+#    status_topic: rvc/state/generator
+#    command_topic: rvc/set/generator
+#    link_id: generator_status
+#    entity_links:
+#      - start_trigger
+#        stop_trigger
+
+  - name: GENERATOR
     type: generator
-    instance: 0
-    instance_name: generator
+    instance: 19
+    instance_name: generator_start_trigger
     status_topic: rvc/state/generator
     command_topic: rvc/set/generator
+    link_id: start_trigger
+
+  - name: GENERATOR
+    type: generator
+    instance: 20
+    instance_name: generator_stop_trigger
+    status_topic: rvc/state/generator
+    command_topic: rvc/set/generator
+    link_id: stop_trigger
 
   - name: SOLAR_CONTROLLER_STATUS
     type: solar
