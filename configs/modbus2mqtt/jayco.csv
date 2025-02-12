@@ -10,14 +10,14 @@ ref,reset,4417,w
 # 536 = 53.6v
 # 540 = 54.0v
 # 544 = 54.4v
-poll,inverter,255,4426,1,holding_register,5.0
+poll,inverter,255,4426,1,holding_register,5
 ref,chargevolts,4426,rw
 
 # Charge current aka setting 28
 # 50  =  5 amps
 # 150 = 15 amps
 # 400 = 40 amps
-poll,inverter,255,57861,1,holding_register,5.3
+poll,inverter,255,57861,1,holding_register,5
 ref,current,57861,rw
 
 # Inverter Status
@@ -33,8 +33,10 @@ ref,current,57861,rw
 #9: Reserved
 #10: Shutdown
 #11: Fault
-poll,inverter,255,528,1,holding_register,2.0
-ref,status,528,r
+#poll,inverter,255,528,1,holding_register,2
+#ref,status,528,r
+poll,inverter,255,4405,1,holding_register,2
+ref,status,4405,r
 
 # Inverter on/off
 # Found in SRNE document.
@@ -44,5 +46,15 @@ ref,onoff,57088,rw
 
 # Password needs to be set to 255 to be able to write to some registers
 # Found in SRNE document. The register from the Renogy document throws an error
-poll,inverter,255,57859,1,holding_register,0
-ref,password,57859,w
+#poll,inverter,255,57859,1,holding_register,0
+#ref,password,57859,w
+poll,inverter,255,4108,1,holding_register,0
+ref,password,4108,rw
+
+# Priority flag
+# 0: The user did not enter the password
+# 1: The user password has been entered
+# 4: The manufacturer's password has been entered
+poll,inverter,255,4406,1,holding_register,10
+ref,password_entered,4406,r
+
