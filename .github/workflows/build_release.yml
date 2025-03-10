@@ -21,7 +21,8 @@ jobs:
       fail-fast: false
       matrix:
         pi-gen: [
-          { branch: arm64,  architecture: arm64 }
+          { branch: arm64,  architecture: arm64 },
+          { branch: master,  architecture: armhf }
         ]
 
     steps:

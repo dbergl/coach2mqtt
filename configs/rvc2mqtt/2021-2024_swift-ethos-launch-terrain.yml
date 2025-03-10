@@ -214,7 +214,6 @@ floorplan:
     command_topic: rvc/set/hvac/cool
 
   - name: DATE_TIME_STATUS
-    source_id: 9C
     type: system_clock
     instance_name: clock
     status_topic: rvc/state/date
