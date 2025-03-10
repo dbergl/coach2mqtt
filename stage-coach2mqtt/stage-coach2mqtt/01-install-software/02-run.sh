@@ -17,5 +17,5 @@ install -m 644 files/coach2mqtt.service "${ROOTFS_DIR}/lib/systemd/system/"
 
 on_chroot << EOF
 systemctl enable coach2mqtt.service
-ln -s /home/${FIRST_USER_NAME}/coach2mqtt /opt/coach2mqtt
+ln -s /opt/coach2mqtt /home/${FIRST_USER_NAME}/coach2mqtt 
 EOF
