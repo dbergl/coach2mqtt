@@ -191,11 +191,14 @@
             "910a986291492aef",
             "3b0a4ae6d4c2d170",
             "ddfa655775159001",
-            "26101017d89f1e94"
+            "26101017d89f1e94",
+            "0d1ffa76fffb27cf",
+            "a5cac8aca07d2273",
+            "5d60730d299ce644"
         ],
-        "x": 34,
+        "x": 14,
         "y": 1519,
-        "w": 1092,
+        "w": 1112,
         "h": 262
     },
     {
@@ -1361,7 +1364,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 780,
+        "x": 980,
         "y": 1380,
         "wires": []
     },
@@ -1399,7 +1402,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 790,
+        "x": 990,
         "y": 1460,
         "wires": []
     },
@@ -1422,7 +1425,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 580,
+        "x": 620,
         "y": 1380,
         "wires": [
             [
@@ -1449,7 +1452,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 580,
+        "x": 620,
         "y": 1420,
         "wires": [
             [
@@ -1476,7 +1479,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 580,
+        "x": 620,
         "y": 1460,
         "wires": [
             [
@@ -1719,7 +1722,7 @@
         "d": true,
         "g": "f2cbf3c557c1bfd9",
         "name": "Stop Trigger",
-        "topic": "rvc/set/generator/stop_trigger",
+        "topic": "",
         "qos": "2",
         "retain": "false",
         "respTopic": "",
@@ -1765,12 +1768,14 @@
         "z": "461370def5ae9f29",
         "d": true,
         "g": "f2cbf3c557c1bfd9",
-        "name": "send message to stop trigger",
+        "name": "send off to stop trigger",
         "rules": [
             {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "rvc/set/generator/stop_trigger",
+                "tot": "str"
             },
             {
                 "t": "set",
@@ -1785,7 +1790,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 720,
+        "x": 700,
         "y": 1560,
         "wires": [
             [
@@ -1799,7 +1804,7 @@
         "z": "461370def5ae9f29",
         "d": true,
         "g": "f2cbf3c557c1bfd9",
-        "name": "",
+        "name": "Start Trigger",
         "topic": "rvc/set/generator/start_trigger",
         "qos": "2",
         "retain": "false",
@@ -1809,7 +1814,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 970,
+        "x": 1030,
         "y": 1620,
         "wires": []
     },
@@ -1834,10 +1839,10 @@
                 "vt": "str"
             }
         ],
-        "checkall": "true",
+        "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 460,
+        "x": 480,
         "y": 1620,
         "wires": [
             [
@@ -1845,8 +1850,8 @@
                 "828e5066ebf1ae77"
             ],
             [
-                "3a9acc171d673236",
-                "ddfa655775159001"
+                "ddfa655775159001",
+                "5d60730d299ce644"
             ]
         ]
     },
@@ -1856,8 +1861,8 @@
         "z": "461370def5ae9f29",
         "d": true,
         "g": "f2cbf3c557c1bfd9",
-        "name": "",
-        "topic": "rvc/set/generator/start_trigger",
+        "name": "Start Trigger",
+        "topic": "",
         "qos": "2",
         "retain": "false",
         "respTopic": "",
@@ -1866,7 +1871,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 770,
+        "x": 1030,
         "y": 1680,
         "wires": []
     },
@@ -1932,7 +1937,7 @@
         "g": "f2cbf3c557c1bfd9",
         "name": "",
         "pauseType": "delay",
-        "timeout": "50",
+        "timeout": "250",
         "timeoutUnits": "milliseconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1959,7 +1964,7 @@
         "g": "f2cbf3c557c1bfd9",
         "name": "",
         "func": "rbe",
-        "gap": "",
+        "gap": "100%",
         "start": "",
         "inout": "out",
         "septopics": true,
@@ -2108,9 +2113,108 @@
         ]
     },
     {
+        "id": "0d1ffa76fffb27cf",
+        "type": "inject",
+        "z": "461370def5ae9f29",
+        "d": true,
+        "g": "f2cbf3c557c1bfd9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "rvc/set/generator/start",
+        "payload": "on",
+        "payloadType": "str",
+        "x": 170,
+        "y": 1700,
+        "wires": [
+            [
+                "26101017d89f1e94"
+            ]
+        ]
+    },
+    {
+        "id": "a5cac8aca07d2273",
+        "type": "inject",
+        "z": "461370def5ae9f29",
+        "d": true,
+        "g": "f2cbf3c557c1bfd9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "rvc/set/generator/start",
+        "payload": "off",
+        "payloadType": "str",
+        "x": 170,
+        "y": 1740,
+        "wires": [
+            [
+                "26101017d89f1e94"
+            ]
+        ]
+    },
+    {
+        "id": "5d60730d299ce644",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "d": true,
+        "g": "f2cbf3c557c1bfd9",
+        "name": "send off to start trigger",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "rvc/set/generator/start_trigger",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "off",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 1680,
+        "wires": [
+            [
+                "3a9acc171d673236"
+            ]
+        ]
+    },
+    {
         "id": "e59eb21e3043d345",
         "type": "debug",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
@@ -2128,6 +2232,7 @@
         "id": "6ed777a94ff0d0dc",
         "type": "inject",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "",
         "props": [
             {
@@ -2168,6 +2273,7 @@
         "id": "d11283897cf666e8",
         "type": "mqtt out",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "",
         "topic": "",
         "qos": "",
@@ -2186,6 +2292,7 @@
         "id": "1c23f162bfbbf886",
         "type": "mqtt in",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "",
         "topic": "rvc/state/aps/danger/capwatts",
         "qos": "1",
@@ -2207,6 +2314,7 @@
         "id": "7b430fbb9aadd866",
         "type": "debug",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "response",
         "active": true,
         "tosidebar": true,
@@ -2224,6 +2332,7 @@
         "id": "3dc865f1021e839e",
         "type": "inject",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "",
         "props": [
             {
@@ -2264,6 +2373,7 @@
         "id": "43fa363f30f1ff72",
         "type": "mqtt in",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "",
         "topic": "rvc/state/aps/danger/ignorefaults",
         "qos": "1",
@@ -2285,6 +2395,7 @@
         "id": "16844235a1ddc2c1",
         "type": "inject",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "",
         "props": [
             {
@@ -2320,6 +2431,7 @@
         "id": "e7842dc05287a8e7",
         "type": "mqtt in",
         "z": "ee0f2e3478b1cd5e",
+        "d": true,
         "name": "",
         "topic": "rvc/state/aps/reboot",
         "qos": "1",
