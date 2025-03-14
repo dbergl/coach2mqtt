@@ -196,10 +196,31 @@
             "a5cac8aca07d2273",
             "5d60730d299ce644"
         ],
-        "x": 14,
+        "x": 34,
         "y": 1519,
-        "w": 1112,
+        "w": 1092,
         "h": 262
+    },
+    {
+        "id": "da25f673c8d00e23",
+        "type": "group",
+        "z": "461370def5ae9f29",
+        "name": "Engine Status",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "72f8f28cb6aa5cde",
+            "f2faf23a455f9473",
+            "eefe4b2a2c5fdbbc",
+            "15ddb8cb91c43a6b",
+            "036dbeb2e4bfd75c",
+            "22fdf931950289a3"
+        ],
+        "x": 34,
+        "y": 1799,
+        "w": 1092,
+        "h": 122
     },
     {
         "id": "9c5de13d667d7ea6",
@@ -1707,7 +1728,7 @@
         "rap": false,
         "rh": 0,
         "inputs": 0,
-        "x": 150,
+        "x": 160,
         "y": 1620,
         "wires": [
             [
@@ -1754,7 +1775,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 670,
+        "x": 680,
         "y": 1620,
         "wires": [
             [
@@ -1790,7 +1811,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
+        "x": 710,
         "y": 1560,
         "wires": [
             [
@@ -1842,7 +1863,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 480,
+        "x": 490,
         "y": 1620,
         "wires": [
             [
@@ -1921,7 +1942,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
+        "x": 810,
         "y": 1740,
         "wires": [
             [
@@ -1948,7 +1969,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 590,
+        "x": 600,
         "y": 1740,
         "wires": [
             [
@@ -1970,7 +1991,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 330,
+        "x": 340,
         "y": 1620,
         "wires": [
             [
@@ -2135,7 +2156,7 @@
         "topic": "rvc/set/generator/start",
         "payload": "on",
         "payloadType": "str",
-        "x": 170,
+        "x": 190,
         "y": 1700,
         "wires": [
             [
@@ -2166,7 +2187,7 @@
         "topic": "rvc/set/generator/start",
         "payload": "off",
         "payloadType": "str",
-        "x": 170,
+        "x": 190,
         "y": 1740,
         "wires": [
             [
@@ -2202,11 +2223,163 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
+        "x": 710,
         "y": 1680,
         "wires": [
             [
                 "3a9acc171d673236"
+            ]
+        ]
+    },
+    {
+        "id": "72f8f28cb6aa5cde",
+        "type": "mqtt in",
+        "z": "461370def5ae9f29",
+        "g": "da25f673c8d00e23",
+        "name": "Chassis Voltage",
+        "topic": "rvc/state/dc/battery/chassis/voltage",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9c5de13d667d7ea6",
+        "nl": false,
+        "rap": false,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1860,
+        "wires": [
+            [
+                "eefe4b2a2c5fdbbc"
+            ]
+        ]
+    },
+    {
+        "id": "f2faf23a455f9473",
+        "type": "mqtt out",
+        "z": "461370def5ae9f29",
+        "g": "da25f673c8d00e23",
+        "name": "",
+        "topic": "rvc/state/enginestatus",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9c5de13d667d7ea6",
+        "x": 1000,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "eefe4b2a2c5fdbbc",
+        "type": "switch",
+        "z": "461370def5ae9f29",
+        "g": "da25f673c8d00e23",
+        "name": ">14.2V",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "14.2",
+                "vt": "num"
+            },
+            {
+                "t": "lt",
+                "v": "14.2",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 340,
+        "y": 1860,
+        "wires": [
+            [
+                "15ddb8cb91c43a6b"
+            ],
+            [
+                "036dbeb2e4bfd75c"
+            ]
+        ]
+    },
+    {
+        "id": "15ddb8cb91c43a6b",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "da25f673c8d00e23",
+        "name": "send message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Running",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 1840,
+        "wires": [
+            [
+                "22fdf931950289a3"
+            ]
+        ]
+    },
+    {
+        "id": "036dbeb2e4bfd75c",
+        "type": "change",
+        "z": "461370def5ae9f29",
+        "g": "da25f673c8d00e23",
+        "name": "send message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Off",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 1880,
+        "wires": [
+            [
+                "22fdf931950289a3"
+            ]
+        ]
+    },
+    {
+        "id": "22fdf931950289a3",
+        "type": "rbe",
+        "z": "461370def5ae9f29",
+        "g": "da25f673c8d00e23",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 770,
+        "y": 1860,
+        "wires": [
+            [
+                "f2faf23a455f9473"
             ]
         ]
     },
