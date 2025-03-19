@@ -88,7 +88,7 @@
                 </p>
                 <p>On Renogy Lithium battery models you will be able to control most of the firefly devices, monitor the Renogy battery BMS, and monitor and control your Renogy Inverter/Charger.
                 </p> 
-                <p>On generator models you will be able to controland monitor most of the firefly devices.
+                <p>On generator models you will be able to control and monitor most of the firefly devices.
                 </p>
                 <p>Lithionics models have not been tested.
                 </p>
@@ -133,7 +133,7 @@
                     </li>
                     <br>
                     <li>
-                        Several feet of RV-C drop cable (4 conductor 24awg) or equivalant. Get enough so you have some flexibility where you mount the Raspberry Pi but keep in mind the RV-C spec says a drop cable should be no more than 6ft.
+                        Several feet of RV-C drop cable (4 conductor 24awg) or equivalant. Get enough so you have some flexibility where you mount the Raspberry Pi but I recommend you keep the length as short as possible to reduce voltage loss.
                         <ul>
                             <li>
                                 <a href="https://www.fireflyint.com/products/70053-24ga-rv-c-drop-cable">RV-C drop cable from FireFly integrations</a>
@@ -169,6 +169,17 @@
                             </ul>
                         </li>
                         <li>
+                            In some cases the inverter seems to create enough interference that the USB connection to the inverter is unstable. I recommend you try the USB cable first, but as an alternative you may need to use a USB to RS485 adapter.
+                            <ul>
+                                <li>
+                                    <a href="https://www.waveshare.com/product/iot-communication/wired-comm-converter/rs232-rs485-can-dali2/usb-to-rs485.htm">Waveshare USB to RS485</a>
+                                </li>
+                            </ul>
+                                <li>
+                                    <a href="https://www.waveshare.com/usb-to-rs485-422.htm">Industrial isolated Waveshare USB to RS485</a>
+                                </li>
+                        </li>
+                        <li>
                             Connector for Renogy BMS Debug port
                             <ul>
                                 <li>
@@ -190,11 +201,11 @@
                 <h3>Install the image</h3>
                    <ol>
                     <li>
-                        <a href="https://www.raspberrypi.com/software/">Download and install the latest Imager tool</a>
+                        <a href="https://www.raspberrypi.com/software/">Download and install the latest Raspberry Pi Imager tool</a>
                     </li>
                     <br>
                     <li>
-                        <a href="https://github.com/dbergl/coach2mqtt/releases/latest">Download the latest image for the Raspberry Pi</a>
+                        <a href="https://github.com/dbergl/coach2mqtt/releases/latest">Download the latest Coach2mqtt image for the Raspberry Pi</a>
                         <p><b>Note:</b> There is no need to decompress the downloaded image. The Imager tool can install a .zip image.
                     </li>
                     <li>
