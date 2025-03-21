@@ -6,9 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Documentation Template</title>
-    <meta name="description" content="A simple HTML/CSS DocumentationTemplate">
-    <meta name="author" content="Carlos Yllobre">
+    <title>Coach2mqtt Installation Guide</title>
+    <meta name="description" content="Instruction for assembling and setting up coach2mqtt on a Raspberry Pi">
+    <meta name="author" content="Dan Berglund">
 
     <link rel="stylesheet" href="style.css?">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
@@ -189,14 +189,26 @@
                     </ul>
 
 
+                <h2>Assembling the hardware</h2>
 
+                <p>Attach the waveshare </p>
+                <ol>
+                    <li>
+                        Attach the Waveshare Can HAT+ to the Pi
+                        <br><br>
+                        <img src="images/canhat1.jpg" alt="Can HAT+" style="width: 50%; height: 50%" />
+                        <img src="images/canhat2.jpg" alt="Install stand-offs" style="width: 50%; height: 50%" />
+                        <img src="images/canhat3.jpg" alt="Attach Can HAT+" style="width: 50%; height: 50%" />
+                    </li>
+                    <li>
+                        If the case you are using allows access to the microsd card you can install the Pi in the case now
+                    </li>
+                </ol>
                 <p id="installingapp">
-               
-
 
                 <h2>Installing Coach2mqtt</h2>
                 
-                <p>To fully utilize Coach2mqtt you will need to install an image on the Rasperry Pi and an app on your phone or tablet.</p>
+                <p>To use Coach2mqtt you will need to install an image on the Rasperry Pi and an app on your phone or tablet.</p>
                 
                 <h3>Install the image</h3>
                    <ol>
@@ -209,8 +221,8 @@
                         <p><b>Note:</b> There is no need to decompress the downloaded image. The Imager tool can install a .zip image.
                     </li>
                     <li>
-                        Using the Imager tool install the image you downloaded onto the micro SD card
-                        <ol>
+                        Using the Imager tool to install the image you downloaded onto the micro SD card
+                        <ol style="list-style-type: lower-alpha;">
                             <li>
                                 Click <b>CHOOSE OS</b>
                                 <br><br>
@@ -235,30 +247,32 @@
                                 <br><br>
                                 <img src="images\OS_customization2.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
                                 <ul>
-                                <li>
-                                    <b>Hostname</b>: Set this to any name you want. This is name you will use to access the services on your raspberry Pi
-                                </li>
-                                <li>
-                                    <b>Username and Password</b>: Set a username and a <i>strong</i> password. You will use this for additional setup later.                               
-                                </li>
-                                <li>
-                                    <b>Configure wireless LAN</b>: This will be the default wifi your Pi will connect to when powered up. I recommend setting this to either your Winegard or starlink wifi
-                                </li>
-                                <li>
-                                    <b>wireless LAN country</b>: Set this to <b>US</b> unless you are in another country
-                                </li>
-                                <li>
-                                    <b>Time zone</b>: Choose an appropriate time zone
-                                </li>
-                                <li>
-                                    <b>Keyboard layout</b>: select <b>us</b> unless you prefer another layout 
-                                </li>
+                                    <li>
+                                        <b>Hostname</b>: Set this to any name you want. This is name you will use to access the services on your raspberry Pi
+                                    </li>
+                                    <li>
+                                        <b>Username and Password</b>: Set a username and a <i>strong</i> password. You will use this for additional setup later.                               
+                                    </li>
+                                    <li>
+                                        <b>Configure wireless LAN</b>: This will be the default wifi your Pi will connect to when powered up. I recommend setting this to either your Winegard or starlink wifi
+                                    </li>
+                                    <li>
+                                        <b>wireless LAN country</b>: Set this to <b>US</b> unless you are in another country
+                                    </li>
+                                    <li>
+                                        <b>Time zone</b>: Choose an appropriate time zone
+                                    </li>
+                                    <li>
+                                        <b>Keyboard layout</b>: select <b>us</b> unless you prefer another layout 
+                                    </li>
                                 </ul>
-
-                                <br><br>
-                                <img src="images\OS_customization2.png" alt="Custom Settings" style="width: 50%; height: 50%" />
                             </li>
-
+                            <li>
+                                Click Save
+                            </li>
+                            <li>
+                                Click Yes to start writing to the microsd card
+                            </li>
                         </ol>
                     </li>
                     <br id="openingapp">
