@@ -1,0 +1,16 @@
+# some ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# coach2mqtt aliases
+
+c2mstatus () {
+	docker container ls -f "status=running" --format '{{.Label "com.coach2mqtt.name"}}'
+}
+
+c2mupdate () {
+    docker compose -f /opt/coach2mqtt/docker-compose.yml down
+    docker compose -f /opt/coach2mqtt/docker-compose.yml pull
+    docker compose -f /opt/coach2mqtt/docker-compose.yml up -d
+}

@@ -344,7 +344,8 @@
                                </li>
                            </ul>
                     </li>
-                        If the Text shows 🔒<b>Limited Access</b> in the Upper right corner click it to enable Administrative access
+                    <li>
+                        If the text shows 🔒<b>Limited Access</b> in the upper right corner click it to enable Administrative access
                            <br><br>
                            <ul>
                                <li style="list-style-type: none;">
@@ -354,7 +355,40 @@
                                    <img src="images\administrative.png" alt="Login Dialog" style="width: 50%; height: 50%" />
                                </li>
                            </ul>
+                    </li>
+                    <h3>Verify coach2mwtt components are running</h3>
                     <li>
+                        To verify everything installed correctly we need to run some commands on the Raspberry Pi. The Web UI makes it easy to do this.
+                        <p>
+                        Click <b>Terminal</b> on the left side under Tools
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <img src="images\terminal.png" alt="Terminal" style="width: 40%; height: 40%" />
+                            </li>
+                        </ul>
+                    <li>
+                        In the terminal area that opens type <b>c2mstatus</b> and hit &lt;enter&gt;.
+                        The command will output all names of the running components.
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <img src="images\c2mstatus.png" alt="c2mstatus command" style="width: 60%; height: 60%" />
+                            </li>
+                            You should see the 5 components as pictured.
+                            <p>If any are missing you will need to run one more command to download and start them:
+                            <ol>
+                                <li>
+                                    In the terminal area that opens type <b>c2mupdate</b> and hit &lt;enter&gt;.
+
+                                    This will stop any running components, download any missing components, and then start them back up.
+                                    <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\c2mupdate2.png" alt="c2mupdate command" style="width: 80%; height: 80%" />
+                                    </li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </ul>
+
                     </li>
 
                 </ol>
