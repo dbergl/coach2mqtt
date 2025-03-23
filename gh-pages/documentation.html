@@ -196,9 +196,13 @@
                     <li>
                         Attach the Waveshare Can HAT+ to the Pi
                         <br><br>
-                        <img src="images/canhat1.jpg" alt="Can HAT+" style="width: 50%; height: 50%" />
-                        <img src="images/canhat2.jpg" alt="Install stand-offs" style="width: 50%; height: 50%" />
-                        <img src="images/canhat3.jpg" alt="Attach Can HAT+" style="width: 50%; height: 50%" />
+                        <ul>
+                            <lii style="list-style-type: none;">
+                            <img src="images/canhat1.jpg" alt="Can HAT+" style="width: 50%; height: 50%" />
+                            <img src="images/canhat2.jpg" alt="Install stand-offs" style="width: 50%; height: 50%" />
+                            <img src="images/canhat3.jpg" alt="Attach Can HAT+" style="width: 50%; height: 50%" />
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         If the case you are using allows access to the microsd card you can install the Pi in the case now
@@ -226,26 +230,50 @@
                             <li>
                                 Click <b>CHOOSE OS</b>
                                 <br><br>
-                                <img src="images/choose_os.png" alt="Choose OS" style="width: 50%; height: 50%" />
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images/choose_os.png" alt="Choose OS" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
                             </li>
+                            <br>
                             <li> Click <b>Use custom</b> and select the image you downloaded
                                 <br><br>
-                                <img src="images/use_custom.png" alt="Use custom" style="width: 50%; height: 50%" />
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images/use_custom.png" alt="Use custom" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
                             </li>
+                            <br>
                             <li>
                                 Click <b>CHOOSE STORAGE</b> and choose the card you will write the image to
                                 <br><br>
-                                <img src="images\choose_storage.png" alt="Choose Storage" style="width: 50%; height: 50%" />
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\choose_storage.png" alt="Choose Storage" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
                             </li>
+                            <br>
                             <li>
                                 Click <b>NEXT</b> and then <b>EDIT SETTINGS</b> at the OS customisations prompt
                                 <br><br>
-                                <img src="images\OS_customization1.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\OS_customization1.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
                             </li>
+                            <br>
                             <li>
-                                Make your changes in the OS customisation dialog:
+                                Make your changes in the OS customisation dialog and then click <b>SAVE</b>:
                                 <br><br>
-                                <img src="images\OS_customization2.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\OS_customization2.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
                                 <ul>
                                     <li>
                                         <b>Hostname</b>: Set this to any name you want. This is name you will use to access the services on your raspberry Pi
@@ -254,7 +282,7 @@
                                         <b>Username and Password</b>: Set a username and a <i>strong</i> password. You will use this for additional setup later.                               
                                     </li>
                                     <li>
-                                        <b>Configure wireless LAN</b>: This will be the default wifi your Pi will connect to when powered up. I recommend setting this to either your Winegard or starlink wifi
+                                        <b>Configure wireless LAN</b>: This will be the default wifi your Pi will connect to when powered up. I recommend setting this to either your Winegard or Starlink wifi
                                     </li>
                                     <li>
                                         <b>wireless LAN country</b>: Set this to <b>US</b> unless you are in another country
@@ -267,22 +295,75 @@
                                     </li>
                                 </ul>
                             </li>
+                            <br>
                             <li>
-                                Click Save
+                                Click <b>Yes</b> to use your customized settings
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\OS_customization3.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
                             </li>
+                            <br>
                             <li>
-                                Click Yes to start writing to the microsd card
+                                Click <b>Yes</b> to start writing to the microsd card
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\confirm.png" alt="Confirmation Dialog" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
                             </li>
                         </ol>
                     </li>
-                    <br id="openingapp">
                     <li>
-                     The app is installed now.
+                     After the image has been written to the card insert into the Raspberry Pi.
                     </li>
                     <br>
                 </ol>
-                
+                <h3>Powering up with the new image for the first time</h3>
+
+                <p>The first time the Raspberry Pi is powered on it may take 5 or more minutes to get everything setup.
+                On first power up the Pi needs to expand the image to use the full space on the microsd card and configure your customizations. It will reboot and then will attempt to connect to the internet and download about 1 GB of files required for coach2mqtt to run.
+                I recommend plugging in an ethernet cable, if possible, for the initial startup.
+                <p><b>Note</b>:If your connection is too slow the download on startup may timeout and fail. You will be able to run the commands manually later if needed.
+
+                <h3>Connecting to the Pi</h3>
+                Once your device has powered on and you have waited for 5 or more minutes you can connect to the Web UI on the Pi. This is easier on a computer but a phone or tablet can be used.
+                <ol>
+                    <li>
+                        Open a web browser and navigate to <a href="https://coach2mqtt:9090">https://coach2mqtt:9090</a> - <i>Replace coach2mqtt with the hostname you set when creating the image</i>.<p>You will get a warning that the certificate is not valid or your connection is not private. This is expected and you can follow the browser instructions to connect anyway.
+                    </li>
+                    <li>
+                        At the login dialog enter the username and password you set during image creation.
+                           <br><br>
+                           <ul>
+                               <li style="list-style-type: none;">
+                                   <img src="images\login.png" alt="Login Dialog" style="width: 50%; height: 50%" />
+                               </li>
+                           </ul>
+                    </li>
+                        If the Text shows 🔒<b>Limited Access</b> in the Upper right corner click it to enable Administrative access
+                           <br><br>
+                           <ul>
+                               <li style="list-style-type: none;">
+                                   <img src="images\limited.png" alt="Login Dialog" style="width: 50%; height: 50%" />
+                               </li>
+                               <li style="list-style-type: none;">
+                                   <img src="images\administrative.png" alt="Login Dialog" style="width: 50%; height: 50%" />
+                               </li>
+                           </ul>
+                    <li>
+                    </li>
+
+                </ol>
+
+
+
                 <h3>Install the app on your phone or tablet</h3>
+
+                <br id="openingapp">
 
                 <h2>Opening the app</h2>
                 
