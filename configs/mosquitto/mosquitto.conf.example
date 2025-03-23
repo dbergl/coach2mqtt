@@ -7,7 +7,7 @@ allow_anonymous true
 #Bridge connection
 connection hivemq
 #address will be something like <id>.s1.eu.hivemq.cloud:8883
-address .s1.eu.hivemq.cloud:8883
+address <hivemqurl>
 
 # letsencrypt root cert pem file is needed because of cert issue with hivemq
 # if needed, you can download a new one from https://letsencrypt.org/certs/isrgrootx1.pem

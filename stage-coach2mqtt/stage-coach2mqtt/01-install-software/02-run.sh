@@ -15,6 +15,9 @@ cp "${ROOTFS_DIR}/opt/coach2mqtt/configs/mosquitto/mosquitto.conf.example" \
 #Use systemd to start service
 install -m 644 files/coach2mqtt.service "${ROOTFS_DIR}/lib/systemd/system/"
 
+#Install .bash_aliases
+install -m 644 files/bash_aliases "${ROOTFS_DIR}/home/${FIRST_USER_NAME}/.bash_aliases
+
 on_chroot << EOF
 systemctl enable coach2mqtt.service
 ln -s /opt/coach2mqtt /home/${FIRST_USER_NAME}/coach2mqtt 

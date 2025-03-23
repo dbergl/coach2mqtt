@@ -1,0 +1,35 @@
+# coach2mqtt aliases
+
+# some ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+
+c2mstatus () {
+	docker container ls -f "status=running" --format '{{.Label "com.coach2mqtt.name"}}'
+}
+
+c2mupdate () {
+	docker compose -f /opt/coach2mqtt/docker-compose.yml down
+	docker compose -f /opt/coach2mqtt/docker-compose.yml pull
+	docker compose -f /opt/coach2mqtt/docker-compose.yml up -d
+}
+
+sethivemq () {
+    echo "Enter your TLS MQTT URL from HiveMQ:"
+    read HIVEURL
+    
+    
+    echo "Enter the username you created on HiveMQ:"
+    read HIVEUSER
+    
+    echo "Enter the password you set for ${HIVEUSER}:"
+    read HIVEUSER
+    
+    sudo sed -i -e "s/<hivemqurl>/${HIVEURL}/" -e "s/<username>/${HIVEUSER}/" -e "s/<password>/${HIVEPASS}/" /opt/coach2mqtt/configs/mosquitto/mosquitto.conf
+
+    echo Restarting Mosquitto to load updated configration 
+
+    docker compose -f /opt/coach2mqtt/docker-compose.yml down mosquitto && docker compose -f /opt/coach2mqtt/docker-compose.yml up -d mosquitto
+}
