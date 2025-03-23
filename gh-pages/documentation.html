@@ -1,0 +1,599 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coach2mqtt Installation Guide</title>
+    <meta name="description" content="Instruction for assembling and setting up coach2mqtt on a Raspberry Pi">
+    <meta name="author" content="Dan Berglund">
+
+    <link rel="stylesheet" href="style.css?">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <a href="#"><img class="logo" src="logo.svg"></a>
+            <a class="right" style="text-decoration: underline;" href="#"><i class="fas fa-book"></i>&nbsp; Documentation</a>
+            <!-- <a class="right" href="mailto:yourapp@email.com" target="_blank"><i class="fas fa-paper-plane"></i>&nbsp; yourapp@email.com</a> -->
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">
+
+            <div class="sidepanel">
+
+                <a class="title" href="#">Introduction</a>
+                
+                <a class="section" href="#technology">Technology</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#gettingstarted">Getting Started</a>
+
+                <a class="section" href="#assemblehardware">The Hardware</a>
+                <a class="section" href="#installingapp">Installing the App</a>
+                 <a class="section" href="#openingapp">Opening the App</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#basicfeatures">Basic Features</a>
+
+                <a class="section" href="#basicfeatures">Feature 1</a>
+                <a class="section" href="#basicfeatures">Feature 2</a>
+                <a class="section" href="#feature3">Feature 3</a>
+                <a class="section" href="#feature3">Feature 4</a>
+                <a class="section" href="#feature3">Feature 5</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#advanced">Advanced Features</a>
+
+                <a class="section" href="#advanced">Feature A</a>
+                <a class="section" href="#featureb">Feature B</a>
+                <a class="section" href="#featurec">Feature C</a>
+                <a class="sub-section" href="#featurec1">Feature C.1</a>
+                <a class="sub-section" href="#featurec2">Feature C.2</a>
+                <a class="section" href="#featured">Feature D</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#accesibility">Accesibility</a>
+
+                <div class="divider left"></div>
+
+                <a class="title" href="#moreinfo">More Info</a>
+            
+             <div class="space double"></div>
+
+            </div>
+
+            <div class="right-col">
+            
+
+
+                <h1 >Introduction</h1>
+                
+                <p>Coach2mqtt runs on a <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> and allows you to control and monitor most of the systems in your Jayco Swift/Entegra Ethos or your Jayco Terrain/Entegra Launch from your phone or tablet.
+                </p>
+                <p>On Renogy Lithium battery models you will be able to control most of the firefly devices, monitor the Renogy battery BMS, and monitor and control your Renogy Inverter/Charger.
+                </p> 
+                <p>On generator models you will be able to control and monitor most of the firefly devices.
+                </p>
+                <p>Lithionics models have not been tested.
+                </p>
+
+                <h2>Technology</h2>
+                
+                <p>In order to monitor and control the systems the <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> connects to the <a href="http://www.rv-c.com">RV-C</a> bus and on Renogy Lithium battery models it also connects to the BMS CAN bus and the Inverter RS-485 port. 
+
+                <p id="gettingstarted"></p> 
+                 
+        <div class="divider" style="width:24%; margin:30px 0;"></div>
+
+                <p id="assemblehardware"></p>
+                <h1>Getting Started</h1>
+
+                <h2>Hardware requirements</h2>
+                
+                <p>You will need the following:</p> 
+
+                <ul>
+                    <li>
+                        <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B with 2GB+ RAM</a>
+                    </li>
+                    <li>
+                        <a href="https://www.waveshare.com/2-ch-can-hat-plus.htmhttps://www.waveshare.com/2-ch-can-hat-plus.htm">Waveshare 2-Channel CAN Hat+</a>
+                        <ul>
+                            <li>
+                                <a href="https://www.amazon.com/Waveshare-2-Channel-Expansion-Compatible-Protections/dp/B0D3GD458Z">Amazon</a>
+                            </li>
+                        </ul>
+                        <b>Important:</b> Be sure to buy the + version so you can supply power to the Pi and Hat from the RV-C cable.
+                    </li>
+                    <br>
+                    <li>
+                        A case for RaspberryPi 4B that can accomodate the CAN bus hat
+                        <ul>
+                            <li><a href="https://www.amazon.com/HighPi-Raspberry-Pi-Case/dp/B0BWC714GY">Black HighPi Raspberry Pi Case for Pi 4 from Amazon</a></li>
+                            <li><a href="https://www.pishop.us/product/highpi-raspberry-pi-case-for-pi4/">Black HighPi Raspberry Pi Case for Pi 4i from PiShop</a></li>
+                            <li><a href="https://www.pishop.us/product/highpi-raspberry-pi-case-for-pi4-white/">White HighPi Raspberry Pi Case for Pi 4 from PiShop</a></li>
+                            <li><a href="https://www.pishop.us/product/highpi-raspberry-pi-case-for-pi4-clear/">Clear HighPi Raspberry Pi Case for Pi 4 from PiShop</a></li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li>
+                        Several feet of RV-C drop cable (4 conductor 24awg) or equivalant. Get enough so you have some flexibility where you mount the Raspberry Pi but I recommend you keep the length as short as possible to reduce voltage loss.
+                        <ul>
+                            <li>
+                                <a href="https://www.fireflyint.com/products/70053-24ga-rv-c-drop-cable">RV-C drop cable from FireFly integrations</a>
+                            </li>
+                            <li>
+                                <a href="https://www.fireflyint.com/products/70079a-10-ft-plugplug-drop-cable-assembly">10ft with plugs attached already</a>
+                            </li>
+                            <li>
+                                <a href="https://www.fireflyint.com/products/70077a-6-ft-plugplug-drop-cable-assembly">6ft with plugs attached already</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li>
+                         One 3M miniplug connector to connect RV-C bus. Alternatively you can buy RV-C cable with a plug already attached (see above)
+                        <ul>
+                            <li>
+                                <a href="https://www.fireflyint.com/products/70090-3m-mini-plug-connector">From Firefly Integrations</a>
+                            </li>
+                            <li>
+                                <a href="https://www.digikey.com/en/products/detail/3m/37104-A165-00E%2520MB/1855697">From Digikey</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <h3>Renogy Lithium models also require:</h3>
+                    <ul>
+                        <li>
+                            High quality USB 2.0 A to B cable to connect to Renogy Inverter. I recommend you get a cable with ferrite cores attached to reduce possible noise on the USB bus. Be sure to get one that is long enough to reach from the inverter to the where you are mounting the Pi.
+                            <ul>
+                                <li>
+                                    <a href="https://www.amazon.com/Tripp-Lite-Hi-Speed-Ferrite-U023-006/dp/B008VOPCGY">Example from Amazon</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            In some cases the inverter seems to create enough interference that the USB connection to the inverter is unstable. I recommend you try the USB cable first, but as an alternative you may need to use a USB to RS485 adapter.
+                            <ul>
+                                <li>
+                                    <a href="https://www.waveshare.com/product/iot-communication/wired-comm-converter/rs232-rs485-can-dali2/usb-to-rs485.htm">Waveshare USB to RS485</a>
+                                </li>
+                            </ul>
+                                <li>
+                                    <a href="https://www.waveshare.com/usb-to-rs485-422.htm">Industrial isolated Waveshare USB to RS485</a>
+                                </li>
+                        </li>
+                        <li>
+                            Connector for Renogy BMS Debug port
+                            <ul>
+                                <li>
+                                    <a href="https://www.amazon.com/dp/B0BX42NJWR">2 pin connector on Amazon</a>
+                                </li>
+                            </ul>
+                    </ul>
+
+
+                <h2>Assembling the hardware</h2>
+
+                <p>Attach the waveshare </p>
+                <ol>
+                    <li>
+                        Attach the Waveshare Can HAT+ to the Pi
+                        <br><br>
+                        <ul>
+                            <lii style="list-style-type: none;">
+                            <img src="images/canhat1.jpg" alt="Can HAT+" style="width: 50%; height: 50%" />
+                            <img src="images/canhat2.jpg" alt="Install stand-offs" style="width: 50%; height: 50%" />
+                            <img src="images/canhat3.jpg" alt="Attach Can HAT+" style="width: 50%; height: 50%" />
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        If the case you are using allows access to the microsd card you can install the Pi in the case now
+                    </li>
+                </ol>
+                <p id="installingapp">
+
+                <h2>Installing Coach2mqtt</h2>
+                
+                <p>To use Coach2mqtt you will need to install an image on the Rasperry Pi and an app on your phone or tablet.</p>
+                
+                <h3>Install the image</h3>
+                   <ol>
+                    <li>
+                        <a href="https://www.raspberrypi.com/software/">Download and install the latest Raspberry Pi Imager tool</a>
+                    </li>
+                    <br>
+                    <li>
+                        <a href="https://github.com/dbergl/coach2mqtt/releases/latest">Download the latest Coach2mqtt image for the Raspberry Pi</a>
+                        <p><b>Note:</b> There is no need to decompress the downloaded image. The Imager tool can install a .zip image.
+                    </li>
+                    <li>
+                        Using the Imager tool to install the image you downloaded onto the micro SD card
+                        <ol style="list-style-type: lower-alpha;">
+                            <li>
+                                Click <b>CHOOSE OS</b>
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images/choose_os.png" alt="Choose OS" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
+                            </li>
+                            <br>
+                            <li> Click <b>Use custom</b> and select the image you downloaded
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images/use_custom.png" alt="Use custom" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
+                            </li>
+                            <br>
+                            <li>
+                                Click <b>CHOOSE STORAGE</b> and choose the card you will write the image to
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\choose_storage.png" alt="Choose Storage" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
+                            </li>
+                            <br>
+                            <li>
+                                Click <b>NEXT</b> and then <b>EDIT SETTINGS</b> at the OS customisations prompt
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\OS_customization1.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
+                            </li>
+                            <br>
+                            <li>
+                                Make your changes in the OS customisation dialog and then click <b>SAVE</b>:
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\OS_customization2.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <b>Hostname</b>: Set this to any name you want. This is name you will use to access the services on your raspberry Pi
+                                    </li>
+                                    <li>
+                                        <b>Username and Password</b>: Set a username and a <i>strong</i> password. You will use this for additional setup later.                               
+                                    </li>
+                                    <li>
+                                        <b>Configure wireless LAN</b>: This will be the default wifi your Pi will connect to when powered up. I recommend setting this to either your Winegard or Starlink wifi
+                                    </li>
+                                    <li>
+                                        <b>wireless LAN country</b>: Set this to <b>US</b> unless you are in another country
+                                    </li>
+                                    <li>
+                                        <b>Time zone</b>: Choose an appropriate time zone
+                                    </li>
+                                    <li>
+                                        <b>Keyboard layout</b>: select <b>us</b> unless you prefer another layout 
+                                    </li>
+                                </ul>
+                            </li>
+                            <br>
+                            <li>
+                                Click <b>Yes</b> to use your customized settings
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\OS_customization3.png" alt="OS Customizations Prompt" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
+                            </li>
+                            <br>
+                            <li>
+                                Click <b>Yes</b> to start writing to the microsd card
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\confirm.png" alt="Confirmation Dialog" style="width: 50%; height: 50%" />
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                     After the image has been written to the card insert into the Raspberry Pi.
+                    </li>
+                    <br>
+                </ol>
+                <h3>Powering up with the new image for the first time</h3>
+
+                <p>The first time the Raspberry Pi is powered on it may take 5 or more minutes to get everything setup.
+                On first power up the Pi needs to expand the image to use the full space on the microsd card and configure your customizations. It will reboot and then will attempt to connect to the internet and download about 1 GB of files required for coach2mqtt to run.
+                I recommend plugging in an ethernet cable, if possible, for the initial startup.
+                <p><b>Note</b>:If your connection is too slow the download on startup may timeout and fail. You will be able to run the commands manually later if needed.
+
+                <h3>Connecting to the Pi</h3>
+                Once your device has powered on and you have waited for 5 or more minutes you can connect to the Web UI on the Pi. This is easier on a computer but a phone or tablet can be used.
+                <ol>
+                    <li>
+                        Open a web browser and navigate to <a href="https://coach2mqtt:9090">https://coach2mqtt:9090</a> - <i>Replace coach2mqtt with the hostname you set when creating the image</i>.<p>You will get a warning that the certificate is not valid or your connection is not private. This is expected and you can follow the browser instructions to connect anyway.
+                    </li>
+                    <li>
+                        At the login dialog enter the username and password you set during image creation.
+                           <br><br>
+                           <ul>
+                               <li style="list-style-type: none;">
+                                   <img src="images\login.png" alt="Login Dialog" style="width: 50%; height: 50%" />
+                               </li>
+                           </ul>
+                    </li>
+                    <li>
+                        If the text shows 🔒<b>Limited Access</b> in the upper right corner click it to enable Administrative access
+                           <br><br>
+                           <ul>
+                               <li style="list-style-type: none;">
+                                   <img src="images\limited.png" alt="Login Dialog" style="width: 50%; height: 50%" />
+                               </li>
+                               <li style="list-style-type: none;">
+                                   <img src="images\administrative.png" alt="Login Dialog" style="width: 50%; height: 50%" />
+                               </li>
+                           </ul>
+                    </li>
+                    <h3>Verify coach2mwtt components are running</h3>
+                    <li>
+                        To verify everything installed correctly we need to run some commands on the Raspberry Pi. The Web UI makes it easy to do this.
+                        <p>
+                        Click <b>Terminal</b> on the left side under Tools
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <img src="images\terminal.png" alt="Terminal" style="width: 40%; height: 40%" />
+                            </li>
+                        </ul>
+                    <li>
+                        In the terminal area that opens type <b>c2mstatus</b> and hit &lt;enter&gt;.
+                        The command will output all names of the running components.
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <img src="images\c2mstatus.png" alt="c2mstatus command" style="width: 60%; height: 60%" />
+                            </li>
+                            You should see the 5 components as pictured.
+                            <p>If any are missing you will need to run one more command to download and start them:
+                            <ol>
+                                <li>
+                                    In the terminal area that opens type <b>c2mupdate</b> and hit &lt;enter&gt;.
+
+                                    This will stop any running components, download any missing components, and then start them back up.
+                                    <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\c2mupdate2.png" alt="c2mupdate command" style="width: 80%; height: 80%" />
+                                    </li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </ul>
+
+                    </li>
+
+                </ol>
+
+
+
+                <h3>Install the app on your phone or tablet</h3>
+
+                <br id="openingapp">
+
+                <h2>Opening the app</h2>
+                
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                
+                 <ol>
+                    <li>
+                     The first thing you need to do to open this app.
+                    </li>
+                    <br>
+                    <li>
+                     The second thing you need to do to open this app.
+                    </li>
+                    <br>
+                    <li>
+                      The third thing you need to do to open this app.
+                    </li>
+                    <br>
+                    <li>
+                     Open the app and start using it!
+                    </li>
+                    <br>
+                </ol>
+                
+                <p id="basicfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                    
+            <div class="divider" style="width:24%; margin:30px 0;"></div>
+            
+            
+                <h1>Basic Features</h1>
+
+                <h2>Feature 1</h2>
+                
+                <p id="basicfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                </p>
+                
+                <h2>Feature 2</h2>
+                
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br><br>
+                <b>Explanation 1</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br>
+                <br>
+                <b>Explanation 2</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br>
+                <br>
+                <b>Explanation 3</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <br>
+                <br id="feature3">
+                <b>Explanation 4</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+                
+                <h2>Feature 3</h2>
+                
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br id="feature4">
+             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </p>
+                
+                <h2>Feature 4</h2>
+                
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  <br>
+                  <br>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                 <br>
+                 <br id="feature5">
+                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                
+                
+                <h2>Feature 5</h2>
+                
+                <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                <br>
+                <br>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br>
+                </p>
+                
+        
+                
+               <h2>Feature 5</h2>
+                 
+               <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                <br id="advanced">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                
+                <h1>Advanced Features</h1>
+                
+                <h2>Feature A</h2>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor 
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                <br>
+                <br id="featureb">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                   
+                
+                <h2>Feature B</h2>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br>
+                <br id="featurec">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                
+                
+                <h2>Feature C</h2>
+                  
+                <p id="featurec1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  
+                 
+                <h2>Feature C.1</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+                </p>
+                
+                   <ul>
+                    <li>
+                    <b>Point 1</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <br>
+                    <li>
+                    <b>Point 2</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+                    </li>
+                    <br id="featurec2">
+                     <li>
+                    <b>Point 3</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <br>
+                </ul>
+                   
+                 <h2>Feauture C.2</h2>
+                   
+                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <br>
+                    <br>
+                     <b>Important:</b> Please notice that lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <br>
+                    <br>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                 </p>
+                  
+                  
+                  <h2>Feature D</h2>
+                  
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  <br>
+                  <br id="accesibility">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  
+                  
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                   
+                   <h1>Accessibility</h1>
+                   
+                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                   <br>
+                   <br>
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                   <br>
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                   
+                   <p>Lorem ipsum dolor sit amet.
+                      <br id="moreinfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                   
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+
+                <h1>More Info</h1>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.marks are protected by intellectual property rights.</p>
+
+                <div class="doublespace"></div>
+                <div class="divider" style="width:24%; margin:30px 0;"></div>
+                
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
