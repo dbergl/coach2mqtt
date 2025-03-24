@@ -24,7 +24,7 @@ sethivemq () {
     read HIVEUSER
     
     echo "Enter the password you set for ${HIVEUSER}:"
-    read HIVEUSER
+    read HIVEPASS
     
     sudo sed -i -e "s/<hivemqurl>/${HIVEURL}/" -e "s/<username>/${HIVEUSER}/" -e "s/<password>/${HIVEPASS}/" /opt/coach2mqtt/configs/mosquitto/mosquitto.conf
 
