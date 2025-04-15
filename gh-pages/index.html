@@ -23,7 +23,7 @@
     <div class="navbar clear nav-top">
         <div class="row content">
             <a href="#"><img class="logo" src="logo.svg"></a>
-            <a class="right" style="text-decoration: underline;" href="#"><i class="fas fa-book"></i>&nbsp; Documentation</a>
+            <!-- <a class="right" style="text-decoration: underline;" href="#"><i class="fas fa-book"></i>&nbsp;Documentation</a> -->
             <!-- <a class="right" href="mailto:yourapp@email.com" target="_blank"><i class="fas fa-paper-plane"></i>&nbsp; yourapp@email.com</a> -->
         </div>
     </div>
@@ -95,9 +95,9 @@
 
                 <h2>Technology</h2>
                 
-                <p>In order to monitor and control the systems the <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> connects to the <a href="http://www.rv-c.com">RV-C</a> bus and on Renogy Lithium battery models it also connects to the BMS CAN bus and the Inverter RS-485 port. 
+                <p>In order to monitor and control the systems the <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> connects to the <a href="http://www.rv-c.com">RV-C</a> bus. On Renogy Lithium battery models it also connects to the BMS CAN bus and the Inverter RS-485 port.
 
-                <p id="gettingstarted"></p> 
+                <p id="gettingstarted"></p>
                  
         <div class="divider" style="width:24%; margin:30px 0;"></div>
 
@@ -105,8 +105,8 @@
                 <h1>Getting Started</h1>
 
                 <h2>Hardware requirements</h2>
-                
-                <p>You will need the following:</p> 
+
+                <p>You will need the following:</p>
 
                 <ul>
                     <li>
@@ -211,9 +211,9 @@
                 <p id="installingapp">
 
                 <h2>Installing Coach2mqtt</h2>
-                
+
                 <p>To use Coach2mqtt you will need to install an image on the Rasperry Pi and an app on your phone or tablet.</p>
-                
+
                 <h3>Install the image</h3>
                    <ol>
                     <li>
@@ -279,7 +279,7 @@
                                         <b>Hostname</b>: Set this to any name you want. This is name you will use to access the services on your raspberry Pi
                                     </li>
                                     <li>
-                                        <b>Username and Password</b>: Set a username and a <i>strong</i> password. You will use this for additional setup later.                               
+                                        <b>Username and Password</b>: Set a username and a <i>strong</i> password. You will use this for additional setup later.
                                     </li>
                                     <li>
                                         <b>Configure wireless LAN</b>: This will be the default wifi your Pi will connect to when powered up. I recommend setting this to either your Winegard or Starlink wifi
@@ -291,7 +291,7 @@
                                         <b>Time zone</b>: Choose an appropriate time zone
                                     </li>
                                     <li>
-                                        <b>Keyboard layout</b>: select <b>us</b> unless you prefer another layout 
+                                        <b>Keyboard layout</b>: select <b>us</b> unless you prefer another layout
                                     </li>
                                 </ul>
                             </li>
@@ -356,7 +356,7 @@
                                </li>
                            </ul>
                     </li>
-                    <h3>Verify coach2mwtt components are running</h3>
+                    <h3>Verify coach2mqtt components are running</h3>
                     <li>
                         To verify everything installed correctly we need to run some commands on the Raspberry Pi. The Web UI makes it easy to do this.
                         <p>
@@ -369,6 +369,7 @@
                     <li>
                         In the terminal area that opens type <b>c2mstatus</b> and hit &lt;enter&gt;.
                         The command will output all names of the running components.
+                        <br><br>
                         <ul>
                             <li style="list-style-type: none;">
                                 <img src="images\c2mstatus.png" alt="c2mstatus command" style="width: 60%; height: 60%" />
@@ -380,6 +381,7 @@
                                     In the terminal area that opens type <b>c2mupdate</b> and hit &lt;enter&gt;.
 
                                     This will stop any running components, download any missing components, and then start them back up.
+                                    <br><br>
                                     <ul>
                                     <li style="list-style-type: none;">
                                         <img src="images\c2mupdate2.png" alt="c2mupdate command" style="width: 80%; height: 80%" />
@@ -388,11 +390,53 @@
                                 </li>
                             </ol>
                         </ul>
-
                     </li>
-
+                    <br>
+                    <li>
+                        Once you have verified the software is up and running you can safely shutdown the Pi so you can install it in your coach.
+                        <br><br>
+                        <ol>
+                            <li>
+                                Click on <b>Overview</b> in the left menu
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\overview.png" alt="c2mupdate command" style="width: 80%; height: 80%" />
+                                    </li>
+                                </ul>
+                            </li>
+                            <br>
+                            <li>
+                                On the Overview page click on the down arrow next to <b>Reboot</b> in the upper right and then click <b>Shutdown</b>
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\shutdown.png" alt="c2mupdate command" style="width: 80%; height: 80%" />
+                                    </li>
+                                </ul>
+                            </li>
+                            <br>
+                            <li>
+                                Choose <b>No Delay</b> and click <b>Shut down</b>
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\shutdown2.png" alt="c2mupdate command" style="width: 80%; height: 80%" />
+                                    </li>
+                                </ul>
+                                <br><br>
+                                Wait a minute or two and then you can safely unplug the Raspberry Pi.
+                                <p>
+                                You are now ready to install the Rasperry Pi in your coach. 
+                            </li>
+                    </li>
                 </ol>
+                <br>
+                <h3>Installing the hardware in your coach</h3>
 
+                Inside your coach the Raspberry Pi will connect to the RV-C network for power and communication. If you have a Lithium model the Pi will also connect to the Renogy battery debug port and the Renogy Inverter with either a USB cable or an RS-485 connector.
+                <p>
+                
 
 
                 <h3>Install the app on your phone or tablet</h3>
@@ -400,9 +444,9 @@
                 <br id="openingapp">
 
                 <h2>Opening the app</h2>
-                
+
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                
+
                  <ol>
                     <li>
                      The first thing you need to do to open this app.
@@ -421,18 +465,18 @@
                     </li>
                     <br>
                 </ol>
-                
+
                 <p id="basicfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-                    
+
             <div class="divider" style="width:24%; margin:30px 0;"></div>
-            
-            
+
+
                 <h1>Basic Features</h1>
 
                 <h2>Feature 1</h2>
-                
-                <p id="basicfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+
+                <p id="basicfeatures">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                 </p>
                 
