@@ -434,8 +434,39 @@
                 <br>
                 <h3>Installing the hardware in your coach</h3>
 
+                You will need:
+                <ul>
+                    <li>Raspberry Pi</li>
+                    <li>Four conductor RV-C cable with 3M mini plug installed on one end</li>
+                </ul>
+                <br>
+                    Lithium Renogy Models will also need:
+                    <ul>
+                        <li>Two conductor wire with debug connector attached on one end</li>
+                        <li>USB cable to connect to Inverter</li>
+                    </ul>
+                    <br>
                 Inside your coach the Raspberry Pi will connect to the RV-C network for power and communication. If you have a Lithium model the Pi will also connect to the Renogy battery debug port and the Renogy Inverter with either a USB cable or an RS-485 connector.
                 <p>
+                Find a suitable location for the raspbery pi where your cables will reach all devices you need to connect to. In my Entegra Ethos 20D I mounted it under the rear bed near the Renogy Debug port and RV-C G4 Terminator tap.
+                <p>
+                Connect the RV-C cable blue and white wires to Can0. If you used official RV-C cable the blue wire will go to the terminal labled <bold>L</bold>, and white to <bold>H</bold>.
+                Connect the red RV-C wire to the + terminal, and the black RV-C wire to the - terminal.
+
+                Connect the wires from the debug connector to Can1. You should connect the wire from the debug port that is labled Can_L to <bold>L</bold>, and Can_H to <bold>H</bold>.
+                <br><br>
+                <ul>
+                    <li style="list-style-type: none;">
+                        <img src="images\canhat4.jpg" alt="canhat connected to canbus and rv-c" style="width: 80%; height: 80%" />
+                    </li>
+                </ul>
+                <br>Using ferrules on the wires is optional but can make a more secure connection<br>
+
+
+            
+
+
+
                 
 
 
