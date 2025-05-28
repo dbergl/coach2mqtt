@@ -35,14 +35,12 @@
 
                 <a class="title" href="#">Introduction</a>
                 
-                <a class="section" href="#technology">Technology</a>
-
                 <div class="divider left"></div>
 
                 <a class="title" href="#gettingstarted">Getting Started</a>
 
                 <a class="section" href="#assemblehardware">The Hardware</a>
-                <a class="section" href="#installingapp">Installing the App</a>
+                <a class="section" href="#installingapp">Installing the Image</a>
                  <a class="section" href="#openingapp">Opening the App</a>
 
                 <div class="divider left"></div>
@@ -84,7 +82,9 @@
 
                 <h1 >Introduction</h1>
                 
-                <p>Coach2mqtt runs on a <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> and allows you to control and monitor most of the systems in your Jayco Swift/Entegra Ethos or your Jayco Terrain/Entegra Launch from your phone or tablet.
+                <p>Coach2mqtt runs on a <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> and allows you to control and monitor most of the systems in your Jayco Swift/Entegra Ethos or your Jayco Terrain/Entegra Launch from your phone or tablet while connected to the same wifi network as the Raspberry Pi. 
+                </p>
+                <p>Optionally, if your wifi network is also connected to the internet, you will be able to monitor and control your devices from anywhere your phone or tablet has internet.
                 </p>
                 <p>On Renogy Lithium battery models you will be able to control most of the firefly devices, monitor the Renogy battery BMS, and monitor and control your Renogy Inverter/Charger.
                 </p> 
@@ -92,10 +92,6 @@
                 </p>
                 <p>Lithionics models have not been tested.
                 </p>
-
-                <h2>Technology</h2>
-                
-                <p>In order to monitor and control the systems the <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B</a> connects to the <a href="http://www.rv-c.com">RV-C</a> bus. On Renogy Lithium battery models it also connects to the BMS CAN bus and the Inverter RS-485 port.
 
                 <p id="gettingstarted"></p>
                  
@@ -106,20 +102,31 @@
 
                 <h2>Hardware requirements</h2>
 
-                <p>You will need the following:</p>
+                <p>All links are just to help you find the products and are not an endorsement of the product or retailer.</p>
 
+                You will need the following:
                 <ul>
                     <li>
-                        <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B with 2GB+ RAM</a>
+                        <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4B with at least 2GB RAM</a>
                     </li>
                     <li>
-                        <a href="https://www.waveshare.com/2-ch-can-hat-plus.htmhttps://www.waveshare.com/2-ch-can-hat-plus.htm">Waveshare 2-Channel CAN Hat+</a>
+                        8GB or larger microSD card and some way to write to it.
+                        <br>I recommend A2 speed rating.
+                        <ul>
+                            <li><a href="https://www.pishop.us/product/raspberry-pi-sd-card-32gb/?src=raspberrypi">Official Raspberry Pi microSD Card microsd card</a></li>
+                            <li><a href="https://www.bestbuy.com/site/sandisk-extreme-plus-64gb-microsdxc-uhs-i-memory-card/6495764.p?skuId=6495764">64GB Sandisk Extreme Plus</a></li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="https://www.waveshare.com/2-ch-can-hat-plus.htm">Waveshare 2-Channel CAN Hat+</a>
                         <ul>
                             <li>
                                 <a href="https://www.amazon.com/Waveshare-2-Channel-Expansion-Compatible-Protections/dp/B0D3GD458Z">Amazon</a>
                             </li>
                         </ul>
-                        <b>Important:</b> Be sure to buy the + version so you can supply power to the Pi and Hat from the RV-C cable.
+                        <b>Important:</b> Be sure to buy the + version so you can power the Pi and Hat from the RV-C cable.
+                        <img src="images/canhatplus.png" alt="Can HAT+" style="width: 40%; height: 40%" />
                     </li>
                     <br>
                     <li>
@@ -133,7 +140,7 @@
                     </li>
                     <br>
                     <li>
-                        Several feet of RV-C drop cable (4 conductor 24awg) or equivalant. Get enough so you have some flexibility where you mount the Raspberry Pi but I recommend you keep the length as short as possible to reduce voltage loss.
+                        Several feet of RV-C drop cable (4 conductor 24awg) or equivalant. Get enough so you have some flexibility where you mount the Raspberry Pi but I recommend you keep the length as short as possible to reduce voltage loss. Any 4 conductor wire will probably work for this project.
                         <ul>
                             <li>
                                 <a href="https://www.fireflyint.com/products/70053-24ga-rv-c-drop-cable">RV-C drop cable from FireFly integrations</a>
@@ -195,6 +202,7 @@
                 <ol>
                     <li>
                         Attach the Waveshare Can HAT+ to the Pi
+                        <br>Be sure the resistor jumpers next to the CAN terminal blocks are in the off position and the voltage jumper is set to 3v3 (as pictured)
                         <br><br>
                         <ul>
                             <lii style="list-style-type: none;">
@@ -221,7 +229,7 @@
                     </li>
                     <br>
                     <li>
-                        <a href="https://github.com/dbergl/coach2mqtt/releases/latest">Download the latest Coach2mqtt image for the Raspberry Pi</a>
+                        <a href="https://github.com/dbergl/coach2mqtt/releases/latest">Download the latest Coach2mqtt image for the Raspberry Pi</a>. The file you should download is named 'Eth-OS-bookworm-arm64-lite.zip'. There is no need to download the Source code.
                         <p><b>Note:</b> There is no need to decompress the downloaded image. The Imager tool can install a .zip image.
                     </li>
                     <li>
@@ -366,7 +374,7 @@
                                 <img src="images\terminal.png" alt="Terminal" style="width: 40%; height: 40%" />
                             </li>
                         </ul>
-                    <li>
+                    </li>
                         In the terminal area that opens type <b>c2mstatus</b> and hit &lt;enter&gt;.
                         The command will output all names of the running components.
                         <br><br>
@@ -393,7 +401,33 @@
                     </li>
                     <br>
                     <li>
-                        Once you have verified the software is up and running you can safely shutdown the Pi so you can install it in your coach.
+                        If you originally set up on your home network now is a good time to add any additional WiFi connections your Raspberry Pi may connect to such as your Winegard or Starlink.
+                        <br><br>
+                        <ol>
+                            <li>
+                                Click on <b>Wifi Manager</b> in the left menu
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\wifimanager.png" alt="Wifi manager" style="width: 60%; height: 60%" />
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <ol>
+                            <li>
+                                Add your coach  Wifi network
+                                <br><br>
+                                <ul>
+                                    <li style="list-style-type: none;">
+                                        <img src="images\configurenetwork.png" alt="Wifi manager" style="width: 60%; height: 60%" />
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        Once you have verified the software is running and have added your coach wifi you can safely shutdown the Pi so you can install it in your coach.
                         <br><br>
                         <ol>
                             <li>
@@ -450,22 +484,46 @@
                 <p>
                 Find a suitable location for the raspbery pi where your cables will reach all devices you need to connect to. In my Entegra Ethos 20D I mounted it under the rear bed near the Renogy Debug port and RV-C G4 Terminator tap.
                 <p>
-                Connect the RV-C cable blue and white wires to Can0. If you used official RV-C cable the blue wire will go to the terminal labled <bold>L</bold>, and white to <bold>H</bold>.
-                Connect the red RV-C wire to the + terminal, and the black RV-C wire to the - terminal.
-
-                Connect the wires from the debug connector to Can1. You should connect the wire from the debug port that is labled Can_L to <bold>L</bold>, and Can_H to <bold>H</bold>.
+                <ol>
+                    <li>Attach the 3m connector to one end of your RV-C wire. There is a good explanation on how to do this on <a href="https://myervin.com/working-with-3m-mini-clamp-connectors">myervin.com</a>
+                    </li>
+                    <p>
+                    <li> 
+                Connect the RV-C cable blue and white wires to the Can0 terminal on the Canhat+. If you used official RV-C cable the blue wire will go to the terminal labled <bold>L</bold>, and white to <bold>H</bold>.
+                </li>
+                <p>
+                <li>Connect the red RV-C wire to the <bold>+</bold> terminal, and the black RV-C wire to the <bold>-</bold> terminal.
+                </li>
+                <p>
+                <li>If you have a Renogy Li model also connect the wires from the debug connector to Can1. You should connect the wire from the debug port that is labled Can_L to <bold>L</bold>, and Can_H to <bold>H</bold>.
+                </li>
                 <br><br>
                 <ul>
                     <li style="list-style-type: none;">
                         <img src="images\canhat4.jpg" alt="canhat connected to canbus and rv-c" style="width: 80%; height: 80%" />
+                    </lyyi>
+                <br>Using ferrules on the wires is optional but can make a more secure connection<br>
+                </ul>
+
+                <p>
+                <li>If you haven't done so yet, plug in the debug connector to the Renogy Debug port.
+                </li>
+                <br><br>
+                <ul>
+                    <li style="list-style-type: none;">
+                        <img src="images\debugcon.jpg" alt="canhat connected to canbus and rv-c" style="width: 80%; height: 80%" />
                     </li>
                 </ul>
-                <br>Using ferrules on the wires is optional but can make a more secure connection<br>
-
-
-            
-
-
+                <p>
+                Plug the RV-C cable into either your Firefly G12 or G4 Terminal block.
+                <ul>
+                    <li style="list-style-type: none;">
+                        <img src="images\g12.jpg" alt="canhat connected to canbus and rv-c" style="width: 80%; height: 80%" />
+                    </li>
+                    <li style="list-style-type: none;">
+                        <img src="images\g4.jpg" alt="canhat connected to canbus and rv-c" style="width: 80%; height: 80%" />
+                    </li>
+                </ul>
 
                 
 
