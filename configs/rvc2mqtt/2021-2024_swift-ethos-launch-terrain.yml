@@ -87,8 +87,14 @@ floorplan:
   - name: THERMOSTAT_AMBIENT_STATUS
     instance: 0
     type: temperature
-    instance_name: interior temperature
-    status_topic: rvc/state/hvac/thermostat
+    instance_name: firefly temperature sensor
+    status_topic: rvc/state/hvac/firefly_thermostat
+
+  - name: THERMOSTAT_AMBIENT_STATUS
+    instance: 1
+    type: temperature
+    instance_name: timberline temperature sensor
+    status_topic: rvc/state/hvac/timberline_thermostat
 
   - name: G12_TANK_LEVEL
     instance: 1
@@ -213,6 +219,14 @@ floorplan:
     status_topic: rvc/state/hvac/cool
     command_topic: rvc/set/hvac/cool
 
+  - name: TIMBERLINE_CONTROLLER
+  instance: 1
+  source_id: 65
+  type: hvac
+  instance_name: timberline 1.5
+  status_topic: rvc/state/hvac/heat
+  command_topic: rvc/set/hvac/heat
+
   - name: DATE_TIME_STATUS
     type: system_clock
     instance_name: clock
@@ -233,7 +247,6 @@ floorplan:
     instance_name: start_trigger
     status_topic: rvc/state/generator
     command_topic: rvc/set/generator
-    link_id: start_trigger
 
   - name: GENERATOR
     type: generator
@@ -241,7 +254,6 @@ floorplan:
     instance_name: stop_trigger
     status_topic: rvc/state/generator
     command_topic: rvc/set/generator
-    link_id: stop_trigger
 
   - name: INVERTER_STATUS
     type: inverter

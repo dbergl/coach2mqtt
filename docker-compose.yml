@@ -83,6 +83,7 @@ services:
     restart: on-failure:10
     volumes:
       - ./node-red-data:/data
+      - ./configs/iotmqttpanel:/iotmqttpanel:ro
 
   mosquitto:
     image: eclipse-mosquitto:2.0.18-openssl
