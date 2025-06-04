@@ -7,14 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Coach2mqtt Installation Guide</title>
-    <meta name="description" content="Instruction for assembling and setting up coach2mqtt on a Raspberry Pi">
+    <meta name="description" content="Instructions for assembling and setting up coach2mqtt on a Raspberry Pi">
     <meta name="author" content="Dan Berglund">
 
     <link rel="stylesheet" href="style.css?">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
     
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
-
 
 </head>
 
@@ -42,6 +41,7 @@
                 <a class="section" href="#assemblehardware">The Hardware</a>
                 <a class="section" href="#installingimage">Installing the Image</a>
                 <a class="section" href="#installingapp">Installing the App</a>
+                <a class="section" href="#remoteaccesssetup">Setting up remote access</a>
 
                 <div class="divider left"></div>
 
@@ -378,7 +378,7 @@
                             </li>
                             You should see the 5 components as pictured.
                             <p>If any are missing you will need to run one more command to download and start them:
-                            <ol>
+                            <ol style="list-style-type:lower-alpha">
                                 <li>
                                     In the terminal area that opens type <b>c2mupdate</b> and hit &lt;enter&gt;.
 
@@ -397,7 +397,7 @@
                     <li>
                         If you originally set up on your home network now is a good time to add any additional WiFi connections your Raspberry Pi may connect to such as your Winegard or Starlink.
                         <br><br>
-                        <ol>
+                        <ol style="list-style-type:lower-alpha">
                             <li>
                                 Click on <b>Wifi Manager</b> in the left menu
                                 <br><br>
@@ -407,8 +407,6 @@
                                     </li>
                                 </ul>
                             </li>
-                        </ol>
-                        <ol>
                             <li>
                                 Add your coach  Wifi network
                                 <br><br>
@@ -503,10 +501,8 @@
                 Plug the RV-C cable into either your Firefly G12 or G4 Terminal block.
                 <ul>
                     <li style="list-style-type: none;">
-                        <img src="images\g12.jpg" alt="canhat connected to canbus and rv-c" class="screenshot" style="width: 80%; height: 80%" />
-                    </li>
-                    <li style="list-style-type: none;">
-                        <img src="images\g4.jpg" alt="canhat connected to canbus and rv-c" class="screenshot" style="width: 80%; height: 80%" />
+                        <img src="images\g12.jpg" alt="canhat connected to canbus and rv-c" class="screenshot" style="width: 50%; height: 50%" />
+                        <img src="images\g4.jpg" alt="canhat connected to canbus and rv-c" class="screenshot" style="width: 50%; height: 50%" />
                     </li>
                 </ul>
                 <p>For lithium models you also need to connect to the battery debug port and the Renogy inverter USB port:
@@ -609,10 +605,48 @@
                                 <img src="images\iot9.png" alt="Configs page" class="screenshot" style="width: 40%; height: 40%" />
                                 <br><br>
                             </li>
-
+                            <li>
+                                Touch the tab on the bottom to bring up each dashboard.<br>
+                                <img src="images\iot-dashboard1.png" alt="Home dashboard" class="screenshot" style="width: 40%; height: 40%" />
+                                <img src="images\iot-dashboard2.png" alt="Firefly dashboard" class="screenshot" style="width: 40%; height: 40%" />
+                                <br>
+                                <img src="images\iot-dashboard3.png" alt="Samkoon dashboard" class="screenshot" style="width: 40%; height: 40%" />
+                                <img src="images\iot-dashboard4.png" alt="APS-500 dashboard" class="screenshot" style="width: 40%; height: 40%" />
+                                <br><br>
+                            </li>
                         </ol>
                     </li>
+                    <p>
+                    At this point you are set up for local access. You can now control and monitor your connected devices in the van from the <em>IoT MQTT Panel</em> app as long as you are connected to the same WiFi network as the Raspberry Pi - i.e. your Winegard or Starlink
 
+                    <p id="remoteaccesssetup"><br></p>
+
+                    <h2>Remote Access Setup</h2>
+                    <p>Remote access can be set up in many ways. I will cover how to set up a <a href="https://www.hivemq.com">free remote MQTT broker</a> that can be accessed from anywhere both your phone or tablet and the Raspberry Pi has internet access. Another option is setting up something like <a href="https://tailscale.com">Tailscale</a>
+                    <br>
+                    TODO: Add more instructions
+                    <ol>
+                        <li>
+                            Create an free account at <a href="https://www.hivemq.com">HiveMQ.com</a>
+                        </li>
+                        <li>
+                            Configure your Raspberry Pi to relay messages to HiveMQ
+                        </li>
+                        <li>
+                            Set up your connection to HiveMQ in the Iot MQTT Panel app
+                        </li>
+                    </ol>
+
+                    Alternatively you can set up Tailscale. This will use less bandwidth, but could interfere with any other VPN configured on your phone or tablet
+                    <ol>
+                        <li>
+                            Create a free account at <a href="https://tailscale.com">Tailscale.com</a>
+                        </li>
+                        <li>
+                            Install tailscale on your Raspberry Pi
+                        </li>
+                    </ol>
+                    
                     <p id="basicfeatures"><br></p>
 
             <div class="divider" style="width:24%; margin:30px 0;"></div>
