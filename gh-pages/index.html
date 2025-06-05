@@ -157,6 +157,11 @@
                             <li>
                                 <a href="https://www.digikey.com/en/products/detail/3m/37104-A165-00E%2520MB/1855697">From Digikey</a>
                             </li>
+                            <br>
+                            As an alternative, or if you have no 3M miniplug ports available, you can connect to the G12 4 pin molex service port. You will need this style connector
+                            <li>
+                                <a href="https://www.amazon.com/dp/B0753VW1B4">Molex Connector from Amazon</a>
+                            </li>
                         </ul>
                     </li>
                     <h3>Renogy Lithium models also require:</h3>
@@ -478,8 +483,15 @@
                 <p>
                 <ol>
                     <li>Attach the 3m connector to one end of your RV-C wire. There is a good explanation on how to do this on <a href="https://myervin.com/working-with-3m-mini-clamp-connectors">myervin.com</a>
+                        <br><br>
+                        If you are connecting to the the 4 pin molex connector on the G12 you'll need to attach your wire to the connector. This is the pinout on the G12
+                        <ul>
+                            <li>
+                                <img src="images/g12ports.png">
+                            </li>
+                        </ul>
                     </li>
-                    <p>
+                    <br><br>
                     <li> 
                 Connect the RV-C cable blue and white wires to the Can0 terminal on the Canhat+. If you used official RV-C cable the blue wire will go to the terminal labled <bold>L</bold>, and white to <bold>H</bold>.
                 </li>
@@ -622,12 +634,12 @@
                     <p id="remoteaccesssetup"><br></p>
 
                     <h2>Remote Access Setup</h2>
-                    <p>Remote access can be set up in many ways. I will cover how to set up a <a href="https://www.hivemq.com">free remote MQTT broker</a> that can be accessed from anywhere both your phone or tablet and the Raspberry Pi has internet access. Another option is setting up something like <a href="https://tailscale.com">Tailscale</a>
+                    <p>Remote access can be set up in many ways. I will cover how to set up a <a href="https://www.hivemq.com">free remote MQTT broker</a> that can be accessed from anywhere both your phone and the Raspberry Pi have internet access. Another option is setting up something like <a href="https://tailscale.com">Tailscale</a>
                     <br>
                     TODO: Add more instructions
                     <ol>
                         <li>
-                            Create an free account at <a href="https://www.hivemq.com">HiveMQ.com</a>
+                            Create a free account at <a href="https://www.hivemq.com">HiveMQ.com</a>
                         </li>
                         <li>
                             Configure your Raspberry Pi to relay messages to HiveMQ
