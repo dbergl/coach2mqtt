@@ -340,7 +340,7 @@
                 Once your device has powered on and you have waited for 5 or more minutes you can connect to the Web UI on the Pi. This is easier on a computer but a phone or tablet can be used.
                 <ol>
                     <li>
-                        Open a web browser and navigate to <a href="https://coach2mqtt:9090">https://coach2mqtt:9090</a> - <i>Replace coach2mqtt with the hostname you set when creating the image</i>.<p>You will get a warning that the certificate is not valid or your connection is not private. This is expected and you can follow the browser instructions to connect anyway.
+                        Open a web browser and navigate to <a href="https://coach2mqtt:9090">https://coach2mqtt:9090</a> - <i>Replace coach2mqtt with the hostname you set when creating the image</i>. <b>Depending on your network you may need to add <i>.local</i> to the hostname (i.e. coach2mqtt.local) in order to connect.</b><p>You will get a warning that the certificate is not valid or your connection is not private. This is expected and you can follow the browser instructions to connect anyway.
                     </li>
                     <li>
                         At the login dialog enter the username and password you set during image creation.
@@ -608,7 +608,7 @@
                                 <br><br>
                             </li>
                             <li>
-                                Edit the <em>Broker address</em> to match the name you gave your Raspberry Pi<br><em>i.e. coach2mqtt</em><br>
+                                Edit the <em>Broker address</em> to match the name you gave your Raspberry Pi<br><em>i.e. coach2mqtt or coach2mqtt.local</em><br>
                                 <img src="images\iot8.png" alt="Configs page" class="screenshot" style="width: 40%; height: 40%" />
                                 <br><br>
                             </li>
