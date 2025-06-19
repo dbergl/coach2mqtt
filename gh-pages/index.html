@@ -608,7 +608,7 @@
                                 <br><br>
                             </li>
                             <li>
-                                Edit the <em>Broker address</em> to match the name you gave your Raspberry Pi<br><em>i.e. coach2mqtt or coach2mqtt.local</em><br>
+                                Edit the <em>Broker address</em> to match the name you gave your Raspberry Pi<br><em>i.e. coach2mqtt or coach2mqtt.local</em><br> <em>Network protocol</em> should be <em>TCP</em> and <em>Port</em> should be <em>1883</em>.
                                 <img src="images\iot8.png" alt="Configs page" class="screenshot" style="width: 40%; height: 40%" />
                                 <br><br>
                             </li>
@@ -649,13 +649,19 @@
                         </li>
                     </ol>
 
-                    Alternatively you can set up Tailscale. This will use less bandwidth, but could interfere with any other VPN configured on your phone or tablet
+                    <p>Alternatively you can set up Tailscale. This will use less bandwidth, but could interfere with any other VPN configured on your phone or tablet</p>
                     <ol>
                         <li>
                             Create a free account at <a href="https://tailscale.com">Tailscale.com</a>
                         </li>
                         <li>
                             Install tailscale on your Raspberry Pi
+                        </li>
+                        <li>
+                            Install tailscale on your Phone or Tablet
+                        </li>
+                        <li>
+                            Configure your devices so they are on the same Tailscale network
                         </li>
                     </ol>
                     
