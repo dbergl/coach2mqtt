@@ -220,12 +220,12 @@ floorplan:
     command_topic: rvc/set/hvac/cool
 
   - name: TIMBERLINE_CONTROLLER
-  instance: 1
-  source_id: 65
-  type: hvac
-  instance_name: timberline 1.5
-  status_topic: rvc/state/hvac/heat
-  command_topic: rvc/set/hvac/heat
+    instance: 1
+    source_id: 65
+    type: hvac
+    instance_name: timberline 1.5
+    status_topic: rvc/state/hvac/heat
+    command_topic: rvc/set/hvac/heat
 
   - name: DATE_TIME_STATUS
     type: system_clock
