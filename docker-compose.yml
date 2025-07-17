@@ -1,3 +1,4 @@
+name: coach2mqtt
 
 services:
   rvc2mqtt:
@@ -17,6 +18,8 @@ services:
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
       - MQTT_TOPIC_BASE=${MQTT_TOPIC_BASE:-rvc}
+    logging:
+      driver: "local"
     network_mode: "host"
     restart: on-failure:10
     volumes:
@@ -40,6 +43,8 @@ services:
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
+    logging:
+      driver: "local"
     network_mode: "host"
     restart: on-failure:10
     volumes:
@@ -61,6 +66,8 @@ services:
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
+    logging:
+      driver: "local"
     restart: on-failure:10
     device_cgroup_rules:
       - 'c 188:* rmw'
@@ -78,6 +85,8 @@ services:
       - mosquitto
     environment:
       - TZ=America/Los_Angeles
+    logging:
+      driver: "local"
     ports:
       - "1880:1880"
     restart: on-failure:10
@@ -94,6 +103,8 @@ services:
     ports:
       - "1883:1883"
       - "9001:9001"
+    logging:
+      driver: "local"
     volumes:
       - ./logs/mosquitto:/mosquitto/log
       - ./mosquitto-data:/mosquitto/data
