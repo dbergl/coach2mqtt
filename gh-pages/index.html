@@ -340,7 +340,8 @@
                 Once your device has powered on and you have waited for 5 or more minutes you can connect to the Web UI on the Pi. This is easier on a computer but a phone or tablet can be used.
                 <ol>
                     <li>
-                        Open a web browser and navigate to <a href="https://coach2mqtt:9090">https://coach2mqtt:9090</a> - <i>Replace coach2mqtt with the hostname you set when creating the image</i>. <b>Depending on your network you may need to add <i>.local</i> to the hostname (i.e. coach2mqtt.local) in order to connect.</b><p>You will get a warning that the certificate is not valid or your connection is not private. This is expected and you can follow the browser instructions to connect anyway.
+                        Open a web browser and navigate to <a href="https://coach2mqtt:9090">https://coach2mqtt:9090</a> - <i>R eplace coach2mqtt with the hostname you set when creating the image</i>. <b>Depending on your network you may need to add <i>.local</i> to the hostname (i.e. coach2mqtt.local) in order to connect.</b><p>You will get a warning that the certificate is not valid or your connection is not private. This is expected and you can follow the browser instructions to connect anyway.
+
                     </li>
                     <li>
                         At the login dialog enter the username and password you set during image creation.
@@ -634,20 +635,111 @@
                     <p id="remoteaccesssetup"><br></p>
 
                     <h2>Remote Access Setup</h2>
-                    <p>Remote access can be set up in many ways. I will cover how to set up a <a href="https://www.hivemq.com">free remote MQTT broker</a> that can be accessed from anywhere both your phone and the Raspberry Pi have internet access. Another option is setting up something like <a href="https://tailscale.com">Tailscale</a>
-                    <br>
-                    TODO: Add more instructions
+                    <p>Remote access can be set up in a variety of ways. I have found <a href="https://tailscale.com">Tailscale</a> to be the easiet option, but you can also set up a remote MQTT broker such as <a href="https://www.hivemq.com">HiveMQ</a>. Both options will allow you to remotely control your coach devices from the IoT MQTT Panel app on your phone. Tailscale will also let you remotely access your Raspberry Pi. Both options, of course, require that both your phone and the Raspberry Pi have internet access.
+
+                    <h4>HiveMQ</h4>
+                    <p>If you want to use <a href="https://www.hivemq.com">HiveMQ</a> for remote access you need to create a free account, create a cluster, configure access to HiveMQ, configure coach2mqtt to send and recieve data from coach2mqtt and then add the HiveMQ broker to the IoT MQTT Panel app as a new connection.
                     <ol>
                         <li>
                             Create a free account at <a href="https://www.hivemq.com">HiveMQ.com</a>
                         </li>
+                        Once you have created your free account you will need to create a new cluster which will be where data is sent from your Raspberry Pi.
+
                         <li>
-                            Configure your Raspberry Pi to relay messages to HiveMQ
+                            Click <b>Create New Cluster</b>
+                            <ul>
+                                <li style="list-style-type: none;">
+                            <img src="images\hivemq\create-cluster-1.png" alt="" class="screenshot" style="width: 70%; height: 70%" />
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            Set up your connection to HiveMQ in the Iot MQTT Panel app
+                            Choose the FREE Serverless option by clicking <b>Create Serverless Cluster</b>
+                            <ul>
+                                <li style="list-style-type: none;">
+                            <img src="images\hivemq\create-cluster-2.png" alt="" class="screenshot" style="width: 70%; height: 70%" />
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Click <b>Manage Cluster</b> 
+                        </li>
+                        <li>
+                            In the <b>Overview</b> tab copy the <b>TLS MQTT URL</b>.<br><em>We will be using the later when setting up remote access</em>
+
+                            <ul>
+                                <li style="list-style-type: none;">
+                            <img src="images\hivemq\overview.png" alt="" class="screenshot" style="width: 70%; height: 70%" />
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            Click the <b>Access Management</b> tab and then under <b>🔒 Authentication</b> click <b>Edit</b>
+                            <ul>
+                                <li style="list-style-type: none;">
+                            <img src="images\hivemq\access-management-1.png" alt="" class="screenshot" style="width: 70%; height: 70%" />
+                                </li>
+                            </ul> and then <b>Add Credentials</b>.
+                            <ul>
+                                <li style="list-style-type: none;">
+                            <img src="images\hivemq\access-management-2.png" alt="" class="screenshot" style="width: 70%; height: 70%" />
+                                </li>
+                            </ul>
+                            <br><br>Enter a Name (i.e. <em>coach2mqtt</em>), choose <b>Publish and Subscribe</b> Permission. Next create a secure password and click <b>Save</b>.<br><em>We will use this username and password later when configuring the Raspberry Pi</em>
+                            <ul>
+                                <li style="list-style-type: none;">
+                            <img src="images\hivemq\access-management-3.png" alt="" class="screenshot" style="width: 70%; height: 70%" />
+                                </li>
+                            </ul>
+                            <br><br>Repeat to create a second user (i.e <em>panel-app</em>) for the IoT Panel App.<br><em>Be sure to save the username and password</em>
+                            <ul>
+                                <li style="list-style-type: none;">
+                            <img src="images\hivemq\access-management-4.png" alt="" class="screenshot" style="width: 70%; height: 70%" />
+                                </li>
+                            </ul>
                         </li>
                     </ol>
+                    <br>
+                    <h4>Configure your Raspberry Pi to relay messages to HiveMQ</h4>
+                    <p><em>The next steps must be performed on the same network as the Raspberry Pi</em>
+                    <ol>
+                        <li>
+                            Open a browser and navigate to <a href="https://coach2mqtt:9090/system/terminal">https://coach2mqtt:9090/system/terminal</a> and log in - <i>Replace coach2mqtt with the hostname you set when creating the image</i>. <b>Depending on your network you may need to add <i>.local</i> to the hostname (i.e. coach2mqtt.local) in order to connect.</b>
+                        </li>
+                        <li>
+                            In the terminal area type <b>sethivemq</b> and press &lt;enter&gt;<br> 
+                            Type or paste the TLS MQTT URL from HiveMQ and hit &lt;enter&gt;.<br>Type or paste the username and hit &lt;enter&gt;.<br>Type or paste the password and hit &lt;enter&gt;.
+                            <ul>
+                                <li style="list-style-type: none;">
+                                <img src="images\hivemq\sethivemq.png" alt="" class="screenshot" style="width: 70%; height: 70%" />
+                                </li>
+                            </ul>
+                        </li>
+                        Your credentials will be added to the MQTT broker running on the Raspberry Pi and Mosquitto will be restarted. All MQTT topics will now also be published to HiveMQ.
+                        <p>If you need to modify the credentials or something goes wrong during this process you will need to edit the Mosquitto config file manually. The file is located in <b>/opt/coach2mqtt/configs/mosquitto/mosquitto.conf</b> - The mosquitto container will need to be restarted after modifying the configuration.
+                    </ol>
+                    <h4>Set up your connection to HiveMQ in the Iot MQTT Panel app</h4>
+                    <ol>
+                        <li>
+                            Open the IoT MQTT Panel App and click the top left hamburger menu button.
+                        </li>
+                        <li>
+                            Click <b>All Connections</b>
+                        </li>
+                        <li>
+                            Click the <b>⋮</b> icon next to the HiveMQ connection and click The 🖉  to edit the connection<br>
+                            <img src="images\iot5.png" alt="Configs page" class="screenshot" style="width: 40%; height: 40%" />
+                                <br><br>
+                        </li>
+                        <li>
+                            Enter your hivemq Broker address<br>
+                            Make sure Port is 8883 and Network protocol is TCP-SSL
+                            Expand <b>Additional options</b> and enter your panel-app username and password you set earlier and click <b>SAVE</b>
+                        </li>
+                    </ol>
+
+
 
                     <p>Alternatively you can set up Tailscale. This will use less bandwidth, but could interfere with any other VPN configured on your phone or tablet</p>
                     <ol>
