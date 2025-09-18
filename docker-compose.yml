@@ -60,7 +60,7 @@ services:
     environment:
       - RTU=${RTU:-/dev/ttyUSB0}
       - CONFIG_FILE=/config/modbus2mqtt.csv
-      - LOG_LEVEL=${MODBUS_LOG_LEVEL:-3}
+      - LOG_LEVEL=${MODBUS_LOG_LEVEL:-1}
       - MQTT_HOST=${MQTT_HOST:-mosquitto}
       - MQTT_PORT=${MQTT_PORT:-1883}
       - MQTT_USERNAME
@@ -108,7 +108,7 @@ services:
     volumes:
       - ./logs/mosquitto:/mosquitto/log
       - ./mosquitto-data:/mosquitto/data
-      - ./configs/mosquitto:/mosquitto/config
+      - ./configs/mosquitto:/mosquitto/config:ro
 
   influxdb:
     profiles: [influx]
