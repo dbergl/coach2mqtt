@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         pi-gen: [
-          { branch: arm64,  architecture: arm64 }
+          { branch: ${{ env.PLATFORM }}-arm64,  architecture: arm64 }
         ]
 
     steps:
