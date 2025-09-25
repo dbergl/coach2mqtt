@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         pi-gen: [
-          { branch: ${{ env.PLATFORM }}-arm64,  architecture: arm64 }
+          { branch: bookworm-arm64,  architecture: arm64 }
         ]
 
     steps:
