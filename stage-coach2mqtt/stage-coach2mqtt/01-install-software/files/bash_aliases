@@ -16,9 +16,17 @@ c2mupdate () {
 }
 
 sethivemq () {
-    echo "Enter your TLS MQTT URL from HiveMQ:"
-    read HIVEURL
+    echo "Enter your TLS MQTT URL (Including :8883) from HiveMQ"
+    echo "  Example: 1234567890abcdef.s1.eu.hivemq.cloud:8883"
     
+    while true; do
+        read HIVEURL
+        if [[ "${HIVEURL}" =~ ":8883" ]]; then
+            break;
+        else
+            printf "Port is missing.\nPlease enter your TLS MQTT URL (Including :8883) from HiveMQ:\n"
+        fi
+    done
     
     echo "Enter the username you created on HiveMQ:"
     read HIVEUSER
