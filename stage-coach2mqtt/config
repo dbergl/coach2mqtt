@@ -1,6 +1,6 @@
 IMG_NAME='Eth-OS'
 PI_GEN_RELEASE='Raspberry Pi Ethos Edition'
-STAGE_LIST='stage0 stage1 stage2 stage-coach2mqtt'
+STAGE_LIST='stage0 stage1 stage2 stage-coach2mqtt stage-expansionboard'
 RELEASE=bookworm
 LOCALE_DEFAULT=en_US.UTF-8
 KEYBOAD_MAP=us
