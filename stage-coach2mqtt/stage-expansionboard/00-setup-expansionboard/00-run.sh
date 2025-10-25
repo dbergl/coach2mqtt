@@ -18,13 +18,6 @@ EOF
 install -v -m 644 files/80-can.link "${ROOTFS_DIR}/etc/systemd/network/"
 install -v -m 644 files/81-can.link "${ROOTFS_DIR}/etc/systemd/network/"
 
-# Override MODBUS RTU environment variable to point to RS485_1
-if [ ! -d "${ROOTFS_DIR}/opt/coach2mqtt/.env" ] ; then
-    cp "${ROOTFS_DIR}/opt/coach2mqtt/.env.example" \
-    "${ROOTFS_DIR}/opt/coach2mqtt/.env" 
-fi
-echo "RTU=/dev/ttySC0" >> "${ROOTFS_DIR}/opt/coach2mqtt/.env"
-
 on_chroot << EOF
 # Enable serial hardware
 /usr/bin/raspi-config nonint do_serial_hw 0
