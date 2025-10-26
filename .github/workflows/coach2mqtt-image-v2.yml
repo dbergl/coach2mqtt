@@ -635,8 +635,8 @@ jobs:
       # Copy our custom coach2mqtt stages into pi-gen (after base stages are built)
       - name: Copy custom stages
         run: |
-          cp -r stage-coach2mqtt pi-gen/
-          cp -r stage-expansionboard pi-gen/
+          cp -r stage-coach2mqtt/stage-coach2mqtt pi-gen/
+          cp -r stage-coach2mqtt/stage-expansionboard pi-gen/
 
       # Build the coach2mqtt-specific stage on top of base image
       - name: Build custom stage
