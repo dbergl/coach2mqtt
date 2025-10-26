@@ -262,8 +262,8 @@ jobs:
           name: ${{ github.ref == 'refs/heads/main' && format('coach2mqtt-v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || format('coach2mqtt-{0}', needs.coach2mqtt-push-version-number.outputs.version_num) }}
           tag_name: ${{ github.ref == 'refs/heads/main' && format('v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || needs.coach2mqtt-push-version-number.outputs.version_num }}
           body: ${{ steps.changelog.outputs.content }}
-          draft: true
           make_latest: true  # Mark as latest release
+          draft: true
 
   # ============================================================================
   # JOB 3: Build Raspberry Pi Image
@@ -727,7 +727,7 @@ jobs:
           find deploy -name "*.img.xz" -type f -exec cp "{}" ../deploy/ \;
 
           # Set outputs for upload step
-          echo "file_names=${FINAL_IMAGES}" | tr "\n" "," >> $GITHUB_OUTPUT
+          echo "file_names=${FINAL_IMAGES}" | tr "\n" ";" >> $GITHUB_OUTPUT
 
           # Display build information
           echo "${FINAL_IMAGES}" | xargs -I{} sh -c 'echo Built Image: $1; echo Size: $(du -h "$1" | cut -f1)' -- {}
@@ -749,12 +749,9 @@ jobs:
       # ========================================================================
       # Upload the built image to the GitHub release
       - name: Upload Release Asset
-        uses: softprops/action-gh-release@v2
+        uses: shogo82148/actions-upload-release-asset@v1
         with:
-          draft: false
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: ${{ github.ref == 'refs/heads/main' && format('coach2mqtt-v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || format('coach2mqtt-{0}', needs.coach2mqtt-push-version-number.outputs.version_num) }}
-          tag_name: ${{ github.ref == 'refs/heads/main' && format('v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || needs.coach2mqtt-push-version-number.outputs.version_num }}
-          files: ${{ steps.set-asset.outputs.file_names }}
-          make_latest: true
+          upload_url: ${{ needs.release.create-release.outputs.upload_url }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          asset_path: deploy/*.img.xz
 
