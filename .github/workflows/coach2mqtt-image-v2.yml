@@ -122,7 +122,7 @@ env:
 jobs:
   coach2mqtt-push-version-number:
     name: "coach2mqtt: Push version number"
-    runs-on: ubuntu-latest
+    runs-on:  ubuntu-24.04-arm
     outputs:
       # Version outputs for use in subsequent jobs
       version: ${{ steps.current-version.outputs.version }}
@@ -222,7 +222,7 @@ jobs:
   release:
     name: Create Release
     needs: coach2mqtt-push-version-number
-    runs-on: ubuntu-latest
+    runs-on:  ubuntu-24.04-arm
     outputs:
       # Release outputs for asset upload
       id: ${{ steps.create-release.outputs.id }}
@@ -231,7 +231,7 @@ jobs:
     steps:
       # Checkout with full history for changelog generation
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0  # Full history needed for git-cliff
 
@@ -272,7 +272,7 @@ jobs:
   build:
     name: Build Image
     needs: [release]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     outputs:
       # Output paths for the built image
       asset_path: ${{ steps.set-asset.outputs.asset_path }}
@@ -280,7 +280,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # ========================================================================
       # DISK SPACE OPTIMIZATION
