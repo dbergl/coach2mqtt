@@ -1,9 +1,36 @@
 IMG_NAME='Eth-OS'
 PI_GEN_RELEASE='Raspberry Pi Ethos Edition'
-STAGE_LIST='stage0 stage1 stage2 stage-coach2mqtt stage-expansionboard'
 RELEASE=bookworm
+DEPLOY_COMPRESSION=xz
 LOCALE_DEFAULT=en_US.UTF-8
 KEYBOAD_MAP=us
 KEYBOARD_LAYOUT='English (US)'
 TIMEZONE_DEFAULT=America/Los_Angeles
 WPA_COUNTRY=US
+
+# Development: Fast compression for iteration
+COMPRESSION_LEVEL=3
+# Production: Maximum compression for releases
+COMPRESSION_LEVEL_PROD=9
+
+# Build quality settings
+# Development: Fast builds for iteration
+SKIP_INITRAMFS=1
+# Production: High quality for releases
+SKIP_INITRAMFS_PROD=0
+
+## coach2mqtt-specific build configuration
+#STAGE_LIST='stage0 stage1 stage2 stage-coach2mqtt stage-expansionboard'
+
+# C2M_REPO, C2M_GIT_USER, C2M_GIT_BRANCH will be overwritten in the GH actions workflow with current repo/user/branch
+# Repository name
+C2M_REPO=will-be-set-in-gh-workflow
+# GitHub username
+C2M_GIT_USER=will-be-set-in-gh-workflow
+# Branch to clone (main, beta, dev, etc.)
+C2M_GIT_BRANCH=will-be-set-in-gh-workflow
+
+# Construct the Git URL from user and repo
+C2M_GIT_REPO="https://github.com/${C2M_GIT_USER}/${C2M_REPO}.git"
+# Flag indicating build is from pi-gen
+C2M_PIGEN=true
