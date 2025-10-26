@@ -256,12 +256,13 @@ jobs:
       # - Dev: "coach2mqtt-dev-2024-01-01-123456"
       - name: Create Release
         id: create-release
-        uses: softprops/action-gh-release@v2.4.1
+        uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ github.ref == 'refs/heads/main' && format('coach2mqtt-v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || format('coach2mqtt-{0}', needs.coach2mqtt-push-version-number.outputs.version_num) }}
           tag_name: ${{ github.ref == 'refs/heads/main' && format('v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || needs.coach2mqtt-push-version-number.outputs.version_num }}
           body: ${{ steps.changelog.outputs.content }}
+          draft: true
           make_latest: true  # Mark as latest release
 
   # ============================================================================
@@ -750,7 +751,10 @@ jobs:
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ steps.set-asset.outputs.file_names }}
+          draft: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ github.ref == 'refs/heads/main' && format('coach2mqtt-v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || format('coach2mqtt-{0}', needs.coach2mqtt-push-version-number.outputs.version_num) }}
           tag_name: ${{ github.ref == 'refs/heads/main' && format('v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || needs.coach2mqtt-push-version-number.outputs.version_num }}
+          files: ${{ steps.set-asset.outputs.file_names }}
           make_latest: true
 
