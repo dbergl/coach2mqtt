@@ -415,7 +415,7 @@ jobs:
       # Cache frequently downloaded apt packages
       - name: Cache apt packages
         id: cache-apt
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/apt-cache
           key: apt-packages-${{ runner.os }}-pigen-deps-v1
@@ -751,5 +751,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: ${{ steps.set-asset.outputs.file_names }}
+          tag_name: ${{ github.ref == 'refs/heads/main' && format('v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || needs.coach2mqtt-push-version-number.outputs.version_num }}
           make_latest: true
 
