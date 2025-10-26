@@ -244,7 +244,7 @@ jobs:
 
       # Generate changelog from commits since last tag
       - name: Generate a changelog
-        uses: orhun/git-cliff-action@v1
+        uses: orhun/git-cliff-action@v4
         id: changelog
         with:
           config: ./cliff-release.toml  # Changelog format configuration
@@ -256,7 +256,7 @@ jobs:
       # - Dev: "coach2mqtt-dev-2024-01-01-123456"
       - name: Create Release
         id: create-release
-        uses: softprops/action-gh-release@v2.2.1
+        uses: softprops/action-gh-release@v2.4.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ github.ref == 'refs/heads/main' && format('coach2mqtt-v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || format('coach2mqtt-{0}', needs.coach2mqtt-push-version-number.outputs.version_num) }}
