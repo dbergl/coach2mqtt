@@ -726,7 +726,7 @@ jobs:
           find deploy -name "*.img.xz" -type f -exec cp "{}" ../deploy/ \;
 
           # Set outputs for upload step
-          echo "file_names=${FINAL_IMAGES}" >> $GITHUB_OUTPUT
+          echo "file_names=${FINAL_IMAGES}" | tr "\n" "," >> $GITHUB_OUTPUT
 
           # Display build information
           echo "${FINAL_IMAGES}" | xargs -I{} sh -c 'echo Built Image: $1; echo Size: $(du -h "$1" | cut -f1)' -- {}
