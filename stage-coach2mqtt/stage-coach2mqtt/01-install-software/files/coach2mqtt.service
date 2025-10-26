@@ -10,10 +10,10 @@ Group=docker
 WorkingDirectory=/opt/coach2mqtt
 Type=oneshot
 
-ExecStartPre=/usr/bin/docker compose -f /opt/coach2mqtt/docker-compose.yml down
-ExecStart=docker compose -f /opt/coach2mqtt/docker-compose.yml up
+ExecStartPre=/usr/bin/docker compose down
+ExecStart=/usr/bin/docker compose up
 
-ExecStop=docker compose -f /opt/coach2mqtt/docker-compose.yml down
+ExecStop=/usr/bin/docker compose down
 
 [Install]
 WantedBy=multi-user.target

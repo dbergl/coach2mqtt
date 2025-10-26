@@ -1,0 +1,11 @@
+
+services:
+  modbus2mqtt:
+    device_cgroup_rules: !reset []
+    environment:
+      - RTU=${RTU:-/dev/ttySC0}
+      - STRIP_TX_FROM_RX=${STRIP_TX_FROM_RX:-True}
+    devices:
+      - "${RTU:-/dev/ttySC0}:${RTU:-/dev/ttySC0}"
+    volumes: !override
+      - ./configs/modbus2mqtt/${MODBUS_CONFIG_FILE:-jayco.csv}:/config/modbus2mqtt.csv:ro
