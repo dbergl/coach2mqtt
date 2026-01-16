@@ -166,6 +166,7 @@ rvc-logs/*
 !rvc-logs/.rvc_logs_here
 
 #configs with potentially sensitive data
+configs/homeassistant/
 configs/telegraf/*.conf
 configs/influxdb/*.conf
 configs/grafana/*.conf
