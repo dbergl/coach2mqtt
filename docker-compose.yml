@@ -95,7 +95,7 @@ services:
       - ./configs/iotmqttpanel:/iotmqttpanel:ro
 
   mosquitto:
-    image: eclipse-mosquitto:2.0.18-openssl
+    image: eclipse-mosquitto:2.0.22-openssl
     labels:
       com.coach2mqtt.description: "MQTT Broker"
       com.coach2mqtt.name: "Mosquitto"
@@ -109,6 +109,21 @@ services:
       - ./logs/mosquitto:/mosquitto/log
       - ./mosquitto-data:/mosquitto/data
       - ./configs/mosquitto:/mosquitto/config:ro
+
+  homeassistant:
+    profiles: [ha]
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - /configs/homeassitant:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    environment:
+      TZ: Americas/Los_Angeles
+      DISABLE_JEMALLOC: true
 
   influxdb:
     profiles: [influx]
