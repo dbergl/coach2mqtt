@@ -89,12 +89,14 @@ floorplan:
     type: temperature
     instance_name: firefly temperature sensor
     status_topic: rvc/state/hvac/firefly_thermostat
+    link_id: firefly_thermostat
 
   - name: THERMOSTAT_AMBIENT_STATUS
     instance: 1
     type: temperature
     instance_name: timberline temperature sensor
     status_topic: rvc/state/hvac/timberline_thermostat
+    link_id: timberline_thermostat
 
   - name: G12_TANK_LEVEL
     instance: 1
@@ -218,6 +220,9 @@ floorplan:
     instance_name: air conditioner
     status_topic: rvc/state/hvac/cool
     command_topic: rvc/set/hvac/cool
+    link_id: air_conditioner
+    entity_links:
+      - firefly_thermostat
 
   - name: TIMBERLINE_CONTROLLER
     instance: 1
@@ -226,6 +231,9 @@ floorplan:
     instance_name: timberline 1.5
     status_topic: rvc/state/hvac/heat
     command_topic: rvc/set/hvac/heat
+    link_id: heater
+    entity_links:
+      - timberline_thermostat
 
   - name: DATE_TIME_STATUS
     type: system_clock
