@@ -473,7 +473,7 @@
                 },
                 vcell03: {
                     p: "sensor",
-                    name: "Cell 01",
+                    name: "Cell 03",
                     device_class: "voltage",
                     unit_of_measurement: "V",
                     suggested_display_precision: "3",
