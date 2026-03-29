@@ -3,7 +3,7 @@
 
 # Reset/Reboot the inverter
 poll,inverter,32,4417,1,holding_register,0
-ref,reset,4417,w
+ref,reset,4417,w,,,"{""ha_platform"": ""button"", ""name"": ""Inverter Reset"", ""payload_press"": ""1""}"
 
 # Charge voltage aka setting 09
 # 524 = 52.4v
@@ -11,14 +11,14 @@ ref,reset,4417,w
 # 540 = 54.0v
 # 544 = 54.4v
 poll,inverter,32,4426,1,holding_register,5
-ref,chargevolts,4426,rw
+ref,chargevolts,4426,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""voltage"", ""unit_of_measurement"": ""V"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 46.0, ""max"": 58.4, ""step"": 0.1, ""name"": ""Charge Voltage""}"
 
 # Charge current aka setting 28
 # 50  =  5 amps
 # 150 = 15 amps
 # 400 = 40 amps
 poll,inverter,32,57861,1,holding_register,5
-ref,current,57861,rw
+ref,current,57861,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""current"", ""unit_of_measurement"": ""A"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 0, ""max"": 40, ""step"": 0.5, ""name"": ""Charge Current Limit""}"
 
 # Inverter Status
 #0: Power-up delay
@@ -36,25 +36,97 @@ ref,current,57861,rw
 #poll,inverter,32,528,1,holding_register,2
 #ref,status,528,r
 poll,inverter,32,4405,1,holding_register,2
-ref,status,4405,r
+ref,status,4405,r,,,"{""name"": ""Inverter Status""}"
 
 # Inverter on/off
 # Found in SRNE document.
 # 0: Off 1: On
 poll,inverter,32,57088,1,holding_register,2.0
-ref,onoff,57088,rw
+ref,onoff,57088,rw,,,"{""ha_platform"": ""switch"", ""name"": ""Inverter Power"", ""stat_on"": ""1"", ""stat_off"": ""0"", ""payload_on"": ""1"", ""payload_off"": ""0""}"
 
 # Password needs to be set to 255 to be able to write to some registers
 # Found in SRNE document. The register from the Renogy document throws an error
 #poll,inverter,32,57859,1,holding_register,0
 #ref,password,57859,w
 poll,inverter,32,4108,1,holding_register,0
-ref,password,4108,rw
+ref,password,4108,rw,,,"{""ha_platform"": ""number"", ""name"": ""Inverter Password"", ""min"": 0, ""max"": 255, ""step"": 1, ""publish"": false}"
 
 # Priority flag
 # 0: The user did not enter the password
 # 1: The user password has been entered
 # 4: The manufacturer's password has been entered
 poll,inverter,32,4406,1,holding_register,10
-ref,password_entered,4406,r
+ref,password_entered,4406,r,,,"{""name"": ""Password Status""}"
+
+#Fault State
+# 0: No Fault
+# 1: Fault
+poll,inverter,32,4300,4,holding_register,5
+ref,fault,4300,r,bool,,"{""ha_platform"": ""binary_sensor"", ""name"": ""Inverter Fault"", ""device_class"": ""problem""}"
+
+#Fault Code
+poll,inverter,32,4398,4,holding_register,10
+ref,faults/fault_1,4398,r,,,"{""name"": ""Fault Code 1""}"
+ref,faults/fault_2,4399,r,,,"{""name"": ""Fault Code 2""}"
+ref,faults/fault_3,4400,r,,,"{""name"": ""Fault Code 3""}"
+ref,faults/fault_4,4401,r,,,"{""name"": ""Fault Code 4""}"
+
+#Charging State
+# 00 - Chargin is not turned on
+# 01 - Constant current charging
+# 02 - Constant voltage charging
+# 04 - Float charge
+# 06 - Battery activation phase
+# 06 - Battery disconnection processing phase
+poll,inverter,32,4332,1,holding_register,5
+ref,charging_state,4332,r,,,"{""name"": ""Charging State""}"
+
+#Charging Power
+# Watts
+poll,inverter,32,4333,1,holding_register,5
+ref,charging_power,4333,r,,,"{""name"": ""Charging Power"", ""device_class"": ""power"", ""unit_of_measurement"": ""W""}"
+
+#Battery Charge today
+poll,inverter,32,4543,1,holding_register,5
+ref,history/battery_charge_today,4543,r,,,"{""name"": ""Battery Charge Today"", ""unit_of_measurement"": ""Ah""}"
+
+#Battery Disharge today
+poll,inverter,32,4544,1,holding_register,5
+ref,history/battery_discharge_today,4544,r,,,"{""name"": ""Battery Discharge Today"", ""unit_of_measurement"": ""Ah""}"
+
+#Battery Charge History
+poll,inverter,32,4508,7,holding_register,5
+ref,history/battery_charge_today-1,4508,r,,,"{""name"": ""Battery Charge Yesterday"", ""unit_of_measurement"": ""Ah""}"
+ref,history/battery_charge_today-2,4509,r,,,"{""name"": ""Battery Charge 2 Days Ago"", ""unit_of_measurement"": ""Ah""}"
+ref,history/battery_charge_today-3,4510,r,,,"{""name"": ""Battery Charge 3 Days Ago"", ""unit_of_measurement"": ""Ah""}"
+ref,history/battery_charge_today-4,4511,r,,,"{""name"": ""Battery Charge 4 Days Ago"", ""unit_of_measurement"": ""Ah""}"
+ref,history/battery_charge_today-5,4512,r,,,"{""name"": ""Battery Charge 5 Days Ago"", ""unit_of_measurement"": ""Ah""}"
+ref,history/battery_charge_today-6,4513,r,,,"{""name"": ""Battery Charge 6 Days Ago"", ""unit_of_measurement"": ""Ah""}"
+ref,history/battery_charge_today-7,4514,r,,,"{""name"": ""Battery Charge 7 Days Ago"", ""unit_of_measurement"": ""Ah""}"
+
+#System time — each register packs two values in high/low bytes
+# 4402: high=year, low=month
+# 4403: high=day,  low=hour
+# 4404: high=minute, low=second
+poll,inverter,32,4402,3,holding_register,10
+ref,system_time/datetime,4402,rw,packedtime,,"{""ha_platform"": ""text"", ""name"": ""System Time""}"
+ref,system_time/year,4402,rw,hibyte,,"{""publish"": false}"
+ref,system_time/month,4402,rw,lobyte,,"{""publish"": false}"
+ref,system_time/day,4403,rw,hibyte,,"{""publish"": false}"
+ref,system_time/hour,4403,rw,lobyte,,"{""publish"": false}"
+ref,system_time/minute,4404,rw,hibyte,,"{""publish"": false}"
+ref,system_time/second,4404,rw,lobyte,,"{""publish"": false}"
+
+#Battery Rated Capacity
+poll,inverter,32,4423,1,holding_register,5
+ref,BattCapacity,4423,r,,,"{""name"": ""Battery Capacity"", ""unit_of_measurement"": ""Ah""}"
+
+#AC Input Voltage
+poll,inverter,32,4000,1,holding_register,5
+ref,AC_Input_Voltage,4000,r,,,"{""name"": ""AC Input Voltage"", ""device_class"": ""voltage"", ""unit_of_measurement"": ""V"", ""suggested_display_precision"": 1, ""value_template"": ""{{ value | float / 10 }}""}"
+
+#Max AC Input Current 
+#Renogy Setting 39
+poll,inverter,32,57884,1,holding_register,5
+ref,MaxACInputCurrent,57884,rw,,,"{""name"": ""Max AC Input Current"", ""device_class"": ""current"", ""unit_of_measurement"": ""A"", ""suggested_display_precision"": 0, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 5, ""max"": 30, ""step"": 5}"
 

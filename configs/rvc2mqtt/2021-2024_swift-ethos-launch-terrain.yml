@@ -7,12 +7,6 @@ floorplan:
     status_topic: rvc/state/lights/ext/spotlight
     command_topic: rvc/set/lights/ext/spotlight
 
-  - name: DC_DIMMER_STATUS_3
-    instance: 18
-    type: dimmer_switch
-    instance_name: aes
-    status_topic: rvc/state/aes
-    command_topic: rvc/set/aes
 
   - name: DC_DIMMER_STATUS_3
     instance: 21
@@ -81,6 +75,7 @@ floorplan:
     instance: 44
     type: dimmer_switch
     instance_name: water pump
+    dimmable: false
     status_topic: rvc/state/waterpump
     command_topic: rvc/set/waterpump
 
@@ -202,6 +197,12 @@ floorplan:
     instance_name: main house battery bank
     status_topic: rvc/state/dc/battery/renogy
 
+  - name: DC_SOURCE_STATUS_1
+    instance: 129
+    type: dc_system
+    instance_name: hallway wireless keypad
+    status_topic: rvc/state/dc/battery/keypad
+
   - name: DC_SOURCE_STATUS_G12
     instance: 1
     type: dc_system
@@ -282,4 +283,24 @@ floorplan:
     instance: 2
     instance_name: chassis-battery
     status_topic: rvc/state/solar
+    command_topic: rvc/set/solar
+
+  - name: G12
+    type: g12_configuration
+    source_id: '9C'
+    instance_name: "G12 Controller"
+    status_topic: "rvc/state/g12"
+    command_topic: "rvc/set/g12"
+
+  - name: VEGATOUCH_MIRA
+    type: vegatouch_mira
+    source_id: 'FD'
+    instance_name: "Vegatouch Mira"
+    status_topic: "rvc/state/vegatouch_mira"
+
+  - name: TOUCHSCREEN
+    type: touchscreen
+    source_id: '9F'
+    instance_name: "Touchscreen"
+    status_topic: "rvc/state/touchscreen"
 

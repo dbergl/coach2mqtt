@@ -161,11 +161,15 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+#docker override file
+docker-compose.override.yml
+
 #rvc2mqtt logs
 rvc-logs/*
 !rvc-logs/.rvc_logs_here
 
-#configs with potentially sensitive data
+#configs with user data
+configs/rvc2mqtt/*.override.yml
 configs/homeassistant/
 configs/telegraf/*.conf
 configs/influxdb/*.conf
