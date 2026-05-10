@@ -109,7 +109,7 @@ ref,history/battery_charge_today-7,4514,r,,,"{""name"": ""Battery Charge 7 Days 
 # 4403: high=day,  low=hour
 # 4404: high=minute, low=second
 poll,inverter,32,4402,3,holding_register,10
-ref,system_time/datetime,4402,rw,packedtime,,"{""ha_platform"": ""text"", ""name"": ""System Time""}"
+ref,system_time/datetime,4402,rw,packedtime,,"{""ha_platform"": ""datetime"", ""name"": ""System Time"", ""timezone"": ""America/Los_Angeles""}"
 ref,system_time/year,4402,rw,hibyte,,"{""publish"": false}"
 ref,system_time/month,4402,rw,lobyte,,"{""publish"": false}"
 ref,system_time/day,4403,rw,hibyte,,"{""publish"": false}"
