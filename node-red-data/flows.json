@@ -8,14 +8,6 @@
         "env": []
     },
     {
-        "id": "d7b1b7dbf8e4bc1b",
-        "type": "tab",
-        "label": "APS-500",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "a6c5fe6fe51d9491",
         "type": "group",
         "z": "461370def5ae9f29",
@@ -216,21 +208,16 @@
         ],
         "x": 34,
         "y": 1739,
-        "w": 1042,
+        "w": 1092,
         "h": 262
     },
     {
         "id": "bbfe14ccd0c2c200",
         "type": "group",
         "z": "461370def5ae9f29",
+        "name": "Inverter",
         "style": {
-            "stroke": "#999999",
-            "stroke-opacity": "1",
-            "fill": "none",
-            "fill-opacity": "1",
-            "label": true,
-            "label-position": "nw",
-            "color": "#a4a4a4"
+            "label": true
         },
         "nodes": [
             "9344180afa8c6abb",
@@ -697,10 +684,10 @@
         "op2": "off",
         "op1type": "nul",
         "op2type": "str",
-        "duration": "5",
+        "duration": "15",
         "extend": true,
         "overrideDelay": false,
-        "units": "s",
+        "units": "min",
         "reset": "off",
         "bytopic": "all",
         "topic": "topic",
@@ -838,7 +825,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 660,
+        "x": 640,
         "y": 660,
         "wires": [
             [
@@ -1474,7 +1461,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 980,
+        "x": 1030,
         "y": 1780,
         "wires": []
     },
@@ -1497,7 +1484,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 670,
+        "x": 750,
         "y": 1840,
         "wires": [
             [
@@ -1533,7 +1520,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
+        "x": 780,
         "y": 1780,
         "wires": [
             [
@@ -1557,7 +1544,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 980,
+        "x": 1030,
         "y": 1840,
         "wires": []
     },
@@ -1585,7 +1572,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 480,
+        "x": 540,
         "y": 1840,
         "wires": [
             [
@@ -1614,7 +1601,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 980,
+        "x": 1030,
         "y": 1900,
         "wires": []
     },
@@ -1634,7 +1621,7 @@
         "correl": "",
         "expiry": "",
         "broker": "9c5de13d667d7ea6",
-        "x": 980,
+        "x": 1030,
         "y": 1960,
         "wires": []
     },
@@ -1664,7 +1651,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 770,
+        "x": 800,
         "y": 1960,
         "wires": [
             [
@@ -1713,7 +1700,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 330,
+        "x": 410,
         "y": 1840,
         "wires": [
             [
@@ -1744,8 +1731,8 @@
         "topic": "rvc/set/generator/start",
         "payload": "on",
         "payloadType": "str",
-        "x": 200,
-        "y": 1920,
+        "x": 190,
+        "y": 1900,
         "wires": [
             [
                 "26101017d89f1e94"
@@ -1811,31 +1798,13 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
+        "x": 780,
         "y": 1900,
         "wires": [
             [
                 "3a9acc171d673236"
             ]
         ]
-    },
-    {
-        "id": "f2faf23a455f9473",
-        "type": "mqtt out",
-        "z": "461370def5ae9f29",
-        "name": "",
-        "topic": "rvc/state/engine_running",
-        "qos": "0",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "9c5de13d667d7ea6",
-        "x": 1110,
-        "y": 2240,
-        "wires": []
     },
     {
         "id": "c7e341a0.381cc",
@@ -2762,7 +2731,7 @@
         "type": "mqtt in",
         "z": "461370def5ae9f29",
         "g": "bbfe14ccd0c2c200",
-        "name": "Inverter Connected",
+        "name": "Modbus Connected",
         "topic": "modbus/connected",
         "qos": "2",
         "datatype": "auto-detect",
@@ -2808,218 +2777,6 @@
         ]
     },
     {
-        "id": "3f564506d8e4f9af",
-        "type": "inject",
-        "z": "461370def5ae9f29",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "10",
-        "topic": "rvc/set/aps/terminal",
-        "payload": "$RAS:",
-        "payloadType": "str",
-        "x": 640,
-        "y": 2100,
-        "wires": [
-            [
-                "4251f3c87c87c8f3"
-            ]
-        ]
-    },
-    {
-        "id": "4251f3c87c87c8f3",
-        "type": "mqtt out",
-        "z": "461370def5ae9f29",
-        "name": "Request APS Status",
-        "topic": "rvc/set/aps/terminal",
-        "qos": "",
-        "retain": "false",
-        "respTopic": "rvc/state/aps/status",
-        "contentType": "",
-        "userProps": "",
-        "correl": "RAS",
-        "expiry": "",
-        "broker": "9c5de13d667d7ea6",
-        "x": 880,
-        "y": 2160,
-        "wires": []
-    },
-    {
-        "id": "97a264cd9f19d1b5",
-        "type": "mqtt in",
-        "z": "461370def5ae9f29",
-        "name": "Get APS status",
-        "topic": "rvc/state/aps/status",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "9c5de13d667d7ea6",
-        "nl": false,
-        "rap": false,
-        "rh": "2",
-        "inputs": 0,
-        "x": 120,
-        "y": 2300,
-        "wires": [
-            [
-                "63a4499e653973ee"
-            ]
-        ]
-    },
-    {
-        "id": "63a4499e653973ee",
-        "type": "csv",
-        "z": "461370def5ae9f29",
-        "name": "",
-        "spec": "rfc",
-        "sep": ",",
-        "hdrin": "",
-        "hdrout": "none",
-        "multi": "one",
-        "ret": "\\n",
-        "temp": "",
-        "skip": "0",
-        "strings": true,
-        "include_empty_strings": false,
-        "include_null_values": false,
-        "x": 290,
-        "y": 2300,
-        "wires": [
-            [
-                "5fc0aa4c41a241c3"
-            ]
-        ]
-    },
-    {
-        "id": "5fc0aa4c41a241c3",
-        "type": "function",
-        "z": "461370def5ae9f29",
-        "name": "Get Engine RPMs from AST;",
-        "func": "if (msg.payload.col1 === \"AST;\") {\n    msg.payload = msg.payload.col17;\n    msg.topic = \"rpms\";\n    return msg;\n}\nreturn null;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 500,
-        "y": 2300,
-        "wires": [
-            [
-                "c8e204303f7226cc",
-                "00286552cd91d4d9"
-            ]
-        ]
-    },
-    {
-        "id": "5623dfcb82d34dc5",
-        "type": "mqtt in",
-        "z": "461370def5ae9f29",
-        "name": "Ignition status",
-        "topic": "rvc/state/g12/inputs/10/active",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "9c5de13d667d7ea6",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 110,
-        "y": 2240,
-        "wires": [
-            [
-                "69408f305dc7f01d"
-            ]
-        ]
-    },
-    {
-        "id": "c8e204303f7226cc",
-        "type": "join",
-        "z": "461370def5ae9f29",
-        "name": "",
-        "mode": "custom",
-        "build": "object",
-        "property": "payload",
-        "propertyType": "msg",
-        "key": "topic",
-        "joiner": "\\n",
-        "joinerType": "str",
-        "useparts": false,
-        "accumulate": true,
-        "timeout": "",
-        "count": "1",
-        "reduceRight": false,
-        "reduceExp": "",
-        "reduceInit": "",
-        "reduceInitType": "",
-        "reduceFixup": "",
-        "x": 710,
-        "y": 2240,
-        "wires": [
-            [
-                "953f2fd7a6f080a2"
-            ]
-        ]
-    },
-    {
-        "id": "69408f305dc7f01d",
-        "type": "change",
-        "z": "461370def5ae9f29",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "ignition_on",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 290,
-        "y": 2240,
-        "wires": [
-            [
-                "c8e204303f7226cc",
-                "31d3e15f1a1cfd97"
-            ]
-        ]
-    },
-    {
-        "id": "953f2fd7a6f080a2",
-        "type": "function",
-        "z": "461370def5ae9f29",
-        "name": "function 1",
-        "func": "msg.payload = (msg.payload.ignition_on === true && msg.payload.rpms > 100) ? \"ON\" : \"OFF\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 860,
-        "y": 2240,
-        "wires": [
-            [
-                "f2faf23a455f9473",
-                "c8bd01d675ca38f8"
-            ]
-        ]
-    },
-    {
         "id": "63fa8503f41db178",
         "type": "function",
         "z": "461370def5ae9f29",
@@ -3058,354 +2815,6 @@
         "wires": [
             [
                 "63fa8503f41db178"
-            ]
-        ]
-    },
-    {
-        "id": "31d3e15f1a1cfd97",
-        "type": "trigger",
-        "z": "461370def5ae9f29",
-        "name": "",
-        "op1": "$RAS:",
-        "op2": "0",
-        "op1type": "str",
-        "op2type": "str",
-        "duration": "-20",
-        "extend": false,
-        "overrideDelay": false,
-        "units": "s",
-        "reset": "false",
-        "bytopic": "topic",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 630,
-        "y": 2160,
-        "wires": [
-            [
-                "4251f3c87c87c8f3"
-            ]
-        ]
-    },
-    {
-        "id": "c8bd01d675ca38f8",
-        "type": "debug",
-        "z": "461370def5ae9f29",
-        "name": "debug 2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1120,
-        "y": 2140,
-        "wires": []
-    },
-    {
-        "id": "ha_disco_inject2",
-        "type": "inject",
-        "z": "461370def5ae9f29",
-        "name": "Publish HA Discovery",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "2",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 160,
-        "y": 2380,
-        "wires": [
-            [
-                "ha_disco_fn2"
-            ]
-        ]
-    },
-    {
-        "id": "ha_disco_fn2",
-        "type": "function",
-        "z": "461370def5ae9f29",
-        "name": "Build HA discovery config",
-        "func": "return {\n    topic: \"homeassistant/binary_sensor/engine_running/config\",\n    payload: JSON.stringify({\n        name: \"Engine Running\",\n        unique_id: \"engine_running\",\n        state_topic: \"rvc/state/engine_running\",\n        device_class: \"running\",\n        device: { identifiers: [\"rv_engine\"], name: \"Engine\" }\n    }),\n    retain: true\n};",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 2380,
-        "wires": [
-            [
-                "ha_disco_mqtt3"
-            ]
-        ]
-    },
-    {
-        "id": "ha_disco_mqtt3",
-        "type": "mqtt out",
-        "z": "461370def5ae9f29",
-        "name": "binary_sensor config",
-        "topic": "",
-        "qos": "1",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "9c5de13d667d7ea6",
-        "x": 620,
-        "y": 2380,
-        "wires": []
-    },
-    {
-        "id": "00286552cd91d4d9",
-        "type": "debug",
-        "z": "461370def5ae9f29",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 760,
-        "y": 2300,
-        "wires": []
-    },
-    {
-        "id": "6126943c2377eeaa",
-        "type": "inject",
-        "z": "d7b1b7dbf8e4bc1b",
-        "name": "Cap Watts - Jayco config",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "rvc/set/aps/terminal",
-        "payload": "$SCA: 0,100,0.31,0.23,0.00,0,0,0,10000,0,0,30,8,6",
-        "payloadType": "str",
-        "x": 230,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "70bca515520bb512",
-        "type": "inject",
-        "z": "d7b1b7dbf8e4bc1b",
-        "name": "Cap Watts to {cap} value",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "rvc/set/aps/terminal",
-        "payload": "$SCA: 0,100,0.31,0.23,0.00,0,0,{cap},10000,0,0,30,8,6",
-        "payloadType": "str",
-        "x": 230,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "ad6b06d78cba5c8a",
-        "type": "inject",
-        "z": "d7b1b7dbf8e4bc1b",
-        "name": "- Jayco config",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "rvc/set/aps/terminal",
-        "payload": "$CCN: 0,1,120, 2,1,1,0,201,0,0,0.0,0",
-        "payloadType": "str",
-        "x": 190,
-        "y": 280,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "940ed8ee59f10842",
-        "type": "inject",
-        "z": "d7b1b7dbf8e4bc1b",
-        "name": " - Constant voltage on fault",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "rvc/set/aps/terminal",
-        "payload": "$CCN: 0,1,120, 2,1,1,0,201,0,0,13.2,0",
-        "payloadType": "str",
-        "x": 230,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1ff10e54cf967596",
-        "type": "inject",
-        "z": "d7b1b7dbf8e4bc1b",
-        "name": "Request All Status",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            },
-            {
-                "p": "responseTopic",
-                "v": "rvc/state/aps/terminal",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "rvc/set/aps/terminal",
-        "payload": "$RAS:",
-        "payloadType": "str",
-        "x": 210,
-        "y": 400,
-        "wires": [
-            [
-                "1b4260dc47176f33"
-            ]
-        ]
-    },
-    {
-        "id": "1b4260dc47176f33",
-        "type": "mqtt out",
-        "z": "d7b1b7dbf8e4bc1b",
-        "name": "",
-        "topic": "",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "9c5de13d667d7ea6",
-        "x": 670,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "220024b6baab89d3",
-        "type": "inject",
-        "z": "d7b1b7dbf8e4bc1b",
-        "name": "Request Charge Profile",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            },
-            {
-                "p": "responseTopic",
-                "v": "rvc/state/aps/terminal",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "rvc/set/aps/terminal",
-        "payload": "$RCP:0",
-        "payloadType": "str",
-        "x": 220,
-        "y": 460,
-        "wires": [
-            [
-                "1b4260dc47176f33"
-            ]
-        ]
-    },
-    {
-        "id": "4a64fc37a64131ac",
-        "type": "inject",
-        "z": "d7b1b7dbf8e4bc1b",
-        "name": "Request Logs",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            },
-            {
-                "p": "responseTopic",
-                "v": "rvc/state/aps/terminal",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "rvc/set/aps/terminal",
-        "payload": "",
-        "payloadType": "str",
-        "x": 190,
-        "y": 520,
-        "wires": [
-            [
-                "1b4260dc47176f33"
             ]
         ]
     }

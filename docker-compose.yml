@@ -10,7 +10,7 @@ services:
       - mosquitto
     environment:
       - CAN_INTERFACE_NAME=${RVC_CAN_INTERFACE_NAME:-can_rvc}
-      - FLOORPLAN_FILE_1=/floorplan/floorplan.yml
+      - FLOORPLAN_FILE_1=/floorplan/${RVC_FLOORPLAN_FILE:-2021-2024_swift-ethos-launch-terrain.yml}
       - LOG_CONFIG_FILE=/config/${RVC_LOG_CONFIG_FILE}
       - MQTT_HOST=${MQTT_HOST:-localhost}
       - MQTT_PORT=${MQTT_PORT:-1883}
@@ -18,12 +18,13 @@ services:
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
       - MQTT_TOPIC_BASE=${MQTT_TOPIC_BASE:-rvc}
+      - TZ=America/Los_Angeles
     logging:
       driver: "local"
     network_mode: "host"
     restart: on-failure:10
     volumes:
-      - ./configs/rvc2mqtt/${RVC_FLOORPLAN_FILE:-2021-2024_swift-ethos-launch-terrain.yml}:/floorplan/floorplan.yml:ro
+      - ./configs/rvc2mqtt:/floorplan
       - ./configs/rvc2mqtt:/config:ro
       - ./rvc-logs:/logs
 
@@ -43,6 +44,7 @@ services:
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
+      - TZ=America/Los_Angeles
     logging:
       driver: "local"
     network_mode: "host"
@@ -55,6 +57,11 @@ services:
     labels:
       com.coach2mqtt.description: "Modbus to MQTT bridge"
       com.coach2mqtt.name: "Modbus"
+    command:
+      - "python3"
+      - "-u"
+      - "modbus2mqtt.py"
+      - "--add-to-homeassistant"
     depends_on:
       - mosquitto
     environment:
@@ -66,6 +73,7 @@ services:
       - MQTT_USERNAME
       - MQTT_PASSWORD
       - MQTT_CLIENT_ID
+      - TZ=America/Los_Angeles
     logging:
       driver: "local"
     restart: on-failure:10
@@ -95,11 +103,13 @@ services:
       - ./configs/iotmqttpanel:/iotmqttpanel:ro
 
   mosquitto:
-    image: eclipse-mosquitto:2.0.22-openssl
+    image: eclipse-mosquitto:2
     labels:
       com.coach2mqtt.description: "MQTT Broker"
       com.coach2mqtt.name: "Mosquitto"
     restart: on-failure:10
+    environment:
+      TZ: America/Los_Angeles
     ports:
       - "1883:1883"
       - "9001:9001"
@@ -122,7 +132,7 @@ services:
     privileged: true
     network_mode: host
     environment:
-      TZ: Americas/Los_Angeles
+      TZ: America/Los_Angeles
       DISABLE_JEMALLOC: true
 
   influxdb:

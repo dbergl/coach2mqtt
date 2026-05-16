@@ -7,7 +7,6 @@ floorplan:
     status_topic: rvc/state/lights/ext/spotlight
     command_topic: rvc/set/lights/ext/spotlight
 
-
   - name: DC_DIMMER_STATUS_3
     instance: 21
     type: dimmer_switch
@@ -99,9 +98,7 @@ floorplan:
     instance_name: fresh water tank
     status_topic: rvc/state/tanks/fresh
     minimum_change: 100
-    33_trigger: 57400
-    66_trigger: 44400
-    100_trigger: 22000
+    tank_status_instance: 0
 
   - name: G12_TANK_LEVEL
     instance: 2
@@ -109,9 +106,7 @@ floorplan:
     instance_name: gray waste tank
     status_topic: rvc/state/tanks/gray
     minimum_change: 100
-    33_trigger: 45000
-    66_trigger: 41400
-    100_trigger: 21700
+    tank_status_instance: 2
 
   - name: G12_TANK_LEVEL
     instance: 3
@@ -119,9 +114,7 @@ floorplan:
     instance_name: black waste tank
     status_topic: rvc/state/tanks/black
     minimum_change: 100
-    33_trigger: 57100
-    66_trigger: 47300
-    100_trigger: 34500
+    tank_status_instance: 1
 
   - name: G12_TANK_LEVEL
     instance: 4
@@ -129,33 +122,7 @@ floorplan:
     instance_name: second gray waste tank
     status_topic: rvc/state/tanks/gray2
     minimum_change: 100
-    33_trigger: 57600
-    66_trigger: 45250
-    100_trigger: 30500
-
-  - name: TANK_STATUS
-    instance: 0
-    type: tank_level
-    instance_name: fresh water tank
-    status_topic: rvc/state/tanks/fresh/lvl
-
-  - name: TANK_STATUS
-    instance: 1
-    type: tank_level
-    instance_name: black waste tank
-    status_topic: rvc/state/tanks/black/lvl
-
-  - name: TANK_STATUS
-    instance: 2
-    type: tank_level
-    instance_name: gray waste tank
-    status_topic: rvc/state/tanks/gray/lvl
-
-  - name: TANK_STATUS
-    instance: 18
-    type: tank_level
-    instance_name: second gray waste tank
-    status_topic: rvc/state/tanks/gray2/lvl
+    tank_status_instance: 18
 
   - name: TANK_STATUS
     instance: 3
