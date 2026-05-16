@@ -199,7 +199,7 @@ jobs:
       # Commit version change and create/update git tag
       # Tags: v1.2.3 for main, branch-timestamp for dev
       - name: "coach2mqtt: git add & commit & push"
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           add: "./VERSION"
           default_author: github_actions
@@ -258,7 +258,7 @@ jobs:
       # - Dev: "coach2mqtt-dev-2024-01-01-123456"
       - name: Create Release
         id: create-release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ github.ref == 'refs/heads/main' && format('coach2mqtt-v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || format('coach2mqtt-{0}', needs.coach2mqtt-push-version-number.outputs.version_num) }}
@@ -418,7 +418,7 @@ jobs:
       # Cache frequently downloaded apt packages
       - name: Cache apt packages
         id: cache-apt
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/apt-cache
           key: apt-packages-${{ runner.os }}-pigen-deps-v1
