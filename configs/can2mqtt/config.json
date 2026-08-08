@@ -709,9 +709,9 @@
             tvol_l2:     { frame_offset: 3,  byte_offset: 4, size: 2, signed: false, scale: 0.1,   unit: "V",   min: 0,    max: 80,   step: 0.1,   device_class: "voltage", friendly_name: "Total Undervoltage L2" },
             tvol_l3:     { frame_offset: 3,  byte_offset: 6, size: 2, signed: false, scale: 0.1,   unit: "V",   min: 0,    max: 80,   step: 0.1,   device_class: "voltage", friendly_name: "Total Undervoltage L3" },
 
-            cvol_h1:     { frame_offset: 4,  byte_offset: 0, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2.0,  max: 4.5,  step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L1" },
-            cvol_h2:     { frame_offset: 4,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2.0,  max: 4.5,  step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L2" },
-            cvol_h3:     { frame_offset: 4,  byte_offset: 4, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2.0,  max: 4.5,  step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L3" },
+            cvol_h1:     { frame_offset: 4,  byte_offset: 0, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L1" },
+            cvol_h2:     { frame_offset: 4,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L2" },
+            cvol_h3:     { frame_offset: 4,  byte_offset: 4, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L3" },
             ch_temp_h1:  { frame_offset: 4,  byte_offset: 6, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 80,   step: 1,     device_class: "temperature", friendly_name: "Charge High-Temp L1" },
             ch_temp_h2:  { frame_offset: 4,  byte_offset: 7, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 80,   step: 1,     device_class: "temperature", friendly_name: "Charge High-Temp L2" },
 
@@ -726,9 +726,9 @@
 
             dch_temp_l2: { frame_offset: 6,  byte_offset: 0, size: 1, signed: true,  scale: 1,     unit: "°C",  min: -40,  max: 40,   step: 1,     device_class: "temperature", friendly_name: "Discharge Low-Temp L2" },
             dch_temp_l3: { frame_offset: 6,  byte_offset: 1, size: 1, signed: true,  scale: 1,     unit: "°C",  min: -40,  max: 40,   step: 1,     device_class: "temperature", friendly_name: "Discharge Low-Temp L3" },
-            cvol_l1:     { frame_offset: 6,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2.0,  max: 3.5,  step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L1" },
-            cvol_l2:     { frame_offset: 6,  byte_offset: 4, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2.0,  max: 3.5,  step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L2" },
-            cvol_l3:     { frame_offset: 6,  byte_offset: 6, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2.0,  max: 3.5,  step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L3" },
+            cvol_l1:     { frame_offset: 6,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L1" },
+            cvol_l2:     { frame_offset: 6,  byte_offset: 4, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L2" },
+            cvol_l3:     { frame_offset: 6,  byte_offset: 6, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L3" },
 
             diff_vol1:   { frame_offset: 7,  byte_offset: 0, size: 2, signed: false, scale: 1,     unit: "mV",  min: 0,    max: 2000, step: 1,     friendly_name: "Cell Voltage Diff L1" },
             diff_vol2:   { frame_offset: 7,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mV",  min: 0,    max: 2000, step: 1,     friendly_name: "Cell Voltage Diff L2" },
