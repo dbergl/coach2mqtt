@@ -84,6 +84,30 @@ services:
       - /run/udev:/run/udev:ro
       - /dev:/dev
 
+  winegard2mqtt:
+    build: ./winegard2mqtt
+    labels:
+      com.coach2mqtt.description: "Winegard ConnecT GPS/modem to MQTT bridge"
+      com.coach2mqtt.name: "Winegard"
+    depends_on:
+      - mosquitto
+    environment:
+      - WINEGARD_HOST=${WINEGARD_HOST:-10.11.12.1}
+      - WINEGARD_USERNAME=${WINEGARD_USERNAME:-admin}
+      - WINEGARD_PASSWORD
+      - WINEGARD_POLL_INTERVAL=${WINEGARD_POLL_INTERVAL:-60}
+      - LOG_LEVEL=${WINEGARD_LOG_LEVEL:-INFO}
+      - MQTT_HOST=${MQTT_HOST:-mosquitto}
+      - MQTT_PORT=${MQTT_PORT:-1883}
+      - MQTT_USERNAME
+      - MQTT_PASSWORD
+      - MQTT_TOPIC_BASE=${WINEGARD_TOPIC_BASE:-winegard}
+      - MQTT_CLIENT_ID=${WINEGARD_CLIENT_ID:-connect}
+      - TZ=America/Los_Angeles
+    logging:
+      driver: "local"
+    restart: on-failure:10
+
   node-red:
     image: nodered/node-red:latest
     labels:
