@@ -11,14 +11,14 @@ ref,reset,4417,w,,,"{""ha_platform"": ""button"", ""name"": ""Inverter Reset"", 
 # 540 = 54.0v
 # 544 = 54.4v
 poll,inverter,32,4426,1,holding_register,5
-ref,chargevolts,4426,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""voltage"", ""unit_of_measurement"": ""V"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 46.0, ""max"": 58.4, ""step"": 0.1, ""name"": ""Charge Voltage""}"
+ref,chargevolts,4426,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""voltage"", ""unit_of_measurement"": ""V"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 46.0, ""max"": 58.4, ""step"": 0.4, ""mode"": ""box"", ""name"": ""Charge Voltage""}"
 
 # Charge current aka setting 28
 # 50  =  5 amps
 # 150 = 15 amps
 # 400 = 40 amps
 poll,inverter,32,57861,1,holding_register,5
-ref,current,57861,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""current"", ""unit_of_measurement"": ""A"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 0, ""max"": 40, ""step"": 0.5, ""name"": ""Charge Current Limit""}"
+ref,current,57861,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""current"", ""unit_of_measurement"": ""A"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 0, ""max"": 40, ""step"": 5, ""name"": ""Charge Current Limit""}"
 
 # Inverter Status
 #0: Power-up delay
