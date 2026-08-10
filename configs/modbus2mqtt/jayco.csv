@@ -36,7 +36,7 @@ ref,current,57861,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""curren
 #poll,inverter,32,528,1,holding_register,2
 #ref,status,528,r
 poll,inverter,32,4405,1,holding_register,2
-ref,status,4405,r,,,"{""name"": ""Inverter Status""}"
+ref,status,4405,r,,,"{""name"": ""Inverter Status"", ""device_class"": ""enum"", ""options"": [""Power-up delay"", ""Waiting state"", ""Initialization"", ""Soft start"", ""Mains powered operation"", ""Inverter powered operation"", ""Inverter to mains"", ""Mains to inverter"", ""Reserved"", ""Shutdown"", ""Fault"", ""Unknown""], ""val_tpl"": ""{% set m = {0: 'Power-up delay', 1: 'Waiting state', 2: 'Initialization', 3: 'Soft start', 4: 'Mains powered operation', 5: 'Inverter powered operation', 6: 'Inverter to mains', 7: 'Mains to inverter', 8: 'Reserved', 9: 'Reserved', 10: 'Shutdown', 11: 'Fault'} %}{{ m.get(value | int(-1), 'Unknown') }}""}"
 
 # Inverter on/off
 # Found in SRNE document.
@@ -76,10 +76,10 @@ ref,faults/fault_4,4401,r,,,"{""name"": ""Fault Code 4""}"
 # 01 - Constant current charging
 # 02 - Constant voltage charging
 # 04 - Float charge
-# 06 - Battery activation phase
+# 05 - Battery activation phase
 # 06 - Battery disconnection processing phase
 poll,inverter,32,4332,1,holding_register,5
-ref,charging_state,4332,r,,,"{""name"": ""Charging State""}"
+ref,charging_state,4332,r,,,"{""name"": ""Charging State"", ""device_class"": ""enum"", ""options"": [""Charging is not turned on"", ""Constant current charging"", ""Constant voltage charging"", ""Float charge"", ""Battery activation phase"", ""Battery disconnection processing phase"", ""Unknown""], ""val_tpl"": ""{% set m = {0: 'Charging is not turned on', 1: 'Constant current charging', 2: 'Constant voltage charging', 4: 'Float charge', 5: 'Battery activation phase', 6: 'Battery disconnection processing phase'} %}{{ m.get(value | int(-1), 'Unknown') }}""}"
 
 #Charging Power
 # Watts
