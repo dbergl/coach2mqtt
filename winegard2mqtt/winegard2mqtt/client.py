@@ -16,7 +16,6 @@ import requests
 
 LOGIN_PATH = "/cgi-bin/luci/themes/winegard2/index.htm"
 STATUS_PATH = "/cgi-bin/luci/sys_status"
-GPS_PATH = "/cgi-bin/luci/themes/winegard2/gps.htm"
 
 logger = logging.getLogger(__name__)
 
@@ -78,9 +77,10 @@ class WinegardClient:
     # -- public API ---------------------------------------------------------
 
     def status(self) -> dict:
-        """Fetch and decode ``sys_status``."""
-        return self._get(STATUS_PATH).json()
+        """Fetch and decode ``sys_status``.
 
-    def gps_page(self) -> str:
-        """Fetch the GPS Services page HTML (fallback source for a fix)."""
-        return self._get(GPS_PATH).text
+        The only endpoint this bridge needs: the GPS Services page renders the
+        same values with units glued on and omits the quality fields, so there
+        is nothing to fetch from it.
+        """
+        return self._get(STATUS_PATH).json()

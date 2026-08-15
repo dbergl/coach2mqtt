@@ -13,6 +13,15 @@ def sys_status_nofix():
     return json.loads((FIXTURES / "sys_status_nofix.json").read_text())
 
 
+@pytest.fixture
+def sys_status_fix():
+    """A real 3D fix, captured 2026-08-15 once a GNSS antenna was fitted.
+
+    Coordinates are substituted; the router's formatting is verbatim.
+    """
+    return json.loads((FIXTURES / "sys_status_fix.json").read_text())
+
+
 # --- GpsFix.build: coordinate validation ------------------------------------
 # This is the schema-independent half of parsing. Whatever key names the router
 # turns out to use on a fix, these are the rules the extracted values must obey.
@@ -76,6 +85,89 @@ def test_no_fix_yields_no_position(sys_status_nofix):
 
 def test_missing_gps_object_yields_no_position():
     assert parse_gps({}) is None
+
+
+def test_a_real_fix_yields_a_position(sys_status_fix):
+    fix = parse_gps(sys_status_fix)
+    assert fix is not None
+    assert fix.latitude == pytest.approx(12.34567)
+    assert fix.longitude == pytest.approx(-65.43210)
+
+
+def test_altitude_speed_and_heading_come_from_the_fix(sys_status_fix):
+    """The JSON carries bare numbers; the rendered page adds 'meters ASL', 'kph'."""
+    fix = parse_gps(sys_status_fix)
+    assert fix.altitude == pytest.approx(83.6)
+    assert fix.speed == pytest.approx(0.0)
+    assert fix.heading == pytest.approx(0.0)
+
+
+def test_utc_is_composed_from_the_separate_date_and_time_keys(sys_status_fix):
+    """There is no `utc` key: the router splits it into `date` and `time`.
+
+    Home Assistant's timestamp device_class needs ISO 8601 with an offset, so
+    the two halves are recombined rather than passed through.
+    """
+    assert parse_gps(sys_status_fix).utc == "2026-08-15T22:15:30+00:00"
+
+
+def test_a_time_without_a_fractional_part_still_parses(sys_status_fix):
+    sys_status_fix["gps"]["time"] = "22:15:30"
+    assert parse_gps(sys_status_fix).utc == "2026-08-15T22:15:30+00:00"
+
+
+def test_an_unparsable_timestamp_does_not_void_the_position(sys_status_fix):
+    """A garbled clock is not a reason to throw away good coordinates."""
+    sys_status_fix["gps"]["date"] = "*unknown*"
+    fix = parse_gps(sys_status_fix)
+    assert fix is not None
+    assert fix.utc is None
+
+
+def test_fix_quality_fields_are_extracted(sys_status_fix):
+    fix = parse_gps(sys_status_fix)
+    assert fix.fix_type == "3D"
+    assert fix.satellites == 6
+    assert fix.hdop == pytest.approx(0.8)
+
+
+def test_gps_accuracy_is_estimated_from_hdop(sys_status_fix):
+    """HDOP is unitless; Home Assistant's gps_accuracy is metres.
+
+    Multiplying by a ~5 m user-equivalent range error is the standard rule of
+    thumb, and an approximate circle beats an implied pinpoint.
+    """
+    assert parse_gps(sys_status_fix).gps_accuracy == 4
+
+
+def test_a_2d_fix_is_still_a_position(sys_status_fix):
+    sys_status_fix["gps"]["fix"] = "2D"
+    assert parse_gps(sys_status_fix) is not None
+
+
+def test_coordinates_without_a_fix_are_rejected(sys_status_fix):
+    """Guards the case we cannot yet observe: coordinates left behind in the
+    JSON after lock is lost. Without a fix type they are last known, not now."""
+    sys_status_fix["gps"]["fix"] = "NO FIX"
+    assert parse_gps(sys_status_fix) is None
+
+
+def test_a_missing_fix_field_is_not_a_position(sys_status_fix):
+    del sys_status_fix["gps"]["fix"]
+    assert parse_gps(sys_status_fix) is None
+
+
+def test_an_error_still_wins_over_populated_coordinates(sys_status_fix):
+    sys_status_fix["gps"]["error"] = "Not fixed now"
+    assert parse_gps(sys_status_fix) is None
+
+
+def test_the_fix_payload_omits_fields_the_router_did_not_supply(sys_status_fix):
+    del sys_status_fix["gps"]["hdop"]
+    payload = parse_gps(sys_status_fix).as_payload()
+    assert "hdop" not in payload
+    assert "gps_accuracy" not in payload
+    assert payload["latitude"] == pytest.approx(12.34567)
 
 
 # --- parse_modem ------------------------------------------------------------

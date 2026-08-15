@@ -40,6 +40,7 @@ def fix():
     return GpsFix.build(
         latitude=37.7749, longitude=-122.4194,
         altitude=120.5, speed=0.0, heading=271.0, utc="2026-08-08T21:13:38Z",
+        fix_type="3D", satellites=6, hdop=0.8,
     )
 
 
@@ -64,6 +65,23 @@ def test_position_is_retained(publisher, mqtt, fix):
     """A restarting HA must see the last position without waiting for a poll."""
     publisher.publish_gps(fix)
     assert mqtt.last("winegard/connect/gps")["retain"] is True
+
+
+def test_accuracy_travels_with_the_position(publisher, mqtt, fix):
+    """gps_accuracy is a name HA's device_tracker knows: it draws the circle."""
+    publisher.publish_gps(fix)
+
+    payload = json.loads(mqtt.last("winegard/connect/gps")["payload"])
+    assert payload["gps_accuracy"] == 4
+
+
+def test_fix_quality_travels_with_the_position(publisher, mqtt, fix):
+    publisher.publish_gps(fix)
+
+    payload = json.loads(mqtt.last("winegard/connect/gps")["payload"])
+    assert payload["fix_type"] == "3D"
+    assert payload["satellites"] == 6
+    assert payload["hdop"] == pytest.approx(0.8)
 
 
 def test_no_fix_marks_position_unavailable(publisher, mqtt):
@@ -164,6 +182,41 @@ def test_modem_entities_use_the_bridge_availability_topic(publisher, mqtt):
     topic = "homeassistant/sensor/winegard_connect/modem_signal/config"
     config = json.loads(mqtt.last(topic)["payload"])
     assert config["availability_topic"] == "winegard/connect/state"
+
+
+def test_fix_quality_sensors_are_announced(publisher, mqtt):
+    publisher.publish_discovery()
+
+    for key in ("gps_fix", "gps_satellites", "gps_hdop"):
+        topic = f"homeassistant/sensor/winegard_connect/{key}/config"
+        config = json.loads(mqtt.last(topic)["payload"])
+        assert config["availability_topic"] == "winegard/connect/gps/available"
+
+
+def test_hdop_is_a_diagnostic_not_a_headline_reading(publisher, mqtt):
+    """Dilution of precision belongs on the diagnostics panel, not the dashboard."""
+    topic = "homeassistant/sensor/winegard_connect/gps_hdop/config"
+    publisher.publish_discovery()
+
+    assert json.loads(mqtt.last(topic)["payload"])["entity_category"] == "diagnostic"
+
+
+def test_speed_is_announced_in_the_units_the_router_reports(publisher, mqtt):
+    """The rendered page labels this field 'kph'; the JSON gives the bare number."""
+    topic = "homeassistant/sensor/winegard_connect/speed/config"
+    publisher.publish_discovery()
+
+    config = json.loads(mqtt.last(topic)["payload"])
+    assert config["unit_of_measurement"] == "km/h"
+    assert config["device_class"] == "speed"
+
+
+def test_altitude_is_announced_in_metres(publisher, mqtt):
+    """'83.6 meters ASL' on the page; 83.6 in the JSON."""
+    topic = "homeassistant/sensor/winegard_connect/altitude/config"
+    publisher.publish_discovery()
+
+    assert json.loads(mqtt.last(topic)["payload"])["unit_of_measurement"] == "m"
 
 
 def test_all_entities_share_one_device(publisher, mqtt):

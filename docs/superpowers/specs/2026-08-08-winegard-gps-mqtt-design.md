@@ -1,7 +1,8 @@
 # Winegard ConnecT GPS → MQTT
 
 **Date:** 2026-08-08
-**Status:** Approved design, not yet implemented
+**Status:** Implemented. GNSS antenna fitted and first fix captured 2026-08-15;
+the two open items below are resolved — see *Resolution* under each.
 
 ## Goal
 
@@ -81,6 +82,10 @@ which makes a **passive** u.fl GNSS antenna the path of least resistance. Verify
 against the silkscreen that the empty connector really is `ANT_GNSS` and not an
 unused diversity port before connecting anything.
 
+**Resolution (2026-08-15).** An antenna was fitted and the unit produced a 3D
+fix: 6 satellites, HDOP 0.8, `ttf` 174646. The diagnosis held — the port was the
+only thing missing.
+
 ### Open item: the fixed-state schema
 
 Downstream of the blocker above. Once an antenna is fitted, we still do not know
@@ -99,6 +104,30 @@ Consequences for the design:
 - The parser treats *any* unrecognised shape as "no fix" rather than publishing
   a partially-parsed position.
 
+**Resolution (2026-08-15).** `sys_status.gps` carries the position, so the
+`gps.htm` fallback was never needed. It is not implemented, and the client's
+page fetcher has been removed rather than left as dead code — `curl` covers the
+manual-debugging case it would have served. On a fix the object gains
+`latitude`, `longitude`, `altitude`, `speed`, `heading`, `date`, `time`, `fix`,
+`satellites`, `hdop`, `ttf` and a `view` array, and loses `error` entirely.
+
+Three things the guess got wrong or missed:
+
+- **There is no `utc` key.** The timestamp is split across `date`
+  (`"2026/08/15"`) and `time` (`"22:15:30.0"`, fractional part not always
+  present) and is recombined into ISO 8601 with an explicit `+00:00`, which is
+  what HA's `timestamp` device class requires.
+- **Coordinates are signed decimal degrees in strings** — `"-65.43210"`, not
+  the hemisphere-suffixed form the page renders (`65.43210 W`). The JSON needs
+  no unit stripping; the page would have.
+- **Fix quality is available** and was not in the original design: `fix`,
+  `satellites` and `hdop` are now published, with `hdop × 5 m` supplying
+  `gps_accuracy` so the HA map draws a real circle instead of a false pinpoint.
+
+Validity is now keyed on `fix ∈ {2D, 3D}` rather than on the absence of `error`.
+Stale coordinates persisting in the JSON after a lost lock have not been
+observed and may not happen, but the guard costs one comparison.
+
 ## Approach
 
 A new service inside the `coach2mqtt` repo, built by compose (`build:` rather
@@ -114,7 +143,7 @@ coach2mqtt/
     winegard2mqtt/
       __init__.py
       app.py          # poll loop, signal handling
-      client.py       # login, session refresh, sys_status + gps.htm fetch
+      client.py       # login, session refresh, sys_status fetch
       parser.py       # raw response → GpsFix | None, ModemStatus
       publisher.py    # MQTT topics + HA discovery payloads
     test/
@@ -153,7 +182,7 @@ Root is `<MQTT_TOPIC_BASE>/<MQTT_CLIENT_ID>`, e.g. `winegard/connect`.
 |---|---|---|
 | `winegard/connect/state` | yes | `online` / `offline` — LWT; bridge reachability |
 | `winegard/connect/gps/available` | yes | `online` / `offline` — *fix validity* |
-| `winegard/connect/gps` | yes | JSON: `latitude`, `longitude`, `altitude_m`, `speed`, `heading`, `utc` |
+| `winegard/connect/gps` | yes | JSON: `latitude`, `longitude`, `altitude`, `speed`, `heading`, `utc`, `fix_type`, `satellites`, `hdop`, `gps_accuracy` |
 | `winegard/connect/modem` | yes | JSON: `signal_percent`, `carrier`, `apn`, `modem_state`, `internet_source`, `internet_status` |
 
 Two availability topics, deliberately. `state` says whether we can reach the
@@ -174,18 +203,28 @@ Retained configs under `homeassistant/`, all sharing one device block:
 | Entity | Component | Availability topic |
 |---|---|---|
 | Position | `device_tracker` (`source_type: gps`, `json_attributes_topic` → `.../gps`) | `gps/available` |
-| Altitude | `sensor` | `gps/available` |
-| Speed | `sensor` | `gps/available` |
-| Heading | `sensor` | `gps/available` |
+| Altitude | `sensor` (`device_class: distance`, `unit: m`) | `gps/available` |
+| Speed | `sensor` (`device_class: speed`, `unit: km/h`) | `gps/available` |
+| Heading | `sensor` (`unit: °`) | `gps/available` |
 | GPS time | `sensor` (`device_class: timestamp`) | `gps/available` |
+| GPS fix | `sensor` (`2D`/`3D`) | `gps/available` |
+| Satellites | `sensor` | `gps/available` |
+| GPS HDOP | `sensor` (`entity_category: diagnostic`) | `gps/available` |
 | Modem signal | `sensor` (`unit: %`) | `state` |
 | Carrier | `sensor` | `state` |
 | Connection state | `sensor` | `state` |
 
-Verify during implementation that HA's MQTT `device_tracker` derives zone
-membership from `latitude`/`longitude` supplied via `json_attributes_topic`;
-if it insists on an explicit `home`/`not_home` state topic, publish that too
-rather than restructuring the payload.
+`gps_accuracy` rides in the position payload rather than being its own entity —
+HA's `device_tracker` reads that attribute name natively to size the accuracy
+circle.
+
+**Still unverified: zone membership.** The tracker's `state_topic` is
+`gps/available` with `payload_home: online`, which makes HA report *home*
+whenever a fix exists, wherever the rig actually is. That was untestable while
+the unit could not produce a position and remains so here — it needs checking
+against the running HA instance. If HA does not derive the zone from the
+`latitude`/`longitude` attributes, publish a computed `home`/`not_home` to a
+dedicated state topic rather than restructuring the payload.
 
 ## Behaviour
 
@@ -234,6 +273,25 @@ that change bought nothing and can be reverted — re-check *WiFi Only* unless a
 until a GNSS antenna is fitted. This integration reads the router locally and
 sends nothing to Winegard, but it does not stop the device's own reporting.
 
-**Router password.** Currently the factory default `admin`/`admin`, and the
-device shows a "Default password set!" banner. It is expected to change; the
-integration reads it from `.env` so a change means editing one line, not code.
+*Update 2026-08-15:* the live capture reads `wifi_only: true` and
+`heartbeat: false`, so both were duly reverted. Worth restating now that the
+antenna works: the device knows where the rig is and reports upstream on its own
+schedule, independently of this bridge.
+
+**Test fixtures carry no real position.** `sys_status_fix.json` is derived from
+`sys_status_nofix.json` — already scrubbed of MAC, serial, SSID, IMSI, ICCID,
+WAN IP and cell id — with only the `gps` object replaced. Coordinates are
+substituted while the router's formatting is kept verbatim, since the formatting
+is what the parser is tested against. Satellite azimuth and elevation are
+synthesised as well: real ones, stamped with a real UTC time, trilaterate back
+to where the capture was taken. This repo is public.
+
+The captured `gps.htm` pages were deleted once the JSON proved a superset of
+them: no test loads HTML, and keeping a rendered page around invites someone to
+start parsing it again. The field mapping it established is recorded in the
+service README instead.
+
+**Router password.** Confirmed still the factory default `admin`/`admin` on
+2026-08-15, with the device showing its "Default password set!" banner. It is
+expected to change; the integration reads it from `.env` so a change means
+editing one line, not code.

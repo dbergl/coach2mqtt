@@ -11,7 +11,7 @@ tracker correctly goes unavailable.
 """
 
 import json
-from typing import Optional
+from typing import NamedTuple, Optional
 
 from .parser import GpsFix, ModemStatus
 
@@ -25,31 +25,54 @@ DEVICE = {
     "name": "Winegard ConnecT",
 }
 
-# entity_key, json_key, name, unit, device_class, state_class, icon
+class Sensor(NamedTuple):
+    """One HA sensor, reading ``json_key`` out of a published JSON payload."""
+
+    key: str
+    json_key: str
+    name: str
+    unit: Optional[str] = None
+    device_class: Optional[str] = None
+    state_class: Optional[str] = None
+    icon: Optional[str] = None
+    entity_category: Optional[str] = None
+
+
+# Units come from how the router's own GPS page labels these fields — "83.6
+# meters ASL", "0.0 kph", "0.00 deg" — while sys_status gives the bare numbers.
 GPS_SENSORS = [
-    ("altitude", "altitude", "Altitude", "m", None, "measurement", "mdi:altimeter"),
-    ("speed", "speed", "Speed", None, None, "measurement", "mdi:speedometer"),
-    ("heading", "heading", "Heading", "°", None, "measurement", "mdi:compass"),
-    ("utc", "utc", "GPS Time", None, "timestamp", None, "mdi:clock-outline"),
+    Sensor("altitude", "altitude", "Altitude", "m", "distance", "measurement",
+           "mdi:altimeter"),
+    Sensor("speed", "speed", "Speed", "km/h", "speed", "measurement",
+           "mdi:speedometer"),
+    Sensor("heading", "heading", "Heading", "°", None, "measurement", "mdi:compass"),
+    Sensor("utc", "utc", "GPS Time", None, "timestamp", None, "mdi:clock-outline"),
+    Sensor("gps_fix", "fix_type", "GPS Fix", None, None, None, "mdi:crosshairs-gps"),
+    Sensor("gps_satellites", "satellites", "Satellites", None, None, "measurement",
+           "mdi:satellite-variant"),
+    # HDOP explains a bad position rather than being one, so it belongs on the
+    # diagnostics panel instead of the dashboard.
+    Sensor("gps_hdop", "hdop", "GPS HDOP", None, None, "measurement",
+           "mdi:crosshairs-question", "diagnostic"),
 ]
 
 MODEM_SENSORS = [
-    ("modem_signal", "signal_percent", "Modem Signal", "%", None, "measurement",
-     "mdi:signal"),
-    ("modem_rssi_dbm", "rssi_dbm", "Modem RSSI", "dBm", "signal_strength",
-     "measurement", None),
-    ("modem_band", "band", "LTE Band", None, None, None, "mdi:radio-tower"),
-    ("modem_mode", "mode", "Network Mode", None, None, None, "mdi:radio-tower"),
+    Sensor("modem_signal", "signal_percent", "Modem Signal", "%", None,
+           "measurement", "mdi:signal"),
+    Sensor("modem_rssi_dbm", "rssi_dbm", "Modem RSSI", "dBm", "signal_strength",
+           "measurement"),
+    Sensor("modem_band", "band", "LTE Band", icon="mdi:radio-tower"),
+    Sensor("modem_mode", "mode", "Network Mode", icon="mdi:radio-tower"),
     # Counters reset only when the modem does, so total_increasing is correct:
     # it lets HA absorb a reboot without inventing a huge negative delta.
-    ("modem_rx_bytes", "rx_bytes", "Data Received", "B", "data_size",
-     "total_increasing", None),
-    ("modem_tx_bytes", "tx_bytes", "Data Sent", "B", "data_size",
-     "total_increasing", None),
-    ("modem_carrier", "carrier", "Carrier", None, None, None, "mdi:sim"),
-    ("modem_state", "state", "Modem State", None, None, None, "mdi:radio-tower"),
-    ("modem_internet_source", "internet_source", "Internet Source", None, None,
-     None, "mdi:web"),
+    Sensor("modem_rx_bytes", "rx_bytes", "Data Received", "B", "data_size",
+           "total_increasing"),
+    Sensor("modem_tx_bytes", "tx_bytes", "Data Sent", "B", "data_size",
+           "total_increasing"),
+    Sensor("modem_carrier", "carrier", "Carrier", icon="mdi:sim"),
+    Sensor("modem_state", "state", "Modem State", icon="mdi:radio-tower"),
+    Sensor("modem_internet_source", "internet_source", "Internet Source",
+           icon="mdi:web"),
 ]
 
 
@@ -113,16 +136,19 @@ class Publisher:
         self._publish_sensors(MODEM_SENSORS, self.modem_topic, self.state_topic)
 
     def _publish_sensors(self, sensors, state_topic: str, availability_topic: str) -> None:
-        for entity_key, json_key, name, unit, device_class, state_class, icon in sensors:
-            self._publish_config("sensor", entity_key, {
-                "name": name,
+        for sensor in sensors:
+            self._publish_config("sensor", sensor.key, {
+                "name": sensor.name,
                 "state_topic": state_topic,
                 # Absent keys render empty, which HA treats as unknown rather
                 # than as a reading of zero.
-                "value_template": "{{ value_json." + json_key + " | default('') }}",
+                "value_template":
+                    "{{ value_json." + sensor.json_key + " | default('') }}",
                 "availability_topic": availability_topic,
-                **({"unit_of_measurement": unit} if unit else {}),
-                **({"device_class": device_class} if device_class else {}),
-                **({"state_class": state_class} if state_class else {}),
-                **({"icon": icon} if icon else {}),
+                **({"unit_of_measurement": sensor.unit} if sensor.unit else {}),
+                **({"device_class": sensor.device_class} if sensor.device_class else {}),
+                **({"state_class": sensor.state_class} if sensor.state_class else {}),
+                **({"icon": sensor.icon} if sensor.icon else {}),
+                **({"entity_category": sensor.entity_category}
+                   if sensor.entity_category else {}),
             })
