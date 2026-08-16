@@ -1,9 +1,31 @@
 import json
 
+import jinja2
 import pytest
 
 from winegard2mqtt.parser import GpsFix, ModemStatus
 from winegard2mqtt.publisher import Publisher
+
+# homeassistant.components.mqtt.const.PAYLOAD_NONE — the payload HA treats as an
+# explicit "unknown" state, cleanly and without logging a warning.
+HA_PAYLOAD_NONE = "None"
+
+
+def render_value_template(value_template: str, payload: str) -> str:
+    """Render a discovery value_template the way HA's MQTT sensor does.
+
+    HA parses the topic payload as JSON into ``value_json`` and renders the
+    template against it. Reproducing that here lets us assert what a sensor's
+    state becomes for a given payload, rather than eyeballing the template.
+    """
+    return jinja2.Environment().from_string(value_template).render(
+        value_json=json.loads(payload)
+    )
+
+
+def sensor_value_template(mqtt, key: str) -> str:
+    topic = f"homeassistant/sensor/winegard_connect/{key}/config"
+    return json.loads(mqtt.last(topic)["payload"])["value_template"]
 
 
 class RecordingClient:
@@ -217,6 +239,31 @@ def test_altitude_is_announced_in_metres(publisher, mqtt):
     publisher.publish_discovery()
 
     assert json.loads(mqtt.last(topic)["payload"])["unit_of_measurement"] == "m"
+
+
+def test_absent_timestamp_renders_ha_unknown_not_empty(publisher, mqtt):
+    """A fix without a parseable timestamp must leave the GPS Time sensor
+    unknown, not empty. An empty string makes HA's timestamp sensor log
+    'Invalid state message' every poll; PAYLOAD_NONE is the clean unknown."""
+    publisher.publish_discovery()
+    vt = sensor_value_template(mqtt, "utc")
+    rendered = render_value_template(vt, '{"latitude": 1.0, "longitude": 2.0}')
+    assert rendered == HA_PAYLOAD_NONE
+
+
+def test_absent_numeric_field_also_renders_unknown(publisher, mqtt):
+    """Same treatment for optional numeric fields, uniformly."""
+    publisher.publish_discovery()
+    vt = sensor_value_template(mqtt, "gps_hdop")
+    assert render_value_template(vt, '{"latitude": 1.0}') == HA_PAYLOAD_NONE
+
+
+def test_present_field_renders_its_value(publisher, mqtt):
+    """A supplied value passes straight through, unchanged."""
+    publisher.publish_discovery()
+    vt = sensor_value_template(mqtt, "utc")
+    stamp = "2026-08-16T02:40:57+00:00"
+    assert render_value_template(vt, json.dumps({"utc": stamp})) == stamp
 
 
 def test_all_entities_share_one_device(publisher, mqtt):

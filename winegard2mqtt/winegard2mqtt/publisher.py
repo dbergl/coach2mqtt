@@ -140,10 +140,12 @@ class Publisher:
             self._publish_config("sensor", sensor.key, {
                 "name": sensor.name,
                 "state_topic": state_topic,
-                # Absent keys render empty, which HA treats as unknown rather
-                # than as a reading of zero.
+                # Absent keys render as the literal "None" — HA's PAYLOAD_NONE,
+                # which it reads as a clean "unknown". Rendering '' instead makes
+                # a typed sensor (notably the timestamp GPS Time) log "Invalid
+                # state message" on every poll a fix omits that field.
                 "value_template":
-                    "{{ value_json." + sensor.json_key + " | default('') }}",
+                    "{{ value_json." + sensor.json_key + " | default('None') }}",
                 "availability_topic": availability_topic,
                 **({"unit_of_measurement": sensor.unit} if sensor.unit else {}),
                 **({"device_class": sensor.device_class} if sensor.device_class else {}),
