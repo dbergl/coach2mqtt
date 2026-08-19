@@ -36,7 +36,7 @@ ref,current,57861,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""curren
 #poll,inverter,32,528,1,holding_register,2
 #ref,status,528,r
 poll,inverter,32,4405,1,holding_register,2
-ref,status,4405,r,,,"{""name"": ""Inverter Status"", ""device_class"": ""enum"", ""options"": [""Power-up delay"", ""Waiting state"", ""Initialization"", ""Soft start"", ""Mains powered operation"", ""Inverter powered operation"", ""Inverter to mains"", ""Mains to inverter"", ""Reserved"", ""Shutdown"", ""Fault"", ""Unknown""], ""val_tpl"": ""{% set m = {0: 'Power-up delay', 1: 'Waiting state', 2: 'Initialization', 3: 'Soft start', 4: 'Mains powered operation', 5: 'Inverter powered operation', 6: 'Inverter to mains', 7: 'Mains to inverter', 8: 'Reserved', 9: 'Reserved', 10: 'Shutdown', 11: 'Fault'} %}{{ m.get(value | int(-1), 'Unknown') }}""}"
+ref,status,4405,r,,,"{""name"": ""Inverter Status"", ""device_class"": ""enum"", ""options"": [""Power-up delay"", ""Standby"", ""Initialization"", ""Soft start"", ""On Shore Power"", ""On Battery Power"", ""Inverter to mains"", ""Mains to inverter"", ""Reserved"", ""Shutdown"", ""Fault"", ""Unknown""], ""val_tpl"": ""{% set m = {0: 'Power-up delay', 1: 'Standby', 2: 'Initialization', 3: 'Soft start', 4: 'On Shore Power', 5: 'On Battery Power', 6: 'Inverter to mains', 7: 'Mains to inverter', 8: 'Reserved', 9: 'Reserved', 10: 'Shutdown', 11: 'Fault'} %}{{ m.get(value | int(-1), 'Unknown') }}""}"
 
 # Inverter on/off
 # Found in SRNE document.
