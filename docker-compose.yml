@@ -85,7 +85,7 @@ services:
       - /dev:/dev
 
   winegard2mqtt:
-    build: ./winegard2mqtt
+    image: ghcr.io/dbergl/winegard2mqtt:latest
     labels:
       com.coach2mqtt.description: "Winegard ConnecT GPS/modem to MQTT bridge"
       com.coach2mqtt.name: "Winegard"
