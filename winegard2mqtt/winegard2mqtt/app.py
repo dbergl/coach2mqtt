@@ -64,15 +64,12 @@ def poll_once(client: WinegardClient, publisher: Publisher) -> None:
     """
     try:
         status = client.status()
+        publisher.publish_modem(parse_modem(status))
+        publisher.publish_gps(parse_gps(status))
     except AuthError:
         logger.exception("authentication failed — check WINEGARD_PASSWORD")
-        return
     except Exception:
         logger.exception("poll failed; will retry next interval")
-        return
-
-    publisher.publish_modem(parse_modem(status))
-    publisher.publish_gps(parse_gps(status))
 
 
 def build_mqtt_client(config: Config, publisher_state_topic: str) -> mqtt.Client:

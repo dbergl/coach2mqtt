@@ -152,6 +152,8 @@ def _utc_timestamp(date, time) -> Optional[str]:
 
 def parse_gps(status: dict) -> Optional[GpsFix]:
     """Extract a fix from a sys_status payload, or None when there is none."""
+    if not isinstance(status, dict):
+        return None
     gps = status.get("gps")
     if not isinstance(gps, dict):
         return None
@@ -202,6 +204,8 @@ def parse_modem(status: dict) -> ModemStatus:
     ``internet_status`` strings, which are renderings of the same data. The
     string forms remain as a fallback for firmware that lacks the structures.
     """
+    if not isinstance(status, dict):
+        status = {}
     wwan = _section(status, "networks", "wwan")
     modem = _section(status, "auth", "modem")
 

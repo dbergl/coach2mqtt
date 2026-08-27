@@ -97,3 +97,12 @@ def test_router_failure_leaves_bridge_state_alone(publisher, mqtt):
     poll_once(StubClient(error=OSError("connection refused")), publisher)
 
     assert mqtt.last("winegard/connect/state") is None
+
+
+def test_malformed_status_does_not_kill_the_loop(publisher, mqtt):
+    """A status payload that isn't a dict (bad firmware JSON) must not raise,
+    and is treated as "nothing usable" rather than crashing the poller."""
+    poll_once(StubClient(status=["unexpected"]), publisher)
+
+    assert json.loads(mqtt.last("winegard/connect/modem")["payload"]) == {}
+    assert mqtt.last("winegard/connect/gps/available")["payload"] == "offline"
