@@ -199,7 +199,7 @@ jobs:
       # Commit version change and create/update git tag
       # Tags: v1.2.3 for main, branch-timestamp for dev
       - name: "coach2mqtt: git add & commit & push"
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           add: "./VERSION"
           default_author: github_actions
@@ -258,7 +258,7 @@ jobs:
       # - Dev: "coach2mqtt-dev-2024-01-01-123456"
       - name: Create Release
         id: create-release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: ${{ github.ref == 'refs/heads/main' && format('coach2mqtt-v{0}', needs.coach2mqtt-push-version-number.outputs.version_num) || format('coach2mqtt-{0}', needs.coach2mqtt-push-version-number.outputs.version_num) }}
@@ -418,7 +418,7 @@ jobs:
       # Cache frequently downloaded apt packages
       - name: Cache apt packages
         id: cache-apt
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/apt-cache
           key: apt-packages-${{ runner.os }}-pigen-deps-v1
@@ -593,7 +593,6 @@ jobs:
 
           # Clean up any custom stage remnants to prepare for fresh custom build
           sudo rm -rf work/*/stage-coach2mqtt || true
-          sudo rm -rf work/*/stage-expansionboard || true
 
           echo "Base stages 0-2 build completed"
 
@@ -611,7 +610,6 @@ jobs:
           # Create tarball with fast compression, excluding stage-C2M2 directories
           sudo tar -czf ../base-stages-cache.tar.gz \
             --exclude="work/*/stage-coach2mqtt" \
-            --exclude="work/*/stage-expansionboard" \
             work/
 
           echo "Tarball created successfully"
@@ -639,7 +637,6 @@ jobs:
       - name: Copy custom stages
         run: |
           cp -r stage-coach2mqtt/stage-coach2mqtt pi-gen/
-          cp -r stage-coach2mqtt/stage-expansionboard pi-gen/
 
       # Build the coach2mqtt-specific stage on top of base image
       - name: Build custom stage
@@ -670,7 +667,7 @@ jobs:
               # Configure for continuation build from cached base
               echo "CONTINUE=1" >> config
               echo "WORK_DIR=$WORK_DIR_ABS" >> config
-              echo 'STAGE_LIST="./stage-coach2mqtt ./stage-expansionboard"' >> config
+              echo 'STAGE_LIST="./stage-coach2mqtt"' >> config
 
               # Ensure stage2 is marked as complete for continuation
               sudo mkdir -p "$WORK_DIR_ABS/stage2"
@@ -689,7 +686,7 @@ jobs:
 
             # For fresh builds or no cache, continue from base build
             echo "CONTINUE=1" >> config
-            echo 'STAGE_LIST="./stage-coach2mqtt ./stage-expansionboard"' >> config
+            echo 'STAGE_LIST="./stage-coach2mqtt"' >> config
           fi
 
           # Show final configuration for debugging
@@ -738,7 +735,7 @@ jobs:
           if [ "${{ steps.cache-decision.outputs.use_cache }}" == "true" ]; then
             echo "Build completed with base stage caching enabled"
             if [ "${{ steps.cache-base-stages.outputs.cache-hit }}" == "true" ]; then
-              echo "Base stages cache hit - only custom stage-coach2mqtt & stage-expansionboard were rebuilt"
+              echo "Base stages cache hit - only custom stage-coach2mqtt was rebuilt"
             else
               echo "Base stages cache miss - full build was performed"
             fi

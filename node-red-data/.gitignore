@@ -1,0 +1,5 @@
+#ignore everything
+*
+#Except for specific files below
+!.gitignore
+!flows.json
