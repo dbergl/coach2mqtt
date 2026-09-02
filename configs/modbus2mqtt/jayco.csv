@@ -118,11 +118,10 @@ ref,system_time/minute,4404,rw,hibyte,,"{""publish"": false}"
 ref,system_time/second,4404,rw,lobyte,,"{""publish"": false}"
 
 #Battery Rated Capacity
-# Register 4423 is 0.1 Ah/bit (raw 2100 = 210 Ah).  The raw value is published
-# (rvc2mqtt's virtual inverter scales it for CHARGER_CONFIGURATION_STATUS);
-# HA display and writes round-trip through val_tpl/cmd_tpl like chargevolts.
+# Register 4423 is 1 Ah/bit (raw 210 = 210 Ah) - confirmed by testmodbus scans
+# taken months before this register was ever written to.  No scaling needed.
 poll,inverter,32,4423,1,holding_register,5
-ref,BattCapacity,4423,rw,,,"{""ha_platform"": ""number"", ""name"": ""Battery Capacity"", ""unit_of_measurement"": ""Ah"", ""suggested_display_precision"": 0, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 100, ""max"": 300, ""step"": 10}"
+ref,BattCapacity,4423,rw,,,"{""ha_platform"": ""number"", ""name"": ""Battery Capacity"", ""unit_of_measurement"": ""Ah"", ""min"": 100, ""max"": 300, ""step"": 10}"
 
 #Battery Type
 # 0x00: UserDef
