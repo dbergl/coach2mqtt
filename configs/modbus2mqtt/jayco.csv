@@ -10,14 +10,14 @@ ref,reset,4417,w,,,"{""ha_platform"": ""button"", ""name"": ""Inverter Reset"", 
 # 536 = 53.6v
 # 540 = 54.0v
 # 544 = 54.4v
-poll,inverter,32,4426,1,holding_register,5
+poll,inverter,32,4426,1,holding_register,1
 ref,chargevolts,4426,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""voltage"", ""unit_of_measurement"": ""V"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 46.0, ""max"": 58.4, ""step"": 0.4, ""mode"": ""box"", ""name"": ""Charge Voltage""}"
 
 # Charge current aka setting 28
 # 50  =  5 amps
 # 150 = 15 amps
 # 400 = 40 amps
-poll,inverter,32,57861,1,holding_register,5
+poll,inverter,32,57861,1,holding_register,1
 ref,current,57861,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""current"", ""unit_of_measurement"": ""A"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}"", ""cmd_tpl"": ""{{ (value | float * 10) | int }}"", ""min"": 0, ""max"": 40, ""step"": 5, ""name"": ""Charge Current Limit""}"
 
 # Inverter Status
@@ -35,13 +35,13 @@ ref,current,57861,rw,,,"{""ha_platform"": ""number"", ""device_class"": ""curren
 #11: Fault
 #poll,inverter,32,528,1,holding_register,2
 #ref,status,528,r
-poll,inverter,32,4405,1,holding_register,2
+poll,inverter,32,4405,1,holding_register,1
 ref,status,4405,r,,,"{""name"": ""Inverter Status"", ""device_class"": ""enum"", ""options"": [""Power-up delay"", ""Standby"", ""Initialization"", ""Soft start"", ""On Shore Power"", ""On Battery Power"", ""Inverter to mains"", ""Mains to inverter"", ""Reserved"", ""Shutdown"", ""Fault"", ""Unknown""], ""val_tpl"": ""{% set m = {0: 'Power-up delay', 1: 'Standby', 2: 'Initialization', 3: 'Soft start', 4: 'On Shore Power', 5: 'On Battery Power', 6: 'Inverter to mains', 7: 'Mains to inverter', 8: 'Reserved', 9: 'Reserved', 10: 'Shutdown', 11: 'Fault'} %}{{ m.get(value | int(-1), 'Unknown') }}""}"
 
 # Inverter on/off
 # Found in SRNE document.
 # 0: Off 1: On
-poll,inverter,32,57088,1,holding_register,2.0
+poll,inverter,32,57088,1,holding_register,1
 ref,onoff,57088,rw,,,"{""ha_platform"": ""switch"", ""name"": ""Inverter Power"", ""stat_on"": ""1"", ""stat_off"": ""0"", ""payload_on"": ""1"", ""payload_off"": ""0""}"
 
 # Password needs to be set to 255 to be able to write to some registers
@@ -78,24 +78,24 @@ ref,faults/fault_4,4401,r,,,"{""name"": ""Fault Code 4""}"
 # 04 - Float charge
 # 05 - Battery activation phase
 # 06 - Battery disconnection processing phase
-poll,inverter,32,4332,1,holding_register,5
+poll,inverter,32,4332,1,holding_register,1
 ref,charging_state,4332,r,,,"{""name"": ""Charging State"", ""device_class"": ""enum"", ""options"": [""Charging is not turned on"", ""Constant current charging"", ""Constant voltage charging"", ""Float charge"", ""Battery activation phase"", ""Battery disconnection processing phase"", ""Unknown""], ""val_tpl"": ""{% set m = {0: 'Charging is not turned on', 1: 'Constant current charging', 2: 'Constant voltage charging', 4: 'Float charge', 5: 'Battery activation phase', 6: 'Battery disconnection processing phase'} %}{{ m.get(value | int(-1), 'Unknown') }}""}"
 
 #Charging Power
 # Watts
-poll,inverter,32,4333,1,holding_register,5
+poll,inverter,32,4333,1,holding_register,1
 ref,charging_power,4333,r,,,"{""name"": ""Charging Power"", ""device_class"": ""power"", ""unit_of_measurement"": ""W""}"
 
 #Battery Charge today
-poll,inverter,32,4543,1,holding_register,5
+poll,inverter,32,4543,1,holding_register,60
 ref,history/battery_charge_today,4543,r,,,"{""name"": ""Battery Charge Today"", ""unit_of_measurement"": ""Ah""}"
 
 #Battery Disharge today
-poll,inverter,32,4544,1,holding_register,5
+poll,inverter,32,4544,1,holding_register,60
 ref,history/battery_discharge_today,4544,r,,,"{""name"": ""Battery Discharge Today"", ""unit_of_measurement"": ""Ah""}"
 
 #Battery Charge History
-poll,inverter,32,4508,7,holding_register,5
+poll,inverter,32,4508,7,holding_register,60
 ref,history/battery_charge_today-1,4508,r,,,"{""name"": ""Battery Charge Yesterday"", ""unit_of_measurement"": ""Ah""}"
 ref,history/battery_charge_today-2,4509,r,,,"{""name"": ""Battery Charge 2 Days Ago"", ""unit_of_measurement"": ""Ah""}"
 ref,history/battery_charge_today-3,4510,r,,,"{""name"": ""Battery Charge 3 Days Ago"", ""unit_of_measurement"": ""Ah""}"
@@ -121,6 +121,19 @@ ref,system_time/second,4404,rw,lobyte,,"{""publish"": false}"
 poll,inverter,32,4423,1,holding_register,5
 ref,BattCapacity,4423,rw,,,"{""ha_platform"": ""number"", ""name"": ""Battery Capacity"", ""unit_of_measurement"": ""Ah"", ""min"": 100, ""max"": 300, ""step"": 10}"
 
+#Battery Type
+# 0x00: UserDef
+# 0x01: Sealed Lead-Acid
+# 0x02: Flooded Lead-Acid
+# 0x03: Gel Lead-Acid
+# 0x04: Lithium Iron Phosphate (14s)
+# 0x05: Lithium Iron Phosphate (15s)
+# 0x06: Lithium Iron Phosphate (16s)
+# 0x0C: Lithium-Ion (13s)
+# 0x0D: Lithium-Ion (14s)
+poll,inverter,32,4424,1,holding_register,60
+ref,battery_type,4424,r,,,"{""name"": ""Battery Type"", ""device_class"": ""enum"", ""options"": [""UserDef"", ""Sealed Lead-Acid"", ""Flooded Lead-Acid"", ""Gel Lead-Acid"", ""Lithium Iron Phosphate (14s)"", ""Lithium Iron Phosphate (15s)"", ""Lithium Iron Phosphate (16s)"", ""Lithium-Ion (13s)"", ""Lithium-Ion (14s)"", ""Unknown""], ""val_tpl"": ""{% set m = {0: 'UserDef', 1: 'Sealed Lead-Acid', 2: 'Flooded Lead-Acid', 3: 'Gel Lead-Acid', 4: 'Lithium Iron Phosphate (14s)', 5: 'Lithium Iron Phosphate (15s)', 6: 'Lithium Iron Phosphate (16s)', 12: 'Lithium-Ion (13s)', 13: 'Lithium-Ion (14s)'} %}{{ m.get(value | int(-1), 'Unknown') }}""}"
+
 #AC Input Voltage
 # AC input/output and battery voltage — SRNE 4000 block, read in one request
 # (register map validated against renogy-bt's InverterClient; 4332/4333 in
@@ -133,7 +146,7 @@ ref,BattCapacity,4423,rw,,,"{""ha_platform"": ""number"", ""name"": ""Battery Ca
 #   4005 = battery voltage,      0.1 V/bit
 # Raw register values are published; rvc2mqtt's virtual inverter applies the
 # scales via its floorplan `fields:` map, and HA display uses val_tpl.
-poll,inverter,32,4000,6,holding_register,5
+poll,inverter,32,4000,6,holding_register,1
 ref,AC_Input_Voltage,4000,r,,,"{""name"": ""AC Input Voltage"", ""device_class"": ""voltage"", ""unit_of_measurement"": ""V"", ""suggested_display_precision"": 1, ""value_template"": ""{{ value | float / 10 }}""}"
 ref,AC_Input_Current,4001,r,,,"{""name"": ""AC Input Current"", ""device_class"": ""current"", ""unit_of_measurement"": ""A"", ""suggested_display_precision"": 2, ""val_tpl"": ""{{ value | float / 100 }}""}"
 ref,AC_Output_Voltage,4002,r,,,"{""name"": ""AC Output Voltage"", ""device_class"": ""voltage"", ""unit_of_measurement"": ""V"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}""}"
@@ -141,10 +154,16 @@ ref,AC_Output_Current,4003,r,,,"{""name"": ""AC Output Current"", ""device_class
 ref,AC_Output_Frequency,4004,r,,,"{""name"": ""AC Output Frequency"", ""device_class"": ""frequency"", ""unit_of_measurement"": ""Hz"", ""suggested_display_precision"": 2, ""val_tpl"": ""{{ value | float / 100 }}""}"
 ref,battery_voltage,4005,r,,,"{""name"": ""Battery Voltage"", ""device_class"": ""voltage"", ""unit_of_measurement"": ""V"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}""}"
 
+#AC Input Frequency
+# 4009 = AC input frequency, 0.01 Hz/bit (same scale as AC_Output_Frequency
+# at 4004; not contiguous with the 4000-4005 block, so polled separately)
+poll,inverter,32,4009,1,holding_register,1
+ref,AC_Input_Frequency,4009,r,,,"{""name"": ""AC Input Frequency"", ""device_class"": ""frequency"", ""unit_of_measurement"": ""Hz"", ""suggested_display_precision"": 2, ""val_tpl"": ""{{ value | float / 100 }}""}"
+
 # Battery current: register 4328, 0.1 A/bit, SIGNED (negative while
 # discharging); needs the explicit int16 dataType — an empty type column
 # means uint16, which published 0xFFD1 as 65489 instead of -47.
-poll,inverter,32,4328,1,holding_register,5
+poll,inverter,32,4328,1,holding_register,1
 ref,battery_current,4328,r,int16,,"{""name"": ""Battery Current"", ""device_class"": ""current"", ""unit_of_measurement"": ""A"", ""suggested_display_precision"": 1, ""val_tpl"": ""{{ value | float / 10 }}""}"
 
 #Max AC Input Current 
