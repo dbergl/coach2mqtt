@@ -14,29 +14,3 @@ c2mupdate () {
 	docker compose -f /opt/coach2mqtt/docker-compose.yml pull
 	docker compose -f /opt/coach2mqtt/docker-compose.yml up -d
 }
-
-sethivemq () {
-    echo "Enter your TLS MQTT URL (Including :8883) from HiveMQ"
-    echo "  Example: 1234567890abcdef.s1.eu.hivemq.cloud:8883"
-    
-    while true; do
-        read HIVEURL
-        if [[ "${HIVEURL}" =~ ":8883" ]]; then
-            break;
-        else
-            printf "Port is missing.\nPlease enter your TLS MQTT URL (Including :8883) from HiveMQ:\n"
-        fi
-    done
-    
-    echo "Enter the username you created on HiveMQ:"
-    read HIVEUSER
-    
-    echo "Enter the password you set for ${HIVEUSER}:"
-    read HIVEPASS
-    
-    sudo sed -i -e "s/<hivemqurl>/${HIVEURL}/" -e "s/<username>/${HIVEUSER}/" -e "s/<password>/${HIVEPASS}/" /opt/coach2mqtt/configs/mosquitto/mosquitto.conf
-
-    echo Restarting Mosquitto to load updated configration 
-
-    docker compose -f /opt/coach2mqtt/docker-compose.yml down mosquitto && docker compose -f /opt/coach2mqtt/docker-compose.yml up -d mosquitto
-}
