@@ -1,8 +1,10 @@
 name: coach2mqtt
 
+# coach2mqtt images are pinned by version; :latest stays frozen for v1 installs.
+# Switch to the major tag (e.g. :2) once the images have a final v2.0.0 release.
 services:
   rvc2mqtt:
-    image: ghcr.io/dbergl/rvc2mqtt:latest
+    image: ghcr.io/dbergl/rvc2mqtt:2.0.0-beta.1
     labels:
       com.coach2mqtt.description: "RV-C to MQTT bridge"
       com.coach2mqtt.name: "RV-C"
@@ -29,7 +31,7 @@ services:
       - ./rvc-logs:/logs
 
   can2mqtt:
-    image: ghcr.io/dbergl/can2mqtt:latest
+    image: ghcr.io/dbergl/can2mqtt:2.0.0-beta.1
     labels:
       com.coach2mqtt.description: "Canbus to MQTT bridge"
       com.coach2mqtt.name: "Canbus"
@@ -53,7 +55,7 @@ services:
       - ./configs/can2mqtt/${CANBUS_CONFIG_FILE:-config.json}:/config/config.json:ro
 
   modbus2mqtt:
-    image: ghcr.io/dbergl/modbus2mqtt:latest
+    image: ghcr.io/dbergl/modbus2mqtt:2.0.0-beta.1
     labels:
       com.coach2mqtt.description: "Modbus to MQTT bridge"
       com.coach2mqtt.name: "Modbus"
@@ -85,7 +87,7 @@ services:
       - /dev:/dev
 
   winegard2mqtt:
-    image: ghcr.io/dbergl/winegard2mqtt:latest
+    image: ghcr.io/dbergl/winegard2mqtt:2.0.0-beta.1
     labels:
       com.coach2mqtt.description: "Winegard ConnecT GPS/modem to MQTT bridge"
       com.coach2mqtt.name: "Winegard"
