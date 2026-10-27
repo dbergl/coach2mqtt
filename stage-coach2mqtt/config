@@ -20,7 +20,7 @@ SKIP_INITRAMFS=1
 SKIP_INITRAMFS_PROD=0
 
 ## coach2mqtt-specific build configuration
-#STAGE_LIST='stage0 stage1 stage2 stage-coach2mqtt stage-expansionboard'
+#STAGE_LIST='stage0 stage1 stage2 stage-coach2mqtt'
 
 # C2M_REPO, C2M_GIT_USER, C2M_GIT_BRANCH will be overwritten in the GH actions workflow with current repo/user/branch
 # Repository name

@@ -150,6 +150,26 @@
                     state_topic: "bms/volts",
                     unique_id: "RBT210LFP51S-12-volts"
                 },
+                altsoc: {
+                    p: "sensor",
+                    name: "AltSoC",
+                    device_class: "battery",
+                    unit_of_measurement: "%",
+                    suggested_display_precision: "0",
+                    value_template: "{{value_json.soc}}",
+                    state_topic: "bms/volts",
+                    unique_id: "RBT210LFP51S-12-altsoc"
+                },
+                usablesoc: {
+                    p: "sensor",
+                    name: "UsableSoC",
+                    device_class: "battery",
+                    unit_of_measurement: "%",
+                    suggested_display_precision: "0",
+                    value_template: "{{value_json.usablesoc}}",
+                    state_topic: "bms/volts",
+                    unique_id: "RBT210LFP51S-12-usablesoc"
+                },
                 hcellv: {
                     p: "sensor",
                     name: "Highest Cell",
@@ -655,5 +675,80 @@
             qos: "1",
             avty_t: "bms/bridge/state",
         }
-    }
+    },
+    bms_settings: {
+        read_request_canid: "0x500",
+        read_request_data: "AAAA0200FFFFFFFF",
+        read_response_base: "0x450",
+        write_base: "0x410",
+        frame_count: 11,
+        state_topic_prefix: "bms/settings",
+        command_topic_suffix: "/set",
+        refresh_topic: "bms/settings/refresh",
+        inter_frame_delay_ms: 10,
+        // Engineering value = raw * scale. All fields big-endian.
+        // Verified against live BMS 2026-05-12; 47/49 values matched user reference JSON.
+        settings: {
+            AH:          { frame_offset: 0,  byte_offset: 0, size: 2, signed: false, scale: 1,     unit: "Ah",  read_only: true, friendly_name: "Battery Capacity" },
+            cvol_num:    { frame_offset: 0,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: null,  read_only: true, friendly_name: "Cell Count" },
+            temp_num:    { frame_offset: 0,  byte_offset: 4, size: 1, signed: false, scale: 1,     unit: null,  read_only: true, friendly_name: "Temp Probe Count" },
+            module_num:  { frame_offset: 0,  byte_offset: 5, size: 1, signed: false, scale: 1,     unit: null,  read_only: true, friendly_name: "Module Count" },
+
+            ch_cur_h1:   { frame_offset: 1,  byte_offset: 0, size: 2, signed: true,  scale: 1,     unit: "A",   min: -125, max: 0,    step: 1,     device_class: "current", friendly_name: "Charge Overcurrent L1" },
+            ch_cur_h2:   { frame_offset: 1,  byte_offset: 2, size: 2, signed: true,  scale: 1,     unit: "A",   min: -125, max: 0,    step: 1,     device_class: "current", friendly_name: "Charge Overcurrent L2" },
+            ch_cur_h3:   { frame_offset: 1,  byte_offset: 4, size: 2, signed: true,  scale: 1,     unit: "A",   min: -125, max: 0,    step: 1,     device_class: "current", friendly_name: "Charge Overcurrent L3" },
+            dch_cur_h1:  { frame_offset: 1,  byte_offset: 6, size: 2, signed: false, scale: 1,     unit: "A",   min: 0,    max: 240,  step: 1,     device_class: "current", friendly_name: "Discharge Overcurrent L1" },
+
+            dch_cur_h2:  { frame_offset: 2,  byte_offset: 0, size: 2, signed: false, scale: 1,     unit: "A",   min: 0,    max: 240,  step: 1,     device_class: "current", friendly_name: "Discharge Overcurrent L2" },
+            dch_cur_h3:  { frame_offset: 2,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "A",   min: 0,    max: 240,  step: 1,     device_class: "current", friendly_name: "Discharge Overcurrent L3" },
+            tvol_h1:     { frame_offset: 2,  byte_offset: 4, size: 2, signed: false, scale: 0.1,   unit: "V",   min: 42,   max: 58.4, step: 0.1,   device_class: "voltage", friendly_name: "Total Overvoltage L1" },
+            tvol_h2:     { frame_offset: 2,  byte_offset: 6, size: 2, signed: false, scale: 0.1,   unit: "V",   min: 42,   max: 58.4, step: 0.1,   device_class: "voltage", friendly_name: "Total Overvoltage L2" },
+
+            tvol_h3:     { frame_offset: 3,  byte_offset: 0, size: 2, signed: false, scale: 0.1,   unit: "V",   min: 42,   max: 58.4, step: 0.1,   device_class: "voltage", friendly_name: "Total Overvoltage L3" },
+            tvol_l1:     { frame_offset: 3,  byte_offset: 2, size: 2, signed: false, scale: 0.1,   unit: "V",   min: 0,    max: 80,   step: 0.1,   device_class: "voltage", friendly_name: "Total Undervoltage L1" },
+            tvol_l2:     { frame_offset: 3,  byte_offset: 4, size: 2, signed: false, scale: 0.1,   unit: "V",   min: 0,    max: 80,   step: 0.1,   device_class: "voltage", friendly_name: "Total Undervoltage L2" },
+            tvol_l3:     { frame_offset: 3,  byte_offset: 6, size: 2, signed: false, scale: 0.1,   unit: "V",   min: 0,    max: 80,   step: 0.1,   device_class: "voltage", friendly_name: "Total Undervoltage L3" },
+
+            cvol_h1:     { frame_offset: 4,  byte_offset: 0, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L1" },
+            cvol_h2:     { frame_offset: 4,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L2" },
+            cvol_h3:     { frame_offset: 4,  byte_offset: 4, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Overvoltage L3" },
+            ch_temp_h1:  { frame_offset: 4,  byte_offset: 6, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 80,   step: 1,     device_class: "temperature", friendly_name: "Charge High-Temp L1" },
+            ch_temp_h2:  { frame_offset: 4,  byte_offset: 7, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 80,   step: 1,     device_class: "temperature", friendly_name: "Charge High-Temp L2" },
+
+            ch_temp_h3:  { frame_offset: 5,  byte_offset: 0, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 80,   step: 1,     device_class: "temperature", friendly_name: "Charge High-Temp L3" },
+            dch_temp_h1: { frame_offset: 5,  byte_offset: 1, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 80,   step: 1,     device_class: "temperature", friendly_name: "Discharge High-Temp L1" },
+            dch_temp_h2: { frame_offset: 5,  byte_offset: 2, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 80,   step: 1,     device_class: "temperature", friendly_name: "Discharge High-Temp L2" },
+            dch_temp_h3: { frame_offset: 5,  byte_offset: 3, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 80,   step: 1,     device_class: "temperature", friendly_name: "Discharge High-Temp L3" },
+            ch_temp_l1:  { frame_offset: 5,  byte_offset: 4, size: 1, signed: true,  scale: 1,     unit: "°C",  min: -40,  max: 40,   step: 1,     device_class: "temperature", friendly_name: "Charge Low-Temp L1" },
+            ch_temp_l2:  { frame_offset: 5,  byte_offset: 5, size: 1, signed: true,  scale: 1,     unit: "°C",  min: -40,  max: 40,   step: 1,     device_class: "temperature", friendly_name: "Charge Low-Temp L2" },
+            ch_temp_l3:  { frame_offset: 5,  byte_offset: 6, size: 1, signed: true,  scale: 1,     unit: "°C",  min: -40,  max: 40,   step: 1,     device_class: "temperature", friendly_name: "Charge Low-Temp L3" },
+            dch_temp_l1: { frame_offset: 5,  byte_offset: 7, size: 1, signed: true,  scale: 1,     unit: "°C",  min: -40,  max: 40,   step: 1,     device_class: "temperature", friendly_name: "Discharge Low-Temp L1" },
+
+            dch_temp_l2: { frame_offset: 6,  byte_offset: 0, size: 1, signed: true,  scale: 1,     unit: "°C",  min: -40,  max: 40,   step: 1,     device_class: "temperature", friendly_name: "Discharge Low-Temp L2" },
+            dch_temp_l3: { frame_offset: 6,  byte_offset: 1, size: 1, signed: true,  scale: 1,     unit: "°C",  min: -40,  max: 40,   step: 1,     device_class: "temperature", friendly_name: "Discharge Low-Temp L3" },
+            cvol_l1:     { frame_offset: 6,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L1" },
+            cvol_l2:     { frame_offset: 6,  byte_offset: 4, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L2" },
+            cvol_l3:     { frame_offset: 6,  byte_offset: 6, size: 2, signed: false, scale: 1,     unit: "mV",  min: 2000, max: 3650, step: 5,     device_class: "voltage", friendly_name: "Cell Undervoltage L3" },
+
+            diff_vol1:   { frame_offset: 7,  byte_offset: 0, size: 2, signed: false, scale: 1,     unit: "mV",  min: 0,    max: 2000, step: 1,     friendly_name: "Cell Voltage Diff L1" },
+            diff_vol2:   { frame_offset: 7,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mV",  min: 0,    max: 2000, step: 1,     friendly_name: "Cell Voltage Diff L2" },
+            diff_vol3:   { frame_offset: 7,  byte_offset: 4, size: 2, signed: false, scale: 1,     unit: "mV",  min: 0,    max: 2000, step: 1,     friendly_name: "Cell Voltage Diff L3" },
+            // diff_temp* are deltas, not absolute temps: device_class temperature_delta
+            // so HA converts 15 °C to a 27 °F span instead of 59 °F.
+            diff_temp1:  { frame_offset: 7,  byte_offset: 6, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 50,   step: 1,     device_class: "temperature_delta", friendly_name: "Temp Diff L1" },
+            diff_temp2:  { frame_offset: 7,  byte_offset: 7, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 50,   step: 1,     device_class: "temperature_delta", friendly_name: "Temp Diff L2" },
+
+            diff_temp3:  { frame_offset: 8,  byte_offset: 0, size: 1, signed: false, scale: 1,     unit: "°C",  min: 0,    max: 50,   step: 1,     device_class: "temperature_delta", friendly_name: "Temp Diff L3" },
+            feed_cur1:   { frame_offset: 8,  byte_offset: 1, size: 2, signed: false, scale: 1,     unit: "A",   min: 0,    max: 500,  step: 1,     device_class: "current", friendly_name: "Feedback Overcurrent L1" },
+            feed_cur2:   { frame_offset: 8,  byte_offset: 3, size: 2, signed: false, scale: 1,     unit: "A",   min: 0,    max: 500,  step: 1,     device_class: "current", friendly_name: "Feedback Overcurrent L2" },
+            feed_cur3:   { frame_offset: 8,  byte_offset: 5, size: 2, signed: false, scale: 1,     unit: "A",   min: 0,    max: 500,  step: 1,     device_class: "current", friendly_name: "Feedback Overcurrent L3" },
+            SoC1:        { frame_offset: 8,  byte_offset: 7, size: 1, signed: false, scale: 1,     unit: "%",   min: 0,    max: 100,  step: 1,     device_class: "battery", friendly_name: "SoC Low Alarm L1" },
+
+            SoC2:        { frame_offset: 9,  byte_offset: 0, size: 1, signed: false, scale: 1,     unit: "%",   min: 0,    max: 100,  step: 1,     device_class: "battery", friendly_name: "SoC Low Alarm L2" },
+            SoC3:        { frame_offset: 9,  byte_offset: 1, size: 1, signed: false, scale: 1,     unit: "%",   min: 0,    max: 100,  step: 1,     device_class: "battery", friendly_name: "SoC Low Alarm L3" },
+            IR1:         { frame_offset: 9,  byte_offset: 2, size: 2, signed: false, scale: 1,     unit: "mΩ",  min: 0,    max: 1000, step: 1,     friendly_name: "Internal Resistance L1" },
+            IR2:         { frame_offset: 9,  byte_offset: 4, size: 2, signed: false, scale: 1,     unit: "mΩ",  min: 0,    max: 1000, step: 1,     friendly_name: "Internal Resistance L2" },
+            IR3:         { frame_offset: 9,  byte_offset: 6, size: 2, signed: false, scale: 1,     unit: "mΩ",  min: 0,    max: 1000, step: 1,     friendly_name: "Internal Resistance L3" },
+        },
+    },
 }
