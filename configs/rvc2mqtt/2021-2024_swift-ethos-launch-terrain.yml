@@ -186,6 +186,13 @@ floorplan:
     instance: 0
     type: hvac
     instance_name: air conditioner
+    hvac_modes:
+    - cool
+    - off
+    fan_modes:
+    - auto
+    - high
+    - low
     status_topic: rvc/state/hvac/cool
     command_topic: rvc/set/hvac/cool
     link_id: air_conditioner
